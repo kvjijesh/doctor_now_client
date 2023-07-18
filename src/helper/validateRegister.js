@@ -20,6 +20,11 @@ const validate = (values) => {
   } else if (values.password.length > 10) {
     errors.password = "Password cannot exceed more than 10 characters";
   }
+  if (!values.confirmPassword) {
+    errors.confirmPassword = "Confirm Password is required";
+  } else if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = "Passwords do not match";
+  }
 
   return errors;
 };

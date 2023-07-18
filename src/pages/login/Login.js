@@ -12,7 +12,6 @@ import {
 import validate from "../../helper/validateLogin";
 import { toast } from "react-toastify";
 
-
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -40,10 +39,12 @@ const Login = () => {
       dispatch(loginStart());
       try {
         const response = await axios.post("auth/login", formData);
-        console.log(response);
-
-        dispatch(loginSucces(response.data));
-        navigate("/home");
+        if (response.status === 200) {
+          localStorage.setItem('token', response.data.token);
+          console.log(response,889898);
+          dispatch(loginSucces(response.data));
+          navigate("/home");
+        }
       } catch (error) {
         dispatch(loginFailure());
         if (error.isAxiosError) {
