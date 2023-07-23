@@ -1,8 +1,20 @@
 .home {
     display: flex;
+    align-items: center;
+    .table-container{
+      margin-left: 250px;
+    }
+    h2{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
 
     .homeContainer {
       flex: 6;
+
 
       .widgets,
       .charts {

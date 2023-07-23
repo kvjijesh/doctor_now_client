@@ -32,6 +32,7 @@ const LoginDoctor = () => {
         try {
           const response = await axios.post("/auth/doctorlogin", values);
           if (response.status === 200) {
+            localStorage.setItem('dtoken', response.data.token);
             dispatch(doctorloginSucces(response.data));
             navigate("/doctorhome");
           }

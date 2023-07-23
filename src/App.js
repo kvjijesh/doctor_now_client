@@ -14,6 +14,8 @@ import LoginDoctor from "./doctor/login/LoginDoctor";
 import RegisterDoctor from "./doctor/register/RegisterDoctor";
 import { RegisterUser } from "./user/register/RegisterUser";
 import DoctorHome from "./doctor/home/DoctorHome";
+import Profile from "./pages/profile/Profile";
+import DoctorList from "./admin/doctorlist/DoctorList";
 
 function App() {
   return (
@@ -58,11 +60,13 @@ function App() {
           <Route path="/doctor" element={<RegisterDoctor />} />
           <Route path="/doctorlogin" element={<LoginDoctor />} />
           <Route path="/doctorhome" element={<DoctorHome />} />
+          <Route path="/doctorprofile" element={<Profile/>} />
+          <Route path="/doctors" element={<DoctorList/>}/>
           <Route
             path="/admin"
             element={
               <>
-                <Navbar />
+                <Header/>
                 <LoginAdmin />
               </>
             }
@@ -73,7 +77,7 @@ function App() {
               path="/dashboard"
               element={
                 <>
-                  <Navbar />
+                  {/* <Navbar /> */}
                   <HomeAdmin />
                 </>
               }

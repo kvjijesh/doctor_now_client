@@ -1,11 +1,15 @@
 import React from "react";
 import Sidebar from "../sidebar/Sidebar";
 import "./home.scss";
+import DataTable from "../../components/table/DataTable";
 const HomeAdmin = () => {
   return (
     <div className="home">
       <Sidebar />
-      <h3>welcome to admin panel</h3>
+      <div className="table-container">
+        <h2>Users</h2>
+        <DataTable />
+      </div>
     </div>
   );
 };
