@@ -9,13 +9,14 @@ import "react-toastify/dist/ReactToastify.css";
 import HomeAdmin from "./admin/home/HomeAdmin";
 import LoginAdmin from "./admin/loginpage/LoginAdmin";
 import Navbar from "./admin/navbar/Navbar";
-import ProtectedRoute from "./Servies/ProtectedRoutes";
+import { ProtectedRoute, ProtectedRouteAdmin, ProtectedRouteDoctor } from "./Servies/ProtectedRoutes";
 import LoginDoctor from "./doctor/login/LoginDoctor";
 import RegisterDoctor from "./doctor/register/RegisterDoctor";
 import { RegisterUser } from "./user/register/RegisterUser";
 import DoctorHome from "./doctor/home/DoctorHome";
 import Profile from "./pages/profile/Profile";
 import DoctorList from "./admin/doctorlist/DoctorList";
+import UserProfile from "./user/userProfile/UserProfile";
 
 function App() {
   return (
@@ -31,15 +32,7 @@ function App() {
               </>
             }
           />
-          <Route
-            path="/home"
-            element={
-              <>
-                <Header />
-                <Home />
-              </>
-            }
-          />
+
           <Route
             path="/signup"
             element={
@@ -59,29 +52,57 @@ function App() {
           />
           <Route path="/doctor" element={<RegisterDoctor />} />
           <Route path="/doctorlogin" element={<LoginDoctor />} />
-          <Route path="/doctorhome" element={<DoctorHome />} />
-          <Route path="/doctorprofile" element={<Profile/>} />
-          <Route path="/doctors" element={<DoctorList/>}/>
+
+
+
           <Route
             path="/admin"
             element={
               <>
-                <Header/>
+                <Header />
                 <LoginAdmin />
               </>
             }
           />
 
-          <Route element={<ProtectedRoute />}>
+          {/* admins protected routes */}
+          <Route element={<ProtectedRouteAdmin />}>
             <Route
               path="/dashboard"
               element={
                 <>
-                  {/* <Navbar /> */}
                   <HomeAdmin />
                 </>
               }
             />
+            <Route path="/doctors" element={<DoctorList />} />
+          </Route>
+          {/* Doctors Protected Routes */}
+          <Route element={<ProtectedRouteDoctor/>}>
+          <Route path="/doctorhome" element={<DoctorHome />} />
+          <Route path="/doctorprofile" element={<Profile />} />
+
+          </Route>
+          <Route element={<ProtectedRoute/>}>
+          <Route
+            path="/home"
+            element={
+              <>
+                <Header />
+                <Home />
+              </>
+            }
+          />
+          <Route
+            path="/userprofile"
+            element={
+              <>
+                <Header />
+                <UserProfile />
+              </>
+            }
+          />
+
           </Route>
         </Routes>
       </Router>

@@ -1,9 +1,18 @@
-import Cookies from "js-cookie";
+
 import { Navigate, Outlet } from "react-router-dom";
-const ProtectedRoute = () => {
-  // const isAuthenticated = Cookies.get('access_token') !== undefined;
-  const isAuthenticated = true;
-  console.log(isAuthenticated);
+export  const ProtectedRouteDoctor = () => {
+  const isAuthenticated = !!localStorage.getItem("dtoken");
+
+  return isAuthenticated ? <Outlet /> : <Navigate to="/doctorlogin" />;
+};
+export const ProtectedRouteAdmin = () => {
+  const isAuthenticated = !!localStorage.getItem("token");
+
+  return isAuthenticated ? <Outlet /> : <Navigate to="/admin" />;
+};
+export const ProtectedRoute = () => {
+  const isAuthenticated = !!localStorage.getItem("token");
+
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };
-export default ProtectedRoute;
+

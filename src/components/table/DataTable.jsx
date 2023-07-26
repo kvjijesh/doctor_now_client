@@ -9,42 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 
-// const columns = [
-//   { id: 'name', label: 'Name', minWidth: 100 },
-//   { id: 'specialisation', label: 'Specialisation', minWidth: 170 },
-//   {
-//     id: 'email',
-//     label: 'Email',
-//     minWidth: 170,
-//   },
-//   {
-//     id: 'isVerified',
-//     label: 'Status',
-//     minWidth: 100,
-
-//   },
-//   {
-//     id: 'registrtionNumber',
-//     label: 'Registrtion Number',
-//     minWidth: 100,
-//     format: (value) => value.value.toLocaleString('en-US'),
-//   },
-//   {
-//     id: 'actions',
-//     label: 'Actions',
-//     minWidth: 150,
-//     align: 'right',
-//     format: (value) => (
-
-//       <Button variant="contained" color={value.is_blocked ? 'secondary' : 'primary'}>
-//         {value.is_blocked ? 'Unblock' : 'Block'}
-//       </Button>
-//     ),
-//   },
-// ];
-
-
-export default function DataTable({rows,columns}) {
+export default function DataTable({ rows, columns, onViewButtonClick, onApproveButtonClick, onBlockButtonClick }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -72,6 +37,7 @@ export default function DataTable({rows,columns}) {
                   {column.label}
                 </TableCell>
               ))}
+              <TableCell style={{ fontSize: '1.5rem' }}>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -82,23 +48,27 @@ export default function DataTable({rows,columns}) {
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                     {columns.map((column) => {
                       const value = row[column.id];
-                            console.log();
                       return (
                         <TableCell
                           key={column.id}
                           align={column.align}
                           style={{ fontSize: '1.3rem' }}
                         >
-
                           {column.format && typeof value === 'number'
-
                             ? column.format(value)
-                            : column.id === 'actions'
-                            ? column.format({ is_blocked: value })
                             : value}
                         </TableCell>
                       );
                     })}
+                    <TableCell>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        onClick={() => onViewButtonClick(row)} 
+                      >
+                        View Details
+                      </Button>
+                    </TableCell>
                   </TableRow>
                 );
               })}

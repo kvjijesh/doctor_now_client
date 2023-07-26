@@ -40,8 +40,8 @@ const Login = () => {
       try {
         const response = await axios.post("auth/login", formData);
         if (response.status === 200) {
-          localStorage.setItem('token', response.data.token);
-          console.log(response,889898);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("userData", JSON.stringify(response.data));
           dispatch(loginSucces(response.data));
           navigate("/home");
         }

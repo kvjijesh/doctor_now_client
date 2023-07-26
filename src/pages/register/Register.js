@@ -12,12 +12,13 @@ const Register = ({ userType }) => {
     name: "",
     email: "",
     password: "",
+    confirmPassword:"",
     otp: "",
   });
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
 
-  const { name, email, password,  otp } = formData;
+  const { name, email, password,confirmPassword, otp } = formData;
 
   const onChange = (e) => {
     setFormData({
@@ -155,7 +156,19 @@ const Register = ({ userType }) => {
                     />
                     <span>{formErrors.password}</span>
                   </div>
-                
+                  <div className="form-group">
+                    <label htmlFor="cpassword">Confirm Password</label>
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      name="confirmPassword"
+                      value={confirmPassword}
+                      placeholder="Renter password"
+                      onChange={onChange}
+                    />
+                    <span>{formErrors.confirmPassword}</span>
+                  </div>
+
                   <button type="submit">Sign Up</button>
                 </form>
                 <p className="alReg">

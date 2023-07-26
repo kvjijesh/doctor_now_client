@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.scss";
 import { images } from "../../images/image";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -9,7 +9,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "../../Servies/axiosInterceptor";
 import { useDispatch } from "react-redux";
-import { logout } from "../../features/user/userSlice";
+import { loginSucces, logout } from "../../features/user/userSlice";
+import { doctorloginSucces, doctorlogout } from "../../features/doctor/doctorSlice";
 
 const Header = ({ userType }) => {
   const { user } = useSelector((state) => state.user);
@@ -32,14 +33,20 @@ const Header = ({ userType }) => {
       const response = await axios.post(url);
 
       if (response.status === 200) {
+        if(userType==='doctor'){
+        localStorage.removeItem("dtoken")
+        dispatch(doctorlogout());
+        navigate("/doctorlogin");}
+       else {
         localStorage.removeItem("token")
-        dispatch(logout());
-       if(userType==='doctor') navigate("/doctorlogin");
-       else navigate('/login')
+        dispatch(logout())
+        navigate('/login')}
       }
     } catch (error) {
       console.log(error);
     }
+    localStorage.removeItem("userData");
+    localStorage.removeItem("doctorData");
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -49,6 +56,27 @@ const Header = ({ userType }) => {
     e.preventDefault();
     setOpen(!opena);
   };
+
+  const loadAuthDataFromLocalStorage = () => {
+    const userData = localStorage.getItem("userData");
+    const doctorData = localStorage.getItem("doctorData");
+
+    if (userData) {
+      const parsedUserData = JSON.parse(userData);
+      dispatch(loginSucces(parsedUserData));
+    }
+    if (doctorData) {
+      const parsedDoctorData = JSON.parse(doctorData);
+      dispatch(doctorloginSucces(parsedDoctorData));
+    }
+  };
+
+  useEffect(() => {
+    loadAuthDataFromLocalStorage();
+  }, []);
+
+
+
   return (
     <>
       {userType === "doctor" ? (
@@ -132,7 +160,8 @@ const Header = ({ userType }) => {
                           "aria-labelledby": "basic-button",
                         }}
                       >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <Link to='/userprofile'>
+                        <MenuItem onClick={handleClose}>Profile</MenuItem></Link>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </Menu>
                     </div>

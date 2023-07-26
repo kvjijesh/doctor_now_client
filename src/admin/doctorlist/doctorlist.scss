@@ -12,3 +12,28 @@
         font-weight: bold;
       }
 }
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+.modal-buttons {
+  display: flex;
+  gap: 10px; /* Add the desired spacing between buttons */
+  justify-content: center;
+  margin-top: 20px; /* Add margin between the buttons and the content */
+}
+
+.block-button {
+  margin-left: 10px; /* Add margin to the second button */
+}

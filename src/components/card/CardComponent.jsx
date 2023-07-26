@@ -29,7 +29,7 @@ export default function CardComponent(props) {
       </CardActionArea>
       <CardActions>
         <Button size="large" color="primary">
-          Share
+          Click
         </Button>
       </CardActions>
     </Card>

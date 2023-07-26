@@ -29,7 +29,8 @@ function LoginAdmin() {
         dispatch(adminLoginStart());
         try {
           const response = await axios.post("/auth/login", values);
-          if (response.data.isAdmin) {
+          if (response.data.is_Admin) {
+            localStorage.setItem('token', response.data.token);
             dispatch(adminLoginSucces(response.data));
             navigate("/dashboard");
           } else {

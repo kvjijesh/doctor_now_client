@@ -22,7 +22,7 @@ const doctorSlice=createSlice({
             state.doctor=null
             state.error=action.payload
         },
-        doctologout:(state)=>{
+        doctorlogout:(state)=>{
             state.loading=false
             state.doctor=null
             state.error=''
