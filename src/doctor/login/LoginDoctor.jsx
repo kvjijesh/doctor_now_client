@@ -8,9 +8,9 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { validateSchema } from "../../helper/formik";
 import {
-  doctorloginFailure,
-  doctorloginStart,
-  doctorloginSucces,
+  doctorLoginFailure,
+  doctorLoginStart,
+  doctorLoginSucces,
 } from "../../features/doctor/doctorSlice";
 import axios from "../../Servies/axiosInterceptor";
 
@@ -28,17 +28,17 @@ const LoginDoctor = () => {
       initialValues,
       validationSchema: validateSchema,
       onSubmit: async (values, action) => {
-        dispatch(doctorloginStart());
+        dispatch(doctorLoginStart());
         try {
           const response = await axios.post("/auth/doctorlogin", values);
           if (response.status === 200) {
             localStorage.setItem('dtoken', response.data.token);
             localStorage.setItem("doctorData", JSON.stringify(response.data));
-            dispatch(doctorloginSucces(response.data));
+            dispatch(doctorLoginSucces(response.data));
             navigate("/doctorhome");
           }
         } catch (error) {
-          dispatch(doctorloginFailure());
+          dispatch(doctorLoginFailure());
           if (error.isAxiosError) {
             const response = error.response;
               toast.error(`${response.data.message}`, {

@@ -9,7 +9,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 
-export default function DataTable({ rows, columns, onViewButtonClick, onApproveButtonClick, onBlockButtonClick }) {
+export default function DataTable({ rows, columns, onViewButtonClick, onApproveButtonClick, onBlockButtonClick,onUserBlockButtonClick,userType }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -60,15 +60,32 @@ export default function DataTable({ rows, columns, onViewButtonClick, onApproveB
                         </TableCell>
                       );
                     })}
+                    {userType==='user'?(<TableCell>
+                      {row.is_blocked?( <Button
+                      variant="contained"
+
+                        color="success"
+                        onClick={() => onUserBlockButtonClick(row._id,!row.is_blocked)}
+                      >
+                        Unblock
+                      </Button>):( <Button
+                        variant="contained"
+                        color="error"
+                        onClick={() => onUserBlockButtonClick(row._id,!row.is_blocked)}
+                      >
+                        Block
+                      </Button>)}
+
+                    </TableCell>):(
                     <TableCell>
                       <Button
                         variant="outlined"
                         color="primary"
-                        onClick={() => onViewButtonClick(row)} 
+                        onClick={() => onViewButtonClick(row)}
                       >
                         View Details
                       </Button>
-                    </TableCell>
+                    </TableCell>)}
                   </TableRow>
                 );
               })}

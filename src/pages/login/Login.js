@@ -11,6 +11,7 @@ import {
 } from "../../features/user/userSlice";
 import validate from "../../helper/validateLogin";
 import { toast } from "react-toastify";
+import Header from "../../components/header/Header";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const Login = () => {
         const response = await axios.post("auth/login", formData);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
-          localStorage.setItem("userData", JSON.stringify(response.data));
+          localStorage.setItem('loggedIn',true);
           dispatch(loginSucces(response.data));
           navigate("/home");
         }
@@ -65,6 +66,7 @@ const Login = () => {
     }
   };
   return (
+    <><Header />
     <div className="signup-page">
       <div className="container">
         <div className="image-container">
@@ -106,6 +108,7 @@ const Login = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

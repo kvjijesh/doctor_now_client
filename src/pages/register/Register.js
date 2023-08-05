@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../../Servies/axiosInterceptor";
 import { toast } from "react-toastify";
 import validate from "../../helper/validateRegister";
+import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 
 const Register = ({ userType }) => {
   const navigate = useNavigate();
@@ -114,11 +115,19 @@ const Register = ({ userType }) => {
                   </div>
 
                   <button type="submit">Enter Email OTP</button>
+
                 </form>
+                <div className="backbutton">
+                  <span><ArrowBackOutlinedIcon />Go Back</span>
+
+                </div>
+
               </>
             ) : (
               <>
-                <h2>Sign Up as {userType}</h2>
+              <div className="heading">
+                <h2 >Sign Up as {userType}</h2>
+                </div>
                 <form onSubmit={handleSubmit}>
                   <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -174,9 +183,18 @@ const Register = ({ userType }) => {
                 <p className="alReg">
                   Already have an account?
                   {userType === "doctor" ? (
-                    <Link to="/doctorlogin">Click here to login!</Link>
+                   <Link to="/doctorlogin">Click here to login!</Link>
+
                   ) : (
-                    <Link to="/login">Click here to login!</Link>
+                    <Link to="/login"> Click here to login!</Link>
+                  )}
+                </p>
+                <p className="alReg">
+                  Not a {userType}?
+                  {userType === "doctor" ? (
+                   <span><Link to="/signup"> Click here !</Link></span>
+                  ) : (
+                    <Link to="/doctor"> Click here !</Link>
                   )}
                 </p>
               </>

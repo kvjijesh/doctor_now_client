@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./header.scss";
 import { images } from "../../images/image";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -9,8 +9,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "../../Servies/axiosInterceptor";
 import { useDispatch } from "react-redux";
-import { loginSucces, logout } from "../../features/user/userSlice";
-import { doctorloginSucces, doctorlogout } from "../../features/doctor/doctorSlice";
+import {  logout } from "../../features/user/userSlice";
+import { doctorLogout } from "../../features/doctor/doctorSlice";
 
 const Header = ({ userType }) => {
   const { user } = useSelector((state) => state.user);
@@ -35,18 +35,18 @@ const Header = ({ userType }) => {
       if (response.status === 200) {
         if(userType==='doctor'){
         localStorage.removeItem("dtoken")
-        dispatch(doctorlogout());
+        dispatch(doctorLogout());
         navigate("/doctorlogin");}
        else {
         localStorage.removeItem("token")
+        localStorage.removeItem("loggedIn")
         dispatch(logout())
         navigate('/login')}
       }
     } catch (error) {
       console.log(error);
     }
-    localStorage.removeItem("userData");
-    localStorage.removeItem("doctorData");
+
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -57,23 +57,6 @@ const Header = ({ userType }) => {
     setOpen(!opena);
   };
 
-  const loadAuthDataFromLocalStorage = () => {
-    const userData = localStorage.getItem("userData");
-    const doctorData = localStorage.getItem("doctorData");
-
-    if (userData) {
-      const parsedUserData = JSON.parse(userData);
-      dispatch(loginSucces(parsedUserData));
-    }
-    if (doctorData) {
-      const parsedDoctorData = JSON.parse(doctorData);
-      dispatch(doctorloginSucces(parsedDoctorData));
-    }
-  };
-
-  useEffect(() => {
-    loadAuthDataFromLocalStorage();
-  }, []);
 
 
 
@@ -84,12 +67,16 @@ const Header = ({ userType }) => {
           <header>
             <nav className="navbar container">
               <div className="logo">
-                <img src={images.logo} alt="logo" />
+                <Link to="/doctorhome">
+                <img src={images.logo} alt="logo" /></Link>
               </div>
               <ul className={opena ? `nav-items active ` : `nav-items`}>
+                <Link to='/manage-slots'>
+              <li>Slots</li></Link>
                 <li>Appointments</li>
                 <li>Video Consult</li>
                 <li>Chat consult</li>
+
                 {doctor ? (
                   <ul>
                     <div>
@@ -111,7 +98,8 @@ const Header = ({ userType }) => {
                           "aria-labelledby": "basic-button",
                         }}
                       >
-                        <MenuItem onClick={handleClose}>Profile</MenuItem>
+                        <Link to='/doctorprofile'>
+                        <MenuItem onClick={handleClose}>Profile</MenuItem></Link>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </Menu>
                     </div>
@@ -133,10 +121,11 @@ const Header = ({ userType }) => {
           <header>
             <nav className="navbar container">
               <div className="logo">
-                <img src={images.logo} alt="logo" />
+                <Link to="/home">
+                <img src={images.logo} alt="logo" /></Link>
               </div>
               <ul className={opena ? `nav-items active ` : `nav-items`}>
-                <li>Find Doctors</li>
+                <Link to='/available-doctors'><li>Find Doctors</li></Link>
                 <li>Video Consult</li>
                 <li>Chat with Doctor</li>
                 {user ? (

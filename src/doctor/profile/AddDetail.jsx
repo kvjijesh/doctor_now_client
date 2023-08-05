@@ -1,31 +1,35 @@
 import React from "react";
-import "./profile.scss";
+import "./adddetail.scss";
 import Header from "../../components/header/Header";
 import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { validateDetails } from "../../helper/formik";
 import axios from "../../Servies/axiosInterceptor";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { doctorLoginSucces, doctorloginFailure,  } from "../../features/doctor/doctorSlice";
 const initialValues = {
   registrationNumber: "",
   registrationCouncil: "",
   registrationYear: "",
   offlineFee: "",
-  videoFee: "",
-  chatFee: "",
+  videoChatFee: "",
+  textChatFee: "",
   specialisation: "",
-  mobileNumber: "",
+  mobile: "",
   gender: "",
   street: "",
   city: "",
   state: "",
   country: "",
   pin: "",
+  is_submitted:true
 };
 
-const Profile = () => {
+const AddDetail = () => {
   const userType = "doctor";
   const navigate=useNavigate()
+  const dispatch=useDispatch()
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -39,6 +43,8 @@ const Profile = () => {
           });
           console.log(response);
           if(response.status===201){
+           console.log( response.data)
+            dispatch(doctorLoginSucces(response.data.updatedDoctor))
             toast.success('Added succesfully',{position:toast.POSITION.TOP_CENTER})
             navigate('/doctorhome')
           }
@@ -53,7 +59,7 @@ const Profile = () => {
     <>
       <Header userType={userType} />
 
-      <div className="card">
+      <div className="card1">
         <h2 className="heading">Upload Your Details</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -117,28 +123,28 @@ const Profile = () => {
               <label>Video Fee:</label>
               <input
                 type="text"
-                name="videoFee"
-                id="videoFee"
-                value={values.videoFee}
+                name="videoChatFee"
+                id="videoChatFee"
+                value={values.videoChatFee}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.videoFee && errors.videoFee ? (
-                <span>{errors.videoFee}</span>
+              {touched.videoChatFee && errors.videoChatFee ? (
+                <span>{errors.videoChatFee}</span>
               ) : null}
             </div>
             <div className="form-group">
               <label>Chat Fee:</label>
               <input
                 type="text"
-                name="chatFee"
-                id="chatFee"
-                value={values.chatFee}
+                name="textChatFee"
+                id="textChatFee"
+                value={values.textChatFee}
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
-              {touched.chatFee && errors.chatFee ? (
-                <span>{errors.chatFee}</span>
+              {touched.textChatFee && errors.textChatFee ? (
+                <span>{errors.textChatFee}</span>
               ) : null}
             </div>
           </div>
@@ -174,14 +180,14 @@ const Profile = () => {
             <label>Mobile Number:</label>
             <input
               type="text"
-              name="mobileNumber"
-              id="mobileNumber"
-              value={values.mobileNumber}
+              name="mobile"
+              id="mobile"
+              value={values.mobile}
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {touched.mobileNumber && errors.mobileNumber ? (
-              <span>{errors.mobileNumber}</span>
+            {touched.mobile && errors.mobile ? (
+              <span>{errors.mobile}</span>
             ) : null}
           </div>
           <div className="form-group">
@@ -192,7 +198,7 @@ const Profile = () => {
               onChange={handleChange}
               onBlur={handleBlur}
             >
-              <option disabled>
+              <option selected disabled>
                 Select
               </option>
               <option value="male">Male</option>
@@ -271,4 +277,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default AddDetail;

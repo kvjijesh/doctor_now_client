@@ -5,7 +5,7 @@ import DataTable from "../../components/table/DataTable";
 import axios from "../../Servies/axiosInterceptor";
 import { toast } from "react-toastify";
 import { Button, Modal } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -24,7 +24,7 @@ const DoctorList = () => {
       }
     };
     fetchDoctors();
-  }, []);
+  }, [doctors]);
 
   const columns = [
     { id: "name", label: "Name", minWidth: 100 },
@@ -52,9 +52,8 @@ const DoctorList = () => {
       const response = await axios.post(`/admin/approve/${doctorId}`, null, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
-        }
+        },
       });
-
       setIsModalOpen(false);
       toast.success("Doctor approved successfully", {
         position: toast.POSITION.TOP_CENTER,
@@ -69,12 +68,9 @@ const DoctorList = () => {
       const response = await axios.post(`/admin/block-doctor/${doctorId}`, {
         blockedStatus,
       });
-      if (response.status===200) {
-        console.log(response.data.doctor)
-       const updatedSelectedDoctor=response.data.doctor;
-       setSelectedDoctor(updatedSelectedDoctor);
-      console.log(selectedDoctor);
-
+      if (response.status === 200) {
+        const updatedSelectedDoctor = response.data.doctor;
+        setSelectedDoctor(updatedSelectedDoctor);
         const actionMessage = blockedStatus ? "blocked" : "unblocked";
         setIsModalOpen(false);
         toast.success(`Doctor ${actionMessage} successfully`, {
@@ -118,12 +114,16 @@ const DoctorList = () => {
             <p>Registration Year: {selectedDoctor?.registrationYear}</p>
             <div className="modal-buttons">
               {selectedDoctor?.is_blocked ? (
-                <Button variant="contained" color="success"  onClick={() =>
-                  handleBlockButtonClick(
-                    selectedDoctor?._id,
-                    !selectedDoctor?.is_blocked
-                  )
-                }>
+                <Button
+                  variant="contained"
+                  color="success"
+                  onClick={() =>
+                    handleBlockButtonClick(
+                      selectedDoctor?._id,
+                      !selectedDoctor?.is_blocked
+                    )
+                  }
+                >
                   Unblock
                 </Button>
               ) : (
@@ -140,14 +140,22 @@ const DoctorList = () => {
                   Block
                 </Button>
               )}
-              {selectedDoctor?.isVerified?(<Button variant="contained" color="primary" disabled>
-                Approved
-              </Button>):(<Button variant="contained" color="primary" onClick={()=>handleApproveButtonClick(selectedDoctor?._id)}>
-                Approve
-              </Button>)}
-                <Button onClick={handleClose}>
-                  <CloseIcon/>
+              {selectedDoctor?.isVerified ? (
+                <Button variant="contained" color="primary" disabled>
+                  Approved
                 </Button>
+              ) : (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleApproveButtonClick(selectedDoctor?._id)}
+                >
+                  Approve
+                </Button>
+              )}
+              <Button onClick={handleClose}>
+                <CloseIcon />
+              </Button>
             </div>
           </div>
         </div>

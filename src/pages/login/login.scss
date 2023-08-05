@@ -3,14 +3,15 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-color: #fdfafa;
 
     .container {
       display: flex;
-      background-color: #fff;
+      background-color: #faf2f2;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
       border-radius: 6px;
       overflow: hidden;
+      height: 80vh;
 
       .image-container {
         flex: 1;
@@ -92,4 +93,9 @@
         }
       }
     }
+    @media(max-width: 767px){
+      max-width: 90%;
+
+}
+
   }

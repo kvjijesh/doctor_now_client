@@ -5,6 +5,7 @@ import axios from "../../Servies/axiosInterceptor";
 import { useDispatch, useSelector } from "react-redux";
 import { loginSucces } from "../../features/user/userSlice";
 import { toast } from "react-toastify";
+
 const UserProfile = () => {
   const userData = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
@@ -16,12 +17,14 @@ const UserProfile = () => {
   const [userCity, setUserCity] = useState(userData?.city || "");
   const [userState, setUserState] = useState(userData?.state || "");
   const [userPin, setUserPin] = useState(userData?.pin || "");
-  const [userImage, setUserImage] = useState(userData?.image || "");
+  const [image, setImage] = useState(userData?.image || "");
   const [isEditMode, setIsEditMode] = useState(false);
+  const [preview, setPreview] = useState("");
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setUserImage(file);
+    setImage(file);
+    setPreview(URL.createObjectURL(e.target.files[0]));
   };
 
   const handleEditClick = () => {
@@ -30,9 +33,7 @@ const UserProfile = () => {
 
   const handleSaveClick = async (e) => {
     e.preventDefault();
-    console.log("i am from handle save click", userName);
     const formData = new FormData();
-
     formData.append("name", userName);
     formData.append("email", userEmail);
     formData.append("mobile", userMobile);
@@ -40,15 +41,18 @@ const UserProfile = () => {
     formData.append("city", userCity);
     formData.append("state", userState);
     formData.append("pin", userPin);
-    formData.append("image", userImage);
-    const data=Object.fromEntries(formData)
+    if (image) {
+      formData.append("image", image);
+    }
+
     try {
-      const response = await axios.put(`/update/${userData?._id}`,data);
-      if(response.status===200){
-      dispatch(loginSucces(response.data))
-      setIsEditMode(false);}
+      const response = await axios.put(`/update/${userData?._id}`, formData);
+      if (response.status === 200) {
+        dispatch(loginSucces(response.data));
+        setIsEditMode(false);
+      }
     } catch (error) {
-      toast.error(`${error.message}`,{position:toast.POSITION.TOP_CENTER})
+      toast.error(`${error.message}`, { position: toast.POSITION.TOP_CENTER });
     }
   };
 
@@ -56,10 +60,22 @@ const UserProfile = () => {
     <div className="user-profile-container">
       <div className="left-section">
         <div className="user-image">
-          {userImage ? (
-            <img src={URL.createObjectURL(userImage)} alt="User" />
+          {isEditMode ? (
+            preview ? (
+              <img src={preview} alt="User" />
+            ) : userData?.image ? (
+              <img
+                src={`http://localhost:8000/images/${userData?.image}`}
+                alt="User"
+              />
+            ) : (
+              <p>No image selected</p>
+            )
           ) : (
-            <div className="default-image">Change Image</div>
+            <img
+              src={`http://localhost:8000/images/${userData?.image}`}
+              alt="User"
+            />
           )}
 
           {isEditMode && (
@@ -69,7 +85,7 @@ const UserProfile = () => {
                 accept="image/*"
                 onChange={handleImageChange}
                 id="image-input"
-                name='image'
+                name="image"
               />
               <label htmlFor="image-input">Change Image</label>
             </>

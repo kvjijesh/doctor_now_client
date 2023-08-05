@@ -2,33 +2,35 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState={
     loading:false,
-    user:null,
-    error:'',
+    doctor:null,
+    error:''
 }
 
 const doctorSlice=createSlice({
     name:'doctor',
     initialState,
     reducers:{
-        doctorloginStart:(state)=>{
+        doctorLoginStart:(state)=>{
             state.loading=true
         },
-        doctorloginSucces:(state,action)=>{
+        doctorLoginSucces:(state,action)=>{
             state.loading=false
             state.doctor=action.payload
         },
-        doctorloginFailure:(state,action)=>{
+        doctorLoginFailure:(state,action)=>{
             state.loading=false
             state.doctor=null
             state.error=action.payload
         },
-        doctorlogout:(state)=>{
+        doctorLogout:(state)=>{
             state.loading=false
             state.doctor=null
             state.error=''
         }
 
+
     }
 })
-export const {doctorloginStart,doctorloginSucces,doctorloginFailure,doctorlogout}=doctorSlice.actions;
+
+export const {doctorLoginStart,doctorLoginSucces,doctorLoginFailure,doctorLogout,action}=doctorSlice.actions;
 export default doctorSlice.reducer

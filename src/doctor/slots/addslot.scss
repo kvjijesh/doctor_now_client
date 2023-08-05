@@ -1,0 +1,80 @@
+$primary-color: #007bff;
+$secondary-color: #0056b3;
+$shadow-color: rgba(0, 0, 0, 0.1);
+
+.addslot-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  margin-top: 30px;
+}
+
+.form-container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+  box-shadow: 0 2px 4px $shadow-color;
+  background-color: #fff;
+  border-radius: 5px;
+
+  h2 {
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+
+  .form-inputs {
+    display: flex;
+    align-items: center;
+
+    .date-picker {
+      margin-right: 10px;
+    }
+
+    select {
+      margin-right: 10px;
+    }
+
+
+  }
+
+  .added-dates {
+    margin-top: 20px;
+
+    h3 {
+      margin-bottom: 10px;
+      color: $primary-color;
+
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 5px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px $shadow-color;
+        background-color: #fff;
+      }
+    }
+  }
+}
+button {
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  margin-left: 5PX;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 10px;
+
+  &:hover {
+    background-color: $secondary-color;
+  }
+}
