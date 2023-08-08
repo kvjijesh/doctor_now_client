@@ -1,0 +1,28 @@
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+
+.card-booking {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+
+  .booking-card {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
+    width: auto;
+    box-shadow: 0 0 28px 4px $box-shadow-color;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &__title {
+      font-weight: 800;
+      font-size: 1.5rem;
+    }
+  }
+}

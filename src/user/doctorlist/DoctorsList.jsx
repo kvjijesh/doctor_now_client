@@ -17,18 +17,21 @@ const DoctorsList = () => {
           setAllDoctors(response.data);
         }
       } catch (error) {
-        toast.error(`${error.messAGE}`);
+        toast.error(`${error.message}`);
       }
     })();
   }, []);
 
   const filterCards = (event) => {
     const value = event.target.value.toLowerCase();
-    const filteredDoctors = allDoctors.filter((doctor) =>
-      `${doctor.specialisation} `.toLowerCase().includes(value)
+    const filteredDoctors = allDoctors.filter(
+      (doctor) =>
+        doctor.specialisation.toLowerCase().includes(value) ||
+        doctor.name.toLowerCase().includes(value) 
     );
     setDoctors(filteredDoctors);
   };
+
 
   return (
     <div className="App">

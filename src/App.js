@@ -26,6 +26,9 @@ import DoctorsList from "./user/doctorlist/DoctorsList";
 import UsersList from "./admin/userslist/UsersList";
 import DoctorDetails from "./user/doctordetails/DoctorDetails";
 import AddSlot from "./doctor/slots/AddSlot";
+import Booking from "./user/appointment/Booking";
+import ConfirmBooking from "./user/appointment/ConfirmBooking";
+import Appointments from "./doctor/appointments/Appointments";
 
 function App() {
   const isLoggedIn = localStorage.getItem("loggedIn");
@@ -95,6 +98,7 @@ function App() {
           <Route element={<ProtectedRouteDoctor />}>
             <Route path="/doctorhome" element={<DoctorHome />} />
             <Route path="/manage-slots" element={<AddSlot/>} />
+            <Route path="/appointments" element={<Appointments/>} />
             <Route
               path="/doctorprofile"
               element={
@@ -121,6 +125,24 @@ function App() {
                 <>
                   <Header />
                   <UserProfile />
+                </>
+              }
+            />
+            <Route
+              path="/book-appointment"
+              element={
+                <>
+                  <Header />
+                  <Booking />
+                </>
+              }
+            />
+            <Route
+              path='/booking-success'
+              element={
+                <>
+
+                  <ConfirmBooking />
                 </>
               }
             />

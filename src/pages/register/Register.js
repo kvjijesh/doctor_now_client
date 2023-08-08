@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "../../Servies/axiosInterceptor";
 import { toast } from "react-toastify";
 import validate from "../../helper/validateRegister";
-import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
+import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 
 const Register = ({ userType }) => {
   const navigate = useNavigate();
@@ -13,13 +13,33 @@ const Register = ({ userType }) => {
     name: "",
     email: "",
     password: "",
-    confirmPassword:"",
+    confirmPassword: "",
     otp: "",
   });
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
+  const [otpCounter, setOtpCounter] = useState(30);
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
+  const startOtpCounter = () => {
+    setIsResendDisabled(true);
+    let counter = 30;
+    const timer = setInterval(() => {
+      if (counter > 0) {
+        counter--;
+        setOtpCounter(counter);
+      } else {
+        clearInterval(timer);
+        setIsResendDisabled(false);
+      }
+    }, 1000);
+  };
+  const handleResendOTP = async () => {
+    await axios.post("/auth/resend-otp", formData);
 
-  const { name, email, password,confirmPassword, otp } = formData;
+    startOtpCounter();
+  };
+
+  const { name, email, password, confirmPassword, otp } = formData;
 
   const onChange = (e) => {
     setFormData({
@@ -32,6 +52,7 @@ const Register = ({ userType }) => {
     e.preventDefault();
     const errors = validate(formData);
     setFormErrors(errors);
+    startOtpCounter();
     let url;
     if (userType === "doctor") {
       url = "/auth/doctorsignup";
@@ -42,7 +63,6 @@ const Register = ({ userType }) => {
     if (Object.keys(errors).length === 0) {
       try {
         const response = await axios.post(url, formData);
-        console.log(response);
         if (response.data) {
           setIsSubmit(true);
         } else {
@@ -55,6 +75,10 @@ const Register = ({ userType }) => {
       }
     }
   };
+  const handleBack= async()=>{
+    setIsSubmit(false)
+    /*navigate(-1)*/
+  }
 
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +91,7 @@ const Register = ({ userType }) => {
     try {
       const response = await axios.post(link, { email, otp });
       console.log(response);
-      if (response.data) {
+      if (response.status === 201) {
         toast.success(`Registration successful!`, {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
@@ -82,7 +106,7 @@ const Register = ({ userType }) => {
         });
       }
     } catch (error) {
-      toast.error(`Something went wrong`, {
+      toast.error(`OTP Incorrect`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 3000,
       });
@@ -115,18 +139,30 @@ const Register = ({ userType }) => {
                   </div>
 
                   <button type="submit">Enter Email OTP</button>
-
                 </form>
-                <div className="backbutton">
-                  <span><ArrowBackOutlinedIcon />Go Back</span>
-
+                <div className="otp-resend">
+                  <p>
+                    Resend OTP in {otpCounter}s{" "}
+                    <button
+                      onClick={handleResendOTP}
+                      disabled={isResendDisabled}
+                      className="resend-button"
+                    >
+                      Resend OTP
+                    </button>
+                  </p>
                 </div>
-
+                <div className="backbutton">
+                  <span onClick={handleBack} >
+                    <ArrowBackOutlinedIcon/>
+                    Go Back
+                  </span>
+                </div>
               </>
             ) : (
               <>
-              <div className="heading">
-                <h2 >Sign Up as {userType}</h2>
+                <div className="heading">
+                  <h2>Sign Up as {userType}</h2>
                 </div>
                 <form onSubmit={handleSubmit}>
                   <div className="form-group">
@@ -183,8 +219,7 @@ const Register = ({ userType }) => {
                 <p className="alReg">
                   Already have an account?
                   {userType === "doctor" ? (
-                   <Link to="/doctorlogin">Click here to login!</Link>
-
+                    <Link to="/doctorlogin">Click here to login!</Link>
                   ) : (
                     <Link to="/login"> Click here to login!</Link>
                   )}
@@ -192,7 +227,9 @@ const Register = ({ userType }) => {
                 <p className="alReg">
                   Not a {userType}?
                   {userType === "doctor" ? (
-                   <span><Link to="/signup"> Click here !</Link></span>
+                    <span>
+                      <Link to="/signup"> Click here !</Link>
+                    </span>
                   ) : (
                     <Link to="/doctor"> Click here !</Link>
                   )}

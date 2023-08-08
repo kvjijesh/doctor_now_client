@@ -6,6 +6,8 @@ import Header from "../../components/header/Header";
 import axios from "../../Servies/axiosInterceptor";
 import { useDispatch, useSelector } from "react-redux";
 import { doctorLoginSucces } from "../../features/doctor/doctorSlice";
+import { toast } from "react-toastify";
+
 
 const AddSlot = () => {
   const userType = "doctor";
@@ -46,27 +48,60 @@ const AddSlot = () => {
     if (selectedDate) {
       const dateTimeString = `${selectedDate.toDateString()} ${selectedTime}`;
 
+       console.log(selectedDate.toISOString())
       try {
         const response = await axios.post("/doctor/add-slots", {
           doctorId: doctorData?._id,
-          selectedDate: selectedDate.toISOString(),
-          selectedTime,
+          selectedDate: dateTimeString,
+
+
         });
         if (response.status === 200) {
           dispatch(doctorLoginSucces(response.data));
-          setAddedDates([...addedDates, dateTimeString]);
+          setAddedDates([...addedDates, dateTimeString ]);
           setSelectedDate(null);
         }
-      } catch (error) {}
+      } catch (error) {
+
+      }
     }
   };
 
-  const handleDelete = (index) => {
-    const updatedDates = [...addedDates];
-    updatedDates.splice(index, 1);
-    setAddedDates(updatedDates);
-  };
+  const handleDelete = async (index) => {
+    try {
+      const slotToDelete = addedDates[index];
+      const response = await axios.delete("/doctor/delete-slot", {
+        data: {
+          doctorId: doctorData?._id,
+          slotToDelete,
+        },
+      });
 
+      if (response.status === 200) {
+        dispatch(doctorLoginSucces(response.data));
+        const updatedDates = addedDates.filter((_, i) => i !== index);
+        setAddedDates(updatedDates);
+      }
+
+    } catch (error) {
+      console.log(error.response.status)
+      if (error.isAxiosError) {
+        const response = error.response;
+        if (response?.status === 400) {
+          toast.error(`${response.data.message}`, {
+            position: toast.POSITION.TOP_CENTER,
+
+          });
+        } else {
+          toast.error(`${response.message}`, {
+            position: toast.POSITION.TOP_CENTER,
+
+          });
+        }
+      }
+
+    }
+  }
   return (
     <>
       <Header userType={userType} />
@@ -102,7 +137,7 @@ const AddSlot = () => {
             <ul>
               {addedDates.map((slot, index) => (
                 <li key={index}>
-                  {slot.date} {slot.time}
+                  {slot}
                   <button type="button" onClick={() => handleDelete(index)}>
                     Delete
                   </button>

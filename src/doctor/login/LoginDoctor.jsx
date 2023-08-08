@@ -2,7 +2,7 @@ import React from "react";
 import "./logindoctor.scss";
 import Header from "../../components/header/Header";
 import { images } from "../../images/image";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
@@ -95,6 +95,10 @@ const LoginDoctor = () => {
               </div>
               <button type="submit">Login</button>
             </form>
+            <p className="alReg">
+            Not Registered??
+            <Link to="/doctor"> Click here to signup!</Link>
+          </p>
           </div>
         </div>
       </div>

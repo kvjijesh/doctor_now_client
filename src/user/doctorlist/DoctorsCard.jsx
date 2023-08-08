@@ -15,6 +15,7 @@ const DoctorsCard = ({ doctorData }) => {
       <div className="card__body">
         <p>{doctorData.specialisation}</p>
         <p>{doctorData.city}</p>
+        <p>{doctorData.state}</p>
         <p>{doctorData.pin}</p>
         <div className="card__image">
           <img src={imageUrl} alt="doctor" />

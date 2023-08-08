@@ -11,6 +11,7 @@ import axios from "../../Servies/axiosInterceptor";
 import { useDispatch } from "react-redux";
 import {  logout } from "../../features/user/userSlice";
 import { doctorLogout } from "../../features/doctor/doctorSlice";
+import { clearAppointment } from "../../features/user/appoinmentSlice";
 
 const Header = ({ userType }) => {
   const { user } = useSelector((state) => state.user);
@@ -41,6 +42,7 @@ const Header = ({ userType }) => {
         localStorage.removeItem("token")
         localStorage.removeItem("loggedIn")
         dispatch(logout())
+        dispatch(clearAppointment())
         navigate('/login')}
       }
     } catch (error) {
@@ -67,13 +69,14 @@ const Header = ({ userType }) => {
           <header>
             <nav className="navbar container">
               <div className="logo">
-                <Link to="/doctorhome">
+                <Link to="/">
                 <img src={images.logo} alt="logo" /></Link>
               </div>
               <ul className={opena ? `nav-items active ` : `nav-items`}>
                 <Link to='/manage-slots'>
               <li>Slots</li></Link>
-                <li>Appointments</li>
+              <Link to={'/appointments'} >
+                <li >Appointments</li></Link>
                 <li>Video Consult</li>
                 <li>Chat consult</li>
 
@@ -121,7 +124,7 @@ const Header = ({ userType }) => {
           <header>
             <nav className="navbar container">
               <div className="logo">
-                <Link to="/home">
+                <Link to="/">
                 <img src={images.logo} alt="logo" /></Link>
               </div>
               <ul className={opena ? `nav-items active ` : `nav-items`}>
