@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./login.scss";
 import { images } from "../../images/image";
 import { Link, useNavigate } from "react-router-dom";
@@ -16,6 +16,14 @@ import Header from "../../components/header/Header";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    const authToken = localStorage.getItem("token");
+    if (authToken) {
+      navigate('/home')
+    }
+  }, [navigate]);
+
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -42,7 +50,6 @@ const Login = () => {
         const response = await axios.post("auth/login", formData);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
-          localStorage.setItem('loggedIn',true);
           dispatch(loginSucces(response.data));
           navigate("/home");
         }
@@ -67,7 +74,7 @@ const Login = () => {
   };
   return (
     <><Header />
-    <div className="signup-page">
+    <div className="login-page">
       <div className="container">
         <div className="image-container">
           <img src={images.regImage} alt="Signup" />

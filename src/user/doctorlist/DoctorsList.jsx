@@ -23,11 +23,11 @@ const DoctorsList = () => {
   }, []);
 
   const filterCards = (event) => {
-    const value = event.target.value.toLowerCase();
+    const value = event.target.value?.toLowerCase();
     const filteredDoctors = allDoctors.filter(
       (doctor) =>
-        doctor.specialisation.toLowerCase().includes(value) ||
-        doctor.name.toLowerCase().includes(value) 
+        doctor.specialisation?.toLowerCase().includes(value) ||
+        doctor.name?.toLowerCase().includes(value)
     );
     setDoctors(filteredDoctors);
   };

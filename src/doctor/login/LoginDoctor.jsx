@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./logindoctor.scss";
 import Header from "../../components/header/Header";
 import { images } from "../../images/image";
@@ -23,6 +23,12 @@ const LoginDoctor = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userType = "doctor";
+  useEffect(() => {
+    const authToken = localStorage.getItem("dtoken");
+    if (authToken) {
+      navigate('/doctorhome')
+    }
+  }, [navigate]);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,

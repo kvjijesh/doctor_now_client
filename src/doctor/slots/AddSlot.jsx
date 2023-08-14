@@ -47,14 +47,14 @@ const AddSlot = () => {
   const handleAdd = async () => {
     if (selectedDate) {
       const dateTimeString = `${selectedDate.toDateString()} ${selectedTime}`;
-
-       console.log(selectedDate.toISOString())
       try {
         const response = await axios.post("/doctor/add-slots", {
           doctorId: doctorData?._id,
           selectedDate: dateTimeString,
-
-
+        },{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("dtoken")}`,
+          },
         });
         if (response.status === 200) {
           dispatch(doctorLoginSucces(response.data));
@@ -62,7 +62,7 @@ const AddSlot = () => {
           setSelectedDate(null);
         }
       } catch (error) {
-
+        toast.error(`${error.response.data.message}`,{position:toast.POSITION.TOP_CENTER})
       }
     }
   };
@@ -84,22 +84,7 @@ const AddSlot = () => {
       }
 
     } catch (error) {
-      console.log(error.response.status)
-      if (error.isAxiosError) {
-        const response = error.response;
-        if (response?.status === 400) {
-          toast.error(`${response.data.message}`, {
-            position: toast.POSITION.TOP_CENTER,
-
-          });
-        } else {
-          toast.error(`${response.message}`, {
-            position: toast.POSITION.TOP_CENTER,
-
-          });
-        }
-      }
-
+      console.error(error)
     }
   }
   return (

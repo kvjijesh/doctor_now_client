@@ -1,0 +1,17 @@
+$box-shadow-color: rgba(0, 0, 0, 0.1);
+.add-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    .addDep-card{
+        margin: 2rem 2rem 2rem 0;
+        padding: 1.5rem;
+        width: 100%;
+        box-shadow: 0 0 28px 4px $box-shadow-color;
+        transition: transform .3s ease;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

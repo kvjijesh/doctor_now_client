@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./adddetail.scss";
 import Header from "../../components/header/Header";
 import { useFormik } from "formik";
@@ -7,7 +7,10 @@ import { validateDetails } from "../../helper/formik";
 import axios from "../../Servies/axiosInterceptor";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { doctorLoginSucces, doctorloginFailure,  } from "../../features/doctor/doctorSlice";
+import {
+  doctorLoginSucces,
+  doctorloginFailure,
+} from "../../features/doctor/doctorSlice";
 const initialValues = {
   registrationNumber: "",
   registrationCouncil: "",
@@ -23,33 +26,53 @@ const initialValues = {
   state: "",
   country: "",
   pin: "",
-  is_submitted:true
+  is_submitted: true,
 };
 
 const AddDetail = () => {
   const userType = "doctor";
-  const navigate=useNavigate()
-  const dispatch=useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [departmentOptions, setDepartmentOptions] = useState([]);
+  useEffect(() => {
+    const getDepartments = async () => {
+      try {
+        const res = await axios.get("/all-departments");
+
+        const departmentNames = res.data.map(department => department.name);
+        setDepartmentOptions(departmentNames)
+        console.log(departmentOptions);
+      } catch (error) {
+        toast.error(`${error.response}`);
+      }
+    };
+    getDepartments();
+  }, []);
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
       validationSchema: validateDetails,
       onSubmit: async (values, action) => {
         try {
-          const response = await axios.put("/doctor/add-details", values, {
+          const response = await axios.post("/doctor/add-details", values, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("dtoken")}`,
             },
           });
           console.log(response);
-          if(response.status===201){
-           console.log( response.data)
-            dispatch(doctorLoginSucces(response.data.updatedDoctor))
-            toast.success('Added succesfully',{position:toast.POSITION.TOP_CENTER})
-            navigate('/doctorhome')
+          if (response.status === 201) {
+            console.log(response.data);
+            dispatch(doctorLoginSucces(response.data.updatedDoctor));
+            toast.success("Added succesfully", {
+              position: toast.POSITION.TOP_CENTER,
+            });
+            navigate("/doctorhome");
           }
         } catch (error) {
-          toast.error(`${error.message}`,{position:toast.POSITION.TOP_CENTER})
+          toast.error(`${error.message}`, {
+            position: toast.POSITION.TOP_CENTER,
+          });
         }
 
         action.resetForm();
@@ -150,14 +173,22 @@ const AddDetail = () => {
           </div>
           <div className="form-group">
             <label>Specialisation:</label>
-            <input
-              type="text"
+            <select
               name="specialisation"
               id="specialisation"
               value={values.specialisation}
               onChange={handleChange}
               onBlur={handleBlur}
-            />
+            >
+              <option value="" disabled>
+                Select Specialisation
+              </option>
+              {departmentOptions?.map((department, index) => (
+                <option key={index} value={department}>
+                  {department}
+                </option>
+              ))}
+            </select>
             {touched.specialisation && errors.specialisation ? (
               <span>{errors.specialisation}</span>
             ) : null}

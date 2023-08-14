@@ -9,7 +9,6 @@ const DoctorDetails = () => {
   const navigate = useNavigate();
 
   const handleBook = async (slot) => {
-    console.log(slot);
     navigate("/book-appointment", {
       state: { doctorData: doctorData, slot: slot },
     });
@@ -18,8 +17,11 @@ const DoctorDetails = () => {
   return (
     <>
       <Header />
-      <div className="App1">
-        <div className="card2">
+      <div className="detail-heading">
+        <h2>BOOKING DETAILS</h2>
+      </div>
+      <div className="detail-container">
+        <div className="detail-card">
           <div className="profile">
             <img
               className="profile-image"
@@ -34,24 +36,23 @@ const DoctorDetails = () => {
             </div>
           </div>
         </div>
-
+      </div>
+      <div className="detail-heading">
+        <h2>AVAILABLE SLOTS</h2>
+      </div>
+      <div className="slot-container">
         <div className="available-slots">
-          <div className="slot">
-            {doctorData?.availableSlots.length === 0 ? (
-              <p>No slots available</p>
-            ) : (
-              doctorData?.availableSlots.map((slot, index) => (
-                <div
-                  key={index}
-                  className="inner-slots"
-                  onClick={() => handleBook(slot)}
-                >
-                  {slot}
-                </div>
-              ))
-            )}
+
+            {doctorData?.availableSlots.length===0?(<p>No slots available</p>):(doctorData?.availableSlots.map((slot,index)=>( <div
+                key={index}
+                className="inner-slots"
+                onClick={() => handleBook(slot)}
+              >
+                {slot}
+              </div>)))}
+
           </div>
-        </div>
+
       </div>
     </>
   );

@@ -1,14 +1,14 @@
-.signup-page {
+.login-page {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #f5f5f5;
+  background-color: #e9e3e3;
 
   .container {
     display: flex;
     background-color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     overflow: hidden;
     padding: 1rem;
@@ -54,11 +54,11 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: bold;
-            margin-left: 6rem;
+            margin-left: 4rem;
           }
 
           input {
-            margin-left: 6rem;
+            margin-left: 4rem;
             width: 80%;
             padding: 0.5rem;
             border: 1px solid #ccc;
@@ -66,14 +66,14 @@
           }
           span {
             color: var(--red);
-            margin-left: 6rem;
+            margin-left: 4rem;
           }
         }
 
         button[type="submit"] {
           display: block;
           width: 80%;
-          margin-left: 6rem;
+          margin-left: 4rem;
           margin-top: 2rem;
           padding: 1rem;
           background-color: #007bff;
@@ -88,7 +88,7 @@
         }
       }
       .alReg {
-        margin-left: 6rem;
+        margin-left: 4.5rem;
         margin-top: 2rem;
       }
     }

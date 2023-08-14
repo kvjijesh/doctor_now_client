@@ -29,11 +29,18 @@ import AddSlot from "./doctor/slots/AddSlot";
 import Booking from "./user/appointment/Booking";
 import ConfirmBooking from "./user/appointment/ConfirmBooking";
 import Appointments from "./doctor/appointments/Appointments";
+import DepartmentPage from "./admin/departments/DepartmentPage";
+import BookingList from "./user/appointment/BookingList";
+import UserBookings from "./admin/bookinglist/UserBookings";
+
+
 
 function App() {
-  const isLoggedIn = localStorage.getItem("loggedIn");
+
+
   return (
     <>
+
       <Router>
         <Routes>
           <Route
@@ -55,7 +62,7 @@ function App() {
           />
           <Route
             path="/login"
-            element={isLoggedIn === true ? <Home /> : <Login />}
+            element={ <Login />}
           />
           <Route path="/doctor" element={<RegisterDoctor />} />
           <Route path="/doctorlogin" element={<LoginDoctor />} />
@@ -91,7 +98,9 @@ function App() {
               }
             />
             <Route path="/doctors" element={<DoctorList />} />
-            <Route path="/users" element={<UsersList />} />
+            <Route path="users" element={<UsersList />} />
+            <Route path="/departments" element={<DepartmentPage />} />
+            <Route path="/bookings" element={<UserBookings/>} />
           </Route>
 
           {/* Doctors Protected Routes */}
@@ -143,6 +152,15 @@ function App() {
                 <>
 
                   <ConfirmBooking />
+                </>
+              }
+            />
+            <Route
+              path='/user-bookings'
+              element={
+                <>
+
+                  <BookingList />
                 </>
               }
             />

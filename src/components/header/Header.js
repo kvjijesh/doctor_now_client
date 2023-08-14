@@ -40,7 +40,6 @@ const Header = ({ userType }) => {
         navigate("/doctorlogin");}
        else {
         localStorage.removeItem("token")
-        localStorage.removeItem("loggedIn")
         dispatch(logout())
         dispatch(clearAppointment())
         navigate('/login')}
@@ -60,8 +59,6 @@ const Header = ({ userType }) => {
   };
 
 
-
-
   return (
     <>
       {userType === "doctor" ? (
@@ -69,7 +66,7 @@ const Header = ({ userType }) => {
           <header>
             <nav className="navbar container">
               <div className="logo">
-                <Link to="/">
+                <Link to="/doctorhome">
                 <img src={images.logo} alt="logo" /></Link>
               </div>
               <ul className={opena ? `nav-items active ` : `nav-items`}>
@@ -153,8 +150,10 @@ const Header = ({ userType }) => {
                         }}
                       >
                         <Link to='/userprofile'>
-                        <MenuItem onClick={handleClose}>Profile</MenuItem></Link>
-                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                        <MenuItem sx={{ fontSize: '15px',color:"black" }} onClick={handleClose}>Profile</MenuItem></Link>
+                        <Link to='/user-bookings'>
+                        <MenuItem sx={{ fontSize: '15px',color:"black" }}  onClick={handleClose}>My Bookings</MenuItem></Link>
+                        <MenuItem sx={{ fontSize: '15px' }}  onClick={handleLogout}>Logout</MenuItem>
                       </Menu>
                     </div>
                   </ul>

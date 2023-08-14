@@ -61,7 +61,11 @@ const DoctorProfile = () => {
     }
 
     try {
-      const response = await axios.put(`/doctor/update/${doctorData?._id}`, formData);
+      const response = await axios.put(`/doctor/update/${doctorData?._id}`, formData,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("dtoken")}`,
+        },
+      });
       if (response.status === 200) {
         dispatch(doctorLoginSucces(response.data));
         setIsEditMode(false);

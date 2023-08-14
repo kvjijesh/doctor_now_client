@@ -1,0 +1,20 @@
+.table{
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    text-align: center;
+    padding: 15px;
+    background-color:transparent;
+    // backdropFilter: "blur(200px)";
+    color: rgb(20, 70, 177);
+    border-radius: 1.2rem;
+}
+#myTable{
+font-size: 180px;
+}
+.list{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: center;
+}

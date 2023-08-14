@@ -46,7 +46,11 @@ const UserProfile = () => {
     }
 
     try {
-      const response = await axios.put(`/update/${userData?._id}`, formData);
+      const response = await axios.put(`/update/${userData?._id}`, formData,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       if (response.status === 200) {
         dispatch(loginSucces(response.data));
         setIsEditMode(false);

@@ -1,0 +1,27 @@
+.booking-container{
+    display: flex;
+    .main-booking{
+       display: flex;
+        margin-right: 150px;
+        margin-left: 150px;
+    }
+
+}
+.page-heading{
+    margin-top: 20px;
+
+}
+
+
+.user-table{
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    text-align: center;
+    padding: 15px;
+    background-color:rgb(198, 229, 243);
+
+    color: rgb(177, 51, 20);
+    border-radius: 1.2rem;
+    margin-left: 50px;
+    }

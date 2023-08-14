@@ -26,7 +26,7 @@ const UsersList = () => {
       }
     };
     fetchUsers();
-  }, [users]);
+  }, []);
 
   const columns = [
     { id: "name", label: "Name", minWidth: 100 },
@@ -46,9 +46,9 @@ const UsersList = () => {
 
 
     const handleUserButtonClick = async (userId, blockedStatus) => {
-        console.log(888888888)
+
     try {
-      const response = await axios.post(`/admin/block-user/${userId}`, {
+      const response = await axios.put(`/admin/block-user/${userId}`, {
         blockedStatus,
       });
       if (response.status === 200) {

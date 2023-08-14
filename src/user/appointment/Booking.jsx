@@ -19,7 +19,11 @@ const Booking = () => {
   const Doctor = "Doctor Details";
   const handleAppointment=async ()=>{
     try {
-        const response=await axios.post('/confirm-appointment',{doctorData,user,slot})
+        const response=await axios.post('/confirm-appointment',{doctorData,user,slot},{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
         if(response.status===201){
             dispatch(appointmentData(response.data))
             toast.success('Booking confirmed',{position:toast.POSITION.TOP_CENTER})
@@ -28,8 +32,12 @@ const Booking = () => {
         }
 
     } catch (error) {
-        toast.error(`${error.message}`)
+      console.log(error)
+        toast.error(`${error.response.data?.message}`,{position:toast.POSITION.TOP_CENTER})
     }
+  }
+  const handleback=()=>{
+    navigate(-1)
   }
 
   return (
@@ -48,6 +56,7 @@ const Booking = () => {
         </div>
         <div>
         <button className="bookButton" onClick={handleAppointment}>Confirm Appointment</button>
+        <button  onClick={handleback}>Go Back</button>
         </div>
 
       </div>

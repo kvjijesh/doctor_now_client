@@ -49,7 +49,7 @@ const DoctorList = () => {
 
   const handleApproveButtonClick = async (doctorId) => {
     try {
-      const response = await axios.post(`/admin/approve/${doctorId}`, null, {
+      const response = await axios.put(`/admin/approve/${doctorId}`, null, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -65,9 +65,12 @@ const DoctorList = () => {
 
   const handleBlockButtonClick = async (doctorId, blockedStatus) => {
     try {
-      const response = await axios.post(`/admin/block-doctor/${doctorId}`, {
-        blockedStatus,
-      });
+      const response = await axios.put(`/admin/block-doctor/${doctorId}`,
+        {blockedStatus}
+      ,{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+    }});
       if (response.status === 200) {
         const updatedSelectedDoctor = response.data.doctor;
         setSelectedDoctor(updatedSelectedDoctor);
