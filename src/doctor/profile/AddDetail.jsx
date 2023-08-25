@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { validateDetails } from "../../helper/formik";
 import axios from "../../Servies/axiosInterceptor";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   doctorLoginSucces,
   doctorloginFailure,
@@ -26,6 +26,7 @@ const initialValues = {
   state: "",
   country: "",
   pin: "",
+  document:"",
   is_submitted: true,
 };
 
@@ -34,6 +35,8 @@ const AddDetail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [departmentOptions, setDepartmentOptions] = useState([]);
+  const doctorData = useSelector((state) => state.doctor.doctor);
+  const id=doctorData?._id
   useEffect(() => {
     const getDepartments = async () => {
       try {
@@ -41,7 +44,7 @@ const AddDetail = () => {
 
         const departmentNames = res.data.map(department => department.name);
         setDepartmentOptions(departmentNames)
-        console.log(departmentOptions);
+
       } catch (error) {
         toast.error(`${error.response}`);
       }
@@ -49,18 +52,16 @@ const AddDetail = () => {
     getDepartments();
   }, []);
 
+
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
       validationSchema: validateDetails,
       onSubmit: async (values, action) => {
         try {
-          const response = await axios.post("/doctor/add-details", values, {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("dtoken")}`,
-            },
-          });
-          console.log(response);
+          const response = await axios.post("/doctor/add-details", {...values,id});
+
           if (response.status === 201) {
             console.log(response.data);
             dispatch(doctorLoginSucces(response.data.updatedDoctor));
@@ -70,7 +71,7 @@ const AddDetail = () => {
             navigate("/doctorhome");
           }
         } catch (error) {
-          toast.error(`${error.message}`, {
+          toast.error(`${error.response.data.message}`, {
             position: toast.POSITION.TOP_CENTER,
           });
         }
@@ -300,6 +301,18 @@ const AddDetail = () => {
               onBlur={handleBlur}
             />
             {touched.pin && errors.pin ? <span>{errors.pin}</span> : null}
+          </div>
+          <div className="form-group">
+            <label>Documents:</label>
+            <input
+              type="file"
+              name="document"
+              id="document"
+              value={values.document}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            {touched.document && errors.document ? <span>{errors.document}</span> : null}
           </div>
           <button type="submit">Submit</button>
         </form>

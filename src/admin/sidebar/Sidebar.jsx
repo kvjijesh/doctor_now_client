@@ -18,7 +18,7 @@ const Sidebar = () => {
     try {
       const response = await axios.post("/auth/logout");
       if (response.status === 200) {
-        localStorage.removeItem("token")
+        localStorage.removeItem("token");
         dispatch(adminLogout());
         navigate("/admin");
       }
@@ -38,11 +38,11 @@ const Sidebar = () => {
       <div className="center">
         <ul>
           <p className="title">MAIN</p>
-          <Link to='/dashboard' style={{ textDecoration: "none" }}>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
+          <Link to="/dashboard" style={{ textDecoration: "none" }}>
+            <li>
+              <DashboardIcon className="icon" />
+              <span>Dashboard</span>
+            </li>
           </Link>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
@@ -57,16 +57,18 @@ const Sidebar = () => {
               <span>Doctors</span>
             </li>
           </Link>
-          <Link to={'/bookings'}>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Appointments</span>
-          </li></Link>
-        <Link to={'/departments'}>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Department</span>
-          </li></Link>
+          <Link to={"/bookings"}>
+            <li>
+              <CreditCardIcon className="icon" />
+              <span>Appointments</span>
+            </li>
+          </Link>
+          <Link to={"/departments"}>
+            <li>
+              <AccountCircleOutlinedIcon className="icon" />
+              <span>Department</span>
+            </li>
+          </Link>
           <p className="title">USER</p>
           <li>
             <ExitToAppIcon className="icon" />

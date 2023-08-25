@@ -32,6 +32,7 @@ import Appointments from "./doctor/appointments/Appointments";
 import DepartmentPage from "./admin/departments/DepartmentPage";
 import BookingList from "./user/appointment/BookingList";
 import UserBookings from "./admin/bookinglist/UserBookings";
+import Footer from "./components/Footer";
 
 
 
@@ -48,6 +49,7 @@ function App() {
             element={
               <>
                 <Home />
+                <Footer/>
               </>
             }
           />
@@ -72,7 +74,7 @@ function App() {
             path="/admin"
             element={
               <>
-                <Header />
+
                 <LoginAdmin />
               </>
             }
@@ -83,6 +85,7 @@ function App() {
               <>
                 <Header />
                 <DoctorsList />
+
               </>
             }
           />
@@ -93,12 +96,13 @@ function App() {
               path="/dashboard"
               element={
                 <>
+                  <Navbar/>
                   <HomeAdmin />
                 </>
               }
             />
-            <Route path="/doctors" element={<DoctorList />} />
-            <Route path="users" element={<UsersList />} />
+            <Route path="/doctors" element={<><DoctorList /></>} />
+            <Route path="/users" element={<><Navbar/><UsersList /></>} />
             <Route path="/departments" element={<DepartmentPage />} />
             <Route path="/bookings" element={<UserBookings/>} />
           </Route>
@@ -125,6 +129,7 @@ function App() {
               element={
                 <>
                   <Home />
+                  <Footer/>
                 </>
               }
             />
@@ -134,6 +139,7 @@ function App() {
                 <>
                   <Header />
                   <UserProfile />
+
                 </>
               }
             />
@@ -143,6 +149,7 @@ function App() {
                 <>
                   <Header />
                   <Booking />
+                  <Footer/>
                 </>
               }
             />
@@ -152,6 +159,7 @@ function App() {
                 <>
 
                   <ConfirmBooking />
+                  <Footer/>
                 </>
               }
             />
@@ -161,6 +169,7 @@ function App() {
                 <>
 
                   <BookingList />
+                  
                 </>
               }
             />

@@ -17,25 +17,39 @@ const Booking = () => {
   const user = useSelector((state) => state.user.user);
   const Patient = "Patient Details";
   const Doctor = "Doctor Details";
-  const handleAppointment=async ()=>{
-    try {
-        const response=await axios.post('/confirm-appointment',{doctorData,user,slot},{
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        if(response.status===201){
-            dispatch(appointmentData(response.data))
-            toast.success('Booking confirmed',{position:toast.POSITION.TOP_CENTER})
-            navigate('/booking-success')
+  // const handleAppointment=async ()=>{
+  //   try {
+  //       const response=await axios.post('/confirm-appointment',{doctorData,user,slot},{
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //         },
+  //       })
+  //       if(response.status===201){
+  //           dispatch(appointmentData(response.data))
+  //           toast.success('Booking confirmed',{position:toast.POSITION.TOP_CENTER})
+  //           navigate('/booking-success')
 
-        }
+  //       }
+
+  //   } catch (error) {
+  //     console.log(error)
+  //       toast.error(`${error.response.data?.message}`,{position:toast.POSITION.TOP_CENTER})
+  //   }
+  // }
+
+  const handleAppointment=async()=>{
+    try {
+      const res=await axios.post('/create-checkout-session',{doctorData,user,slot})
+      if(res.data.url){
+        window.location.href=res.data.url
+      }
 
     } catch (error) {
-      console.log(error)
-        toast.error(`${error.response.data?.message}`,{position:toast.POSITION.TOP_CENTER})
+      toast.error(`${error.message}`)
     }
+
   }
+
   const handleback=()=>{
     navigate(-1)
   }

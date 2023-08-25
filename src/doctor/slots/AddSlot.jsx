@@ -41,7 +41,7 @@ const AddSlot = () => {
   const today = new Date();
   const minSelectableDate = new Date(today);
   const maxSelectableDate = new Date(today);
-  minSelectableDate.setDate(today.getDate());
+  minSelectableDate.setDate(today.getDate()+1);
   maxSelectableDate.setDate(today.getDate() + 10);
 
   const handleAdd = async () => {
@@ -51,10 +51,6 @@ const AddSlot = () => {
         const response = await axios.post("/doctor/add-slots", {
           doctorId: doctorData?._id,
           selectedDate: dateTimeString,
-        },{
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("dtoken")}`,
-          },
         });
         if (response.status === 200) {
           dispatch(doctorLoginSucces(response.data));

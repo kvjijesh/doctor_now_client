@@ -9,7 +9,7 @@ const BookingCard= ({user,title}) => {
       <div className="user-info">
         <h2>{title}</h2>
         <img
-          src={`http://localhost:8000/images/${user?.image}`}
+          src={`${user?.image}`}
           alt="User"
           className="user-image"
         />

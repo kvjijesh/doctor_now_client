@@ -18,7 +18,7 @@ const DoctorsCard = ({ doctorData }) => {
         <p>{doctorData.state}</p>
         <p>{doctorData.pin}</p>
         <div className="card__image">
-          <img src={imageUrl} alt="doctor" />
+         {doctorData?.image?(<img src={imageUrl} alt="doctor" />):(<img src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg' alt="doctor" />)}
         </div>
         <Button variant="contained" color="success" onClick={handleClick}>
           Book

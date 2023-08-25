@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from "react";
-import Sidebar from "../sidebar/Sidebar";
-import "../doctorlist/doctorlist.scss";
+import "./userslist.scss";
 import DataTable from "../../components/table/DataTable";
 import axios from "../../Servies/axiosInterceptor";
 import { toast } from "react-toastify";
-
-
+import Spinner from "../../components/Spinner";
+import { useDispatch } from "react-redux";
+import { loginSucces } from "../../features/user/userSlice";
 
 const UsersList = () => {
-    let userType='user'
+  let userType = "user";
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
-
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [block,setBlock]=useState('')
+  const dispatch=useDispatch()
+  // const updateStatus= ()=>{
+  //   setBlock(!block)
+  //   console.log('2222222222',block)
+  // }
   useEffect(() => {
     const fetchUsers = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get("/admin/users-list");
         setUsers(response.data);
-        console.log(users);
+        setIsLoading(false);
+
       } catch (error) {
         toast.error(`${error.message}`, {
           position: toast.POSITION.TOP_CENTER,
@@ -26,7 +33,7 @@ const UsersList = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, [block]);
 
   const columns = [
     { id: "name", label: "Name", minWidth: 100 },
@@ -40,22 +47,24 @@ const UsersList = () => {
 
   const handleViewButtonClick = (doctor) => {
     setSelectedUser(doctor);
-
   };
 
-
-
-    const handleUserButtonClick = async (userId, blockedStatus) => {
+  const handleUserButtonClick = async (userId, blockedStatus) => {
 
     try {
       const response = await axios.put(`/admin/block-user/${userId}`, {
         blockedStatus,
+      },{
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
       if (response.status === 200) {
-        console.log(response);
-        const updatedSelectedUser = response.data.doctor;
+        setBlock(!blockedStatus)
+        dispatch(loginSucces(response.data.user))
+        const updatedSelectedUser = response.data.user;
         setSelectedUser(updatedSelectedUser);
-        console.log(selectedUser);
+
 
         const actionMessage = blockedStatus ? "blocked" : "unblocked";
 
@@ -68,30 +77,31 @@ const UsersList = () => {
         });
       }
     } catch (error) {
-      toast.error(`${error.message}`, { position: toast.POSITION.TOP_CENTER });
+      toast.error(`${error.response?.data?.message}`,{position:toast.POSITION.TOP_CENTER});
     }
   };
 
-
   return (
     <>
-      <div className="doctorList">
-        <Sidebar />
-        <div className="table-container">
-          <h2>Users</h2>
-
+      <div className="user-heading">
+        <h2>Users</h2>
+      </div>
+      <div className="user-list">
+        {isLoading ? (
+          <Spinner />
+        ) : (
           <DataTable
             rows={users}
             columns={columns}
             userType={userType}
             onViewButtonClick={handleViewButtonClick}
             onUserBlockButtonClick={handleUserButtonClick}
-          />
-        </div>
-      </div>
 
+          />
+        )}
+      </div>
     </>
   );
 };
 
-export default  UsersList;
+export default UsersList;

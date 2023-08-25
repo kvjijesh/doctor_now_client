@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Spinner from "../../components/Spinner";
 import {
   Table,
   TableBody,
@@ -18,11 +19,13 @@ import axios from "../../Servies/axiosInterceptor";
 import { useSelector } from "react-redux";
 import Header from "../../components/header/Header";
 import Sidebar from "../sidebar/Sidebar";
+import Navbar from "../navbar/Navbar";
 
 function UserBookings() {
   const userData = useSelector((state) => state.user.user);
   const [bookings, setBookings] = useState([]);
   const tableRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const cancelBooking = async (id) => {
     try {
@@ -39,10 +42,11 @@ function UserBookings() {
   useEffect(() => {
     const getAppointmentList = async () => {
       try {
+        setIsLoading(true);
         const res = await axios.get(`/admin/all-bookings`);
         const books = res.data;
-
         setBookings(books);
+        setIsLoading(false);
       } catch (error) {
         toast.error(`${error.response}`);
       }
@@ -70,76 +74,78 @@ function UserBookings() {
 
   return (
     <>
+      <Navbar />
       <div className="booking-container">
-        <Sidebar />
-
+        <div className="booking-header"><h2>
+          Booking Management</h2></div>
         <div className="main-booking">
-          {/* <div className="page-heading">
-            <h2>User Bookings</h2>
-          </div> */}
           <div style={{ padding: "50px" }}>
             <div className="user-table">
-              <TableContainer>
-                <Table ref={tableRef} id="myTable">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell sx={{ fontSize: "15px" }}>No</TableCell>
-                      <TableCell sx={{ fontSize: "15px" }}>User</TableCell>
-                      <TableCell sx={{ fontSize: "15px" }}>Doctor</TableCell>
-                      <TableCell sx={{ fontSize: "15px" }}>Time</TableCell>
-                      <TableCell sx={{ fontSize: "15px" }}>Status</TableCell>
-                      <TableCell sx={{ fontSize: "15px" }}>Action</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {bookings.map((obj, index) => (
-                      <TableRow key={index}>
-                        <TableCell sx={{ fontSize: "15px" }}>
-                          {index + 1}
-                        </TableCell>
-                        <TableCell sx={{ fontSize: "15px" }}>
-                          {obj.userId.name}
-                        </TableCell>
-                        <TableCell sx={{ fontSize: "15px" }}>
-                          {obj.doctorId.name}
-                        </TableCell>
-                        <TableCell sx={{ fontSize: "15px" }}>
-                          {obj.slot}
-                        </TableCell>
-                        <TableCell sx={{ fontSize: "15px" }}>
-                          {obj.status}
-                        </TableCell>
-                        <TableCell>
-                          {obj.status === "Pending" ||
-                          obj.status === "confirmed" ? (
-                            <Button
-                              variant="contained"
-                              sx={{
-                                backgroundColor: "orangered",
-                                width: "100px",
-                                fontSize: "12px",
-                              }}
-                              onClick={() => {
-                                cancelBooking(obj._id);
-                              }}
-                            >
-                              Cancell
-                            </Button>
-                          ) : (
-                            <Button
-                              variant="contained"
-                              disabled
-                              sx={{ width: "100px", fontSize: "12px" }}
-                            >
-                              {obj.status}
-                            </Button>
-                          )}
-                        </TableCell>
+              {isLoading ? (
+                <Spinner loading={isLoading} />
+              ) : (
+                <TableContainer>
+                  <Table ref={tableRef} id="myTable">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell sx={{ fontSize: "15px" }}>No</TableCell>
+                        <TableCell sx={{ fontSize: "15px" }}>User</TableCell>
+                        <TableCell sx={{ fontSize: "15px" }}>Doctor</TableCell>
+                        <TableCell sx={{ fontSize: "15px" }}>Time</TableCell>
+                        <TableCell sx={{ fontSize: "15px" }}>Status</TableCell>
+                        <TableCell sx={{ fontSize: "15px" }}>Action</TableCell>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                      {bookings.map((obj, index) => (
+                        <TableRow key={index}>
+                          <TableCell sx={{ fontSize: "15px" }}>
+                            {index + 1}
+                          </TableCell>
+                          <TableCell sx={{ fontSize: "15px" }}>
+                            {obj.userId.name}
+                          </TableCell>
+                          <TableCell sx={{ fontSize: "15px" }}>
+                            {obj.doctorId.name}
+                          </TableCell>
+                          <TableCell sx={{ fontSize: "15px" }}>
+                            {obj.slot}
+                          </TableCell>
+                          <TableCell sx={{ fontSize: "15px" }}>
+                            {obj.status}
+                          </TableCell>
+                          <TableCell>
+                            {obj.status === "Pending" ||
+                              obj.status === "confirmed" ? (
+                              <Button
+                                variant="contained"
+                                sx={{
+                                  backgroundColor: "orangered",
+                                  width: "100px",
+                                  fontSize: "12px",
+                                }}
+                                onClick={() => {
+                                  cancelBooking(obj._id);
+                                }}
+                              >
+                                Cancell
+                              </Button>
+                            ) : (
+                              <Button
+                                variant="contained"
+                                disabled
+                                sx={{ width: "100px", fontSize: "12px" }}
+                              >
+                                {obj.status}
+                              </Button>
+                            )}
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              )}
             </div>
           </div>
         </div>
@@ -147,5 +153,4 @@ function UserBookings() {
     </>
   );
 }
-
 export default UserBookings;

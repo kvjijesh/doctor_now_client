@@ -10,7 +10,6 @@ import Header from "../../components/header/Header";
 const DoctorProfile = () => {
     const userType='doctor'
   const doctorData = useSelector((state) => state.doctor.doctor);
-  console.log(doctorData)
   const dispatch = useDispatch();
 
   const [doctorName, setDoctorName] = useState(doctorData?.name || "");
@@ -61,11 +60,7 @@ const DoctorProfile = () => {
     }
 
     try {
-      const response = await axios.put(`/doctor/update/${doctorData?._id}`, formData,{
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("dtoken")}`,
-        },
-      });
+      const response = await axios.put(`/doctor/update/${doctorData?._id}`, formData);
       if (response.status === 200) {
         dispatch(doctorLoginSucces(response.data));
         setIsEditMode(false);

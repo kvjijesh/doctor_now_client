@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { images } from "../../images/image";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ import {
 } from "../../features/admin/adminSlice";
 import axios from "../../Servies/axiosInterceptor";
 import { toast } from "react-toastify";
+import Navbar from "../navbar/Navbar";
 
 const initialValues = {
   email: "",
@@ -21,6 +22,12 @@ const initialValues = {
 function LoginAdmin() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  useEffect(() => {
+    const authToken = localStorage.getItem("token");
+    if (authToken) {
+      navigate('/dashboard')
+    }
+  }, [navigate]);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -29,7 +36,7 @@ function LoginAdmin() {
         dispatch(adminLoginStart());
         try {
           const response = await axios.post("/auth/login", values);
-          if (response.data.is_Admin) {
+          if (response.data.role==='admin') {
             localStorage.setItem('token', response.data.token);
             dispatch(adminLoginSucces(response.data));
             navigate("/dashboard");
@@ -42,26 +49,15 @@ function LoginAdmin() {
           }
         } catch (error) {
           dispatch(adminLoginFailure());
-          if (error.isAxiosError) {
-            const response = error.response;
-            if (response.status === 400) {
-              toast.error(`${response.data.message}`, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 3000,
-              });
-            } else {
-              toast.error(`${response.message}`, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 3000,
-              });
-            }
-          }
+          toast.error(`${error.response.data.message}`,{position:toast.POSITION.TOP_CENTER})
         }
         action.resetForm();
       },
     });
 
   return (
+    <>
+    <Navbar/>
     <div className="signup-page">
       <div className="container">
         <div className="image-container">
@@ -105,6 +101,7 @@ function LoginAdmin() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

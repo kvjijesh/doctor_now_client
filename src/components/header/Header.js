@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./header.scss";
 import { images } from "../../images/image";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -9,9 +9,10 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "../../Servies/axiosInterceptor";
 import { useDispatch } from "react-redux";
-import {  logout } from "../../features/user/userSlice";
+import {  loginFailure, logout } from "../../features/user/userSlice";
 import { doctorLogout } from "../../features/doctor/doctorSlice";
 import { clearAppointment } from "../../features/user/appoinmentSlice";
+import { toast } from "react-toastify";
 
 const Header = ({ userType }) => {
   const { user } = useSelector((state) => state.user);
@@ -24,6 +25,14 @@ const Header = ({ userType }) => {
   const handleDropClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
+  useEffect(()=>{
+    const authToken = localStorage.getItem("token");
+    if(!authToken){
+      dispatch(loginFailure())
+    }
+
+  })
   const handleLogout = async (e) => {
     e.preventDefault();
     setAnchorEl(null);
@@ -45,7 +54,7 @@ const Header = ({ userType }) => {
         navigate('/login')}
       }
     } catch (error) {
-      console.log(error);
+      toast.error(`${error.response.data.message}`)
     }
 
   };
@@ -75,7 +84,7 @@ const Header = ({ userType }) => {
               <Link to={'/appointments'} >
                 <li >Appointments</li></Link>
                 <li>Video Consult</li>
-                <li>Chat consult</li>
+
 
                 {doctor ? (
                   <ul>
@@ -127,7 +136,8 @@ const Header = ({ userType }) => {
               <ul className={opena ? `nav-items active ` : `nav-items`}>
                 <Link to='/available-doctors'><li>Find Doctors</li></Link>
                 <li>Video Consult</li>
-                <li>Chat with Doctor</li>
+               <Link to='/user-bookings'><li>Bookings</li></Link>
+
                 {user ? (
                   <ul>
                     <div>

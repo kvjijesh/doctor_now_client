@@ -50,25 +50,15 @@ const Login = () => {
         const response = await axios.post("auth/login", formData);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
+
           dispatch(loginSucces(response.data));
           navigate("/home");
         }
       } catch (error) {
         dispatch(loginFailure());
-        if (error.isAxiosError) {
-          const response = error.response;
-          if (response.status === 400) {
-            toast.error(`${response.data.message}`, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 3000,
-            });
-          } else {
-            toast.error(`${response.message}`, {
-              position: toast.POSITION.TOP_CENTER,
-              autoClose: 3000,
-            });
-          }
-        }
+        toast.error(`${error.response.data.message}`, {
+          position: toast.POSITION.TOP_CENTER,
+        });
       }
     }
   };

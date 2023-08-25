@@ -3,18 +3,28 @@ import { useEffect, useState } from "react";
 import "./doctorslist.scss";
 import { toast } from "react-toastify";
 import DoctorsCard from "./DoctorsCard";
+import Footer from "../../components/Footer";
+import Spinner from "../../components/Spinner";
 
 const DoctorsList = () => {
+  const [isLoading,setIsLoading]=useState(true);
   const [doctors, setDoctors] = useState([]);
   const [allDoctors, setAllDoctors] = useState([]);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // // const itemsPerPage = 1;
+  // const indexOfLastItem = currentPage * itemsPerPage;
+  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  // const displayedDoctors = doctors.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     (async () => {
       try {
+        setIsLoading(true)
         const response = await axios.get("/available-doctors");
-        if (response.status === 200) {
+        if (response?.status === 200) {
           setDoctors(response.data);
           setAllDoctors(response.data);
+          setIsLoading(false)
         }
       } catch (error) {
         toast.error(`${error.message}`);
@@ -32,8 +42,9 @@ const DoctorsList = () => {
     setDoctors(filteredDoctors);
   };
 
-
   return (
+    <>
+{isLoading?(<Spinner/>):(<>
     <div className="App">
       <h2 className="heading">Available Doctors</h2>
       <input
@@ -46,7 +57,14 @@ const DoctorsList = () => {
           <DoctorsCard key={index} doctorData={doctor} />
         ))}
       </div>
+
     </div>
+    <div className="footer">
+    <Footer />
+    </div></>
+)}
+
+    </>
   );
 };
 

@@ -12,9 +12,10 @@ $box-shadow-color: rgba(0, 0, 0, 0.1);
     flex-wrap: wrap;
     justify-content: center;
 .appointment-card {
+
     margin: 2rem 2rem 2rem 0;
     padding: 1.5rem;
-    width: 50%;
+    width: 60%;
     box-shadow: 0 0 28px 4px $box-shadow-color;
     transition: transform .3s ease;
     cursor: pointer;
@@ -25,7 +26,8 @@ $box-shadow-color: rgba(0, 0, 0, 0.1);
 
    .appointment-card-body{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 10px;
     flex-wrap: wrap;
    }
 }

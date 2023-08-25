@@ -1,16 +1,16 @@
 import React from "react";
-import Sidebar from "../sidebar/Sidebar";
 import "./home.scss";
 
 const HomeAdmin = () => {
   return (
-    <div className="home">
-      <Sidebar />
-      <div className="table-container">
+
+      <div className="dashbord-container">
+        <div className="dash-heading">
         <h2>Admin Dashboard</h2>
+        </div>
 
       </div>
-    </div>
+
   );
 };
 

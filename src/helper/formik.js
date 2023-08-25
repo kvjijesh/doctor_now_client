@@ -21,6 +21,7 @@ export const validateDetails=Yup.object({
     state: Yup.string().required("Please enter state").trim('Canot be empty spaces'),
     country: Yup.string().required("Please enter country").trim('Canot be empty spaces'),
     pin: Yup.string().required("Please enter pin").trim('Canot be empty spaces'),
+    document:Yup.string().required("Please select document")
 })
 
 export const validateDoctorProfile=Yup.object({

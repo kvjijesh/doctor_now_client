@@ -24,11 +24,11 @@ const LoginDoctor = () => {
   const dispatch = useDispatch();
   const userType = "doctor";
   useEffect(() => {
-    const authToken = localStorage.getItem("dtoken");
+    const authToken = localStorage.getItem("token");
     if (authToken) {
       navigate('/doctorhome')
     }
-  }, [navigate]);
+  }, []);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -38,8 +38,7 @@ const LoginDoctor = () => {
         try {
           const response = await axios.post("/auth/doctorlogin", values);
           if (response.status === 200) {
-            localStorage.setItem('dtoken', response.data.token);
-            localStorage.setItem("doctorData", JSON.stringify(response.data));
+            localStorage.setItem('token', response.data.token);
             dispatch(doctorLoginSucces(response.data));
             navigate("/doctorhome");
           }

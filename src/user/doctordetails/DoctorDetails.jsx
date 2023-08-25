@@ -23,11 +23,15 @@ const DoctorDetails = () => {
       <div className="detail-container">
         <div className="detail-card">
           <div className="profile">
-            <img
+         {doctorData?.image?(<img
               className="profile-image"
               src={`http://localhost:8000/images/${doctorData?.image}`}
               alt="Profile"
-            />
+            />):(<img
+              className="profile-image"
+              src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'
+              alt="Profile"
+            />)}
             <div className="profile-details">
               <h2>{doctorData?.name}</h2>
               <p>{doctorData?.specialisation}</p>

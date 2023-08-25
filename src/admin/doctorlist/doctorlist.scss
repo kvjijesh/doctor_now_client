@@ -1,16 +1,30 @@
-.doctorList{
+// .doctorList{
+//     display: flex;
+//     align-items: center;
+//     .table-container{
+//         margin-left: 250px;
+//       }
+//       h2{
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         margin-bottom: 10px;
+//         font-weight: bold;
+//       }
+// }
+
+.doctor-container{
+  display: flex;
+  flex-direction: column;
+
+  .doctorlist-heading{
     display: flex;
-    align-items: center;
-    .table-container{
-        margin-left: 250px;
-      }
-      h2{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 10px;
-        font-weight: bold;
-      }
+    justify-content: center;
+    margin-top: 10px;
+  }
+  .doctor-list{
+    padding: 50px;
+  }
 }
 
 .modal-container {
@@ -25,7 +39,7 @@
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  text-align: center;
+  text-align: left;
 }
 .modal-buttons {
   display: flex;
@@ -35,5 +49,5 @@
 }
 
 .block-button {
-  margin-left: 10px; 
+  margin-left: 10px;
 }

@@ -1,17 +1,19 @@
-.sample-container{
+//
+.dept-container{
     display: flex;
-    flex-wrap: wrap;
-    justify-content:baseline;
+    flex-direction: column;
 
-.dept-card{
-    margin-top: 200px;
-    margin-left: 250px;
-    justify-content: center;
-    align-items: center;
-
-}
-.dept-button{
-margin-top: 30px;
-
-}
+    .dept-heading{
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    .data-card{
+        padding: 50px;
+    }
+    .dept-button{
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
 }

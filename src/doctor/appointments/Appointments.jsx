@@ -6,6 +6,7 @@ import AppointmentCard from "./AppointmentCard";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 
+
 const Appointments = () => {
   const doctorData = useSelector((state) => state.doctor.doctor);
   const doctorId=doctorData?._id
@@ -13,10 +14,11 @@ const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
-    
+
     const appointmentList = async () => {
       try {
         const response = await axios.get(`/doctor/appointment-list/${doctorId}`,);
+
         setAppointments(response.data);
       } catch (error) {
         toast.error(`${error.message}`,{position:toast.POSITION.TOP_CENTER})

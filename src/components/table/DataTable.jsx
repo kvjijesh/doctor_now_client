@@ -20,7 +20,8 @@ export default function DataTable({
   onUserBlockButtonClick,
   userType,
   onEditButtonClick,
-  onDeleteButtonClick
+  onDeleteButtonClick,
+
 }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -35,8 +36,15 @@ export default function DataTable({
   };
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: 300 }}>
+    <Paper
+      sx={{
+        width: "100%",
+        overflow: "hidden",
+        boxShadow: " 0 0 28px 4px rgb(149, 145, 145)",
+        borderRadius: "0.8rem",
+      }}
+    >
+      <TableContainer sx={{ maxHeight: 400 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -78,8 +86,9 @@ export default function DataTable({
                           <Button
                             variant="contained"
                             color="success"
-                            onClick={() =>
+                            onClick={() =>{
                               onUserBlockButtonClick(row._id, !row.is_blocked)
+                              }
                             }
                           >
                             Unblock
@@ -99,9 +108,19 @@ export default function DataTable({
                     ) : userType === "department" ? (
                       <TableCell>
                         <>
-                         <Button color="success"  onClick={() => onEditButtonClick(row)}><EditIcon/></Button>
-                         <Button color="error" onClick={() => onDeleteButtonClick(row._id)}> <DeleteIcon /></Button>
-
+                          <Button
+                            color="success"
+                            onClick={() => onEditButtonClick(row)}
+                          >
+                            <EditIcon />
+                          </Button>
+                          <Button
+                            color="error"
+                            onClick={() => onDeleteButtonClick(row._id)}
+                          >
+                            {" "}
+                            <DeleteIcon />
+                          </Button>
                         </>
                       </TableCell>
                     ) : (
