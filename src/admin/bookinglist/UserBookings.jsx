@@ -8,7 +8,6 @@ import {
   TableHead,
   TableRow,
   Button,
-  Typography,
 } from "@mui/material";
 import "./userbookings.scss";
 import $ from "jquery";
@@ -17,8 +16,6 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import { toast } from "react-toastify";
 import axios from "../../Servies/axiosInterceptor";
 import { useSelector } from "react-redux";
-import Header from "../../components/header/Header";
-import Sidebar from "../sidebar/Sidebar";
 import Navbar from "../navbar/Navbar";
 
 function UserBookings() {
@@ -27,11 +24,17 @@ function UserBookings() {
   const tableRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const BOOKING_STATUS = {
+    PENDING: "pending",
+    CONFIRMED: "confirmed",
+    CANCELLED: "cancelled",
+  };
+
   const cancelBooking = async (id) => {
     try {
       await axios.patch(`/cancell-bookings/${id}`);
-      const updatedBookings = bookings.map((booking) =>
-        booking._id === id ? { ...booking, status: "Cancelled" } : booking
+      const updatedBookings = bookings?.map((booking) =>
+        booking._id === id ? { ...booking, status: BOOKING_STATUS.CANCELLED } : booking
       );
       setBookings(updatedBookings);
     } catch (error) {
@@ -97,7 +100,7 @@ function UserBookings() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {bookings.map((obj, index) => (
+                      {bookings?.map((obj, index) => (
                         <TableRow key={index}>
                           <TableCell sx={{ fontSize: "15px" }}>
                             {index + 1}
@@ -115,8 +118,7 @@ function UserBookings() {
                             {obj.status}
                           </TableCell>
                           <TableCell>
-                            {obj.status === "Pending" ||
-                              obj.status === "confirmed" ? (
+                            {obj.status === "pending" ||obj.status === "confirmed" ? (
                               <Button
                                 variant="contained"
                                 sx={{
@@ -128,7 +130,7 @@ function UserBookings() {
                                   cancelBooking(obj._id);
                                 }}
                               >
-                                Cancell
+                                Cancel
                               </Button>
                             ) : (
                               <Button

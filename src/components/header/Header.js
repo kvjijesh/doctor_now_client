@@ -44,7 +44,7 @@ const Header = ({ userType }) => {
 
       if (response.status === 200) {
         if(userType==='doctor'){
-        localStorage.removeItem("dtoken")
+        localStorage.removeItem("token")
         dispatch(doctorLogout());
         navigate("/doctorlogin");}
        else {
@@ -108,8 +108,8 @@ const Header = ({ userType }) => {
                         }}
                       >
                         <Link to='/doctorprofile'>
-                        <MenuItem onClick={handleClose}>Profile</MenuItem></Link>
-                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                        <MenuItem sx={{ fontSize: '15px',color:"black" }} onClick={handleClose}>Profile</MenuItem></Link>
+                        <MenuItem sx={{ fontSize: '15px',color:"black" }} onClick={handleLogout}>Logout</MenuItem>
                       </Menu>
                     </div>
                   </ul>

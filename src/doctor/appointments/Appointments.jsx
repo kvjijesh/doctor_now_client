@@ -25,7 +25,7 @@ const Appointments = () => {
       }
     };
     appointmentList();
-  },[]);
+  },[doctorId]);
 
   const userType = "doctor";
   return (
@@ -35,7 +35,7 @@ const Appointments = () => {
         <h2>Your Appointments</h2>
       </div>
 
-        {appointments.map(appointment => (
+        {appointments?.map(appointment => (
           <AppointmentCard key={appointment._id} appointment={appointment} />
 
         ))}

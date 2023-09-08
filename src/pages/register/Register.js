@@ -35,19 +35,16 @@ const Register = ({ userType }) => {
   };
   const handleResendOTP = async () => {
     await axios.post("/auth/resend-otp", formData);
-
     startOtpCounter();
   };
 
   const { name, email, password, confirmPassword, otp } = formData;
-
   const onChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validate(formData);
@@ -59,7 +56,6 @@ const Register = ({ userType }) => {
     } else {
       url = "/auth/signup";
     }
-
     if (Object.keys(errors).length === 0) {
       try {
         const response = await axios.post(url, formData);
@@ -75,11 +71,10 @@ const Register = ({ userType }) => {
       }
     }
   };
-  const handleBack= async()=>{
-    setIsSubmit(false)
+  const handleBack = async () => {
+    setIsSubmit(false);
     /*navigate(-1)*/
-  }
-
+  };
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
     let link;
@@ -96,7 +91,6 @@ const Register = ({ userType }) => {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 3000,
         });
-
         if (userType === "doctor") navigate("/doctorlogin");
         else navigate("/login");
       } else {
@@ -112,7 +106,6 @@ const Register = ({ userType }) => {
       });
     }
   };
-
   return (
     <>
       <div className="signup-page">
@@ -120,7 +113,6 @@ const Register = ({ userType }) => {
           <div className="image-container">
             <img src={images.regImage} alt="Signup" />
           </div>
-
           <div className="form-container">
             {isSubmit ? (
               <>
@@ -137,7 +129,6 @@ const Register = ({ userType }) => {
                     />
                     <span>{formErrors.otp}</span>
                   </div>
-
                   <button type="submit">Enter Email OTP</button>
                 </form>
                 <div className="otp-resend">
@@ -153,8 +144,8 @@ const Register = ({ userType }) => {
                   </p>
                 </div>
                 <div className="backbutton">
-                  <span onClick={handleBack} >
-                    <ArrowBackOutlinedIcon/>
+                  <span onClick={handleBack}>
+                    <ArrowBackOutlinedIcon />
                     Go Back
                   </span>
                 </div>

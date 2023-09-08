@@ -28,7 +28,7 @@ const LoginDoctor = () => {
     if (authToken) {
       navigate('/doctorhome')
     }
-  }, []);
+  }, [navigate]);
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
@@ -39,18 +39,14 @@ const LoginDoctor = () => {
           const response = await axios.post("/auth/doctorlogin", values);
           if (response.status === 200) {
             localStorage.setItem('token', response.data.token);
+            console.log(response.data)
             dispatch(doctorLoginSucces(response.data));
             navigate("/doctorhome");
           }
         } catch (error) {
           dispatch(doctorLoginFailure());
-          if (error.isAxiosError) {
-            const response = error.response;
-              toast.error(`${response.data.message}`, {
-                position: toast.POSITION.TOP_CENTER,
-                autoClose: 3000,
-              });
-          }
+
+
         }
         action.resetForm();
       },

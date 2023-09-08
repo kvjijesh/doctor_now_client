@@ -14,10 +14,7 @@ const UsersList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [block,setBlock]=useState('')
   const dispatch=useDispatch()
-  // const updateStatus= ()=>{
-  //   setBlock(!block)
-  //   console.log('2222222222',block)
-  // }
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -54,10 +51,6 @@ const UsersList = () => {
     try {
       const response = await axios.put(`/admin/block-user/${userId}`, {
         blockedStatus,
-      },{
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
       });
       if (response.status === 200) {
         setBlock(!blockedStatus)

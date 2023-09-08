@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
-import Register from "./pages/register/Register";
+
 import Home from "./pages/home/Home";
 import "./scss/main.scss";
 import Login from "./pages/login/Login";
@@ -18,7 +18,6 @@ import LoginDoctor from "./doctor/login/LoginDoctor";
 import RegisterDoctor from "./doctor/register/RegisterDoctor";
 import { RegisterUser } from "./user/register/RegisterUser";
 import DoctorHome from "./doctor/home/DoctorHome";
-import Profile from "./doctor/profile/AddDetail";
 import DoctorList from "./admin/doctorlist/DoctorList";
 import UserProfile from "./user/userProfile/UserProfile";
 import DoctorProfile from "./doctor/profile/DoctorProfil";
@@ -33,15 +32,12 @@ import DepartmentPage from "./admin/departments/DepartmentPage";
 import BookingList from "./user/appointment/BookingList";
 import UserBookings from "./admin/bookinglist/UserBookings";
 import Footer from "./components/Footer";
-
-
+import { VideoCall } from "./components/VideoCall";
+import Ratings from "./components/Ratings";
 
 function App() {
-
-
   return (
     <>
-
       <Router>
         <Routes>
           <Route
@@ -49,7 +45,7 @@ function App() {
             element={
               <>
                 <Home />
-                <Footer/>
+                <Footer />
               </>
             }
           />
@@ -62,19 +58,15 @@ function App() {
               </>
             }
           />
-          <Route
-            path="/login"
-            element={ <Login />}
-          />
+          <Route path="/login" element={<Login />} />
           <Route path="/doctor" element={<RegisterDoctor />} />
           <Route path="/doctorlogin" element={<LoginDoctor />} />
-          <Route path="/doctor-details" element={<DoctorDetails/>} />
+          <Route path="/doctor-details" element={<><DoctorDetails /><Footer/></>} />
 
           <Route
             path="/admin"
             element={
               <>
-
                 <LoginAdmin />
               </>
             }
@@ -85,7 +77,6 @@ function App() {
               <>
                 <Header />
                 <DoctorsList />
-
               </>
             }
           />
@@ -96,22 +87,41 @@ function App() {
               path="/dashboard"
               element={
                 <>
-                  <Navbar/>
+                  <Navbar />
                   <HomeAdmin />
                 </>
               }
             />
-            <Route path="/doctors" element={<><DoctorList /></>} />
-            <Route path="/users" element={<><Navbar/><UsersList /></>} />
+            <Route
+              path="/doctors"
+              element={
+                <>
+                  <DoctorList />
+                </>
+              }
+            />
+            <Route
+              path="/users"
+              element={
+                <>
+                  <Navbar />
+                  <UsersList />
+                </>
+              }
+            />
             <Route path="/departments" element={<DepartmentPage />} />
-            <Route path="/bookings" element={<UserBookings/>} />
+            <Route path="/bookings" element={<UserBookings />} />
           </Route>
 
           {/* Doctors Protected Routes */}
           <Route element={<ProtectedRouteDoctor />}>
             <Route path="/doctorhome" element={<DoctorHome />} />
-            <Route path="/manage-slots" element={<AddSlot/>} />
-            <Route path="/appointments" element={<Appointments/>} />
+            <Route path="/manage-slots" element={<AddSlot />} />
+            <Route path="/appointments" element={<Appointments />} />
+            <Route
+              path="/doctor/call/:roomId"
+              element={<><Header userType={'doctor'}/><VideoCall value={"doctor"} /></>}
+            />
             <Route
               path="/doctorprofile"
               element={
@@ -129,7 +139,7 @@ function App() {
               element={
                 <>
                   <Home />
-                  <Footer/>
+                  <Footer />
                 </>
               }
             />
@@ -139,7 +149,6 @@ function App() {
                 <>
                   <Header />
                   <UserProfile />
-
                 </>
               }
             />
@@ -149,30 +158,29 @@ function App() {
                 <>
                   <Header />
                   <Booking />
-                  <Footer/>
+                  <Footer />
                 </>
               }
             />
             <Route
-              path='/booking-success'
+              path="/booking-success"
               element={
                 <>
-
                   <ConfirmBooking />
-                  <Footer/>
+                  <Footer />
                 </>
               }
             />
             <Route
-              path='/user-bookings'
+              path="/user-bookings"
               element={
                 <>
-
                   <BookingList />
-                  
                 </>
               }
             />
+            <Route path="/user/call/:roomId" element={<><Header userType={'user'}/><VideoCall value={'user'}/></>} />
+            <Route path="feedback" element={<Ratings/>} />
           </Route>
         </Routes>
       </Router>

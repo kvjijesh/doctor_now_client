@@ -23,12 +23,13 @@ $box-shadow-color: rgba(0, 0, 0, 0.1);
     &:hover {
         transform: scale(1.1);
     }
-
+    
    .appointment-card-body{
     display: flex;
     justify-content: space-between;
     padding: 10px;
     flex-wrap: wrap;
    }
+
 }
 }

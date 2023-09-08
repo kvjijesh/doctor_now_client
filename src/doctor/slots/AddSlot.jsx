@@ -103,7 +103,7 @@ const AddSlot = () => {
               value={selectedTime}
               onChange={(e) => setSelectedTime(e.target.value)}
             >
-              {timeSlots.map((value, index) => (
+              {timeSlots?.map((value, index) => (
                 <option key={index} value={value}>
                   {value}
                 </option>
@@ -116,7 +116,7 @@ const AddSlot = () => {
           <div className="added-dates">
             <h3>ADDED SLOTS</h3>
             <ul>
-              {addedDates.map((slot, index) => (
+              {addedDates?.map((slot, index) => (
                 <li key={index}>
                   {slot}
                   <button type="button" onClick={() => handleDelete(index)}>

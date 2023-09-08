@@ -10,11 +10,6 @@ const DoctorsList = () => {
   const [isLoading,setIsLoading]=useState(true);
   const [doctors, setDoctors] = useState([]);
   const [allDoctors, setAllDoctors] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // // const itemsPerPage = 1;
-  // const indexOfLastItem = currentPage * itemsPerPage;
-  // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  // const displayedDoctors = doctors.slice(indexOfFirstItem, indexOfLastItem);
 
   useEffect(() => {
     (async () => {
@@ -53,7 +48,7 @@ const DoctorsList = () => {
         placeholder="Search..."
       />
       <div className="cards-container">
-        {doctors.map((doctor, index) => (
+        {doctors?.map((doctor, index) => (
           <DoctorsCard key={index} doctorData={doctor} />
         ))}
       </div>

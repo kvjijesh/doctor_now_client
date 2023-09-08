@@ -6,15 +6,19 @@ import appointmentReducer from '../features/user/appoinmentSlice'
 import storage from "redux-persist/lib/storage";
 import {persistReducer} from 'redux-persist';
 import { combineReducers } from '@reduxjs/toolkit';
-const persistConfig={
-    key:'root',
+import consultReducer from '../features/consult/consultSlice';
+const persistConfig = {
+    key: 'root',
     storage,
-}
+    version: 1,
+    whitelist: ['user', 'admin', 'doctor']
+};
 const reducer=combineReducers({
     user:userReducer,
     admin:adminReducer,
     doctor:doctorReducer,
     appointment:appointmentReducer,
+    consult:consultReducer
 })
 const persistedReducer=persistReducer(persistConfig,reducer)
 const store=configureStore({

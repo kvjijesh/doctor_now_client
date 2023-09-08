@@ -21,6 +21,7 @@ export default function DataTable({
   userType,
   onEditButtonClick,
   onDeleteButtonClick,
+  onDownload
 
 }) {
   const [page, setPage] = React.useState(0);

@@ -10,15 +10,18 @@ import { toast } from "react-toastify";
 import axios from "../../Servies/axiosInterceptor";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
+import ConfirmationModal from '../../components/ConfirmationModal'
 
 const DepartmentPage = () => {
   const [isLoading,setIsLoading]=useState(true);
-
   const tableRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [dept, setDept] = useState([]);
+  const [confirmModal,setConfirmModal]=useState(false)
+  const openModal=()=>{setConfirmModal(true)}
+  const closeModal=()=>{setConfirmModal(false)}
   const handleAdd = () => {
     setIsModalOpen(true);
   };
@@ -118,7 +121,7 @@ const DepartmentPage = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {dept.map((obj, index) => (
+                      {dept?.map((obj, index) => (
                         <TableRow key={index}>
                           <TableCell sx={{ fontSize: "15px" }}>
                             {index + 1}
@@ -130,7 +133,8 @@ const DepartmentPage = () => {
                           <img  src={`http://localhost:8000/images/${obj?.image}`} alt={obj.name} style={{width:"50px"}} />
                           </TableCell>
                           <TableCell>
-                            <Button onClick={()=>{handleDelete(obj._id)}}><DeleteIcon/></Button>
+                            <Button onClick={openModal}><DeleteIcon/></Button>
+                            <ConfirmationModal open={confirmModal} onClose={closeModal} onConfirm={()=>{handleDelete(obj._id)}}/>
                           </TableCell>
                         </TableRow>
                       ))}
@@ -153,7 +157,6 @@ const DepartmentPage = () => {
               <Box
                 sx={{ display: "flex", flexDirection: "column", gap: "1rem" }}
               >
-                {/* <TextField type="text" label="Name" variant="outlined" name="name" placeholder="Name"  /> */}
                 <TextField
                   label="Name"
                   fullWidth

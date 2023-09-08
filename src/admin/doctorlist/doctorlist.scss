@@ -36,10 +36,14 @@
 }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
   text-align: left;
+  height: auto;
+  width: 40rem;
 }
 .modal-buttons {
   display: flex;

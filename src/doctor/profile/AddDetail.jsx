@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   doctorLoginSucces,
-  doctorloginFailure,
+
 } from "../../features/doctor/doctorSlice";
+import  Axios  from "axios";
 const initialValues = {
   registrationNumber: "",
   registrationCouncil: "",
@@ -26,11 +27,12 @@ const initialValues = {
   state: "",
   country: "",
   pin: "",
-  document:"",
+  // document:"",
   is_submitted: true,
 };
 
 const AddDetail = () => {
+  const [document, setdocument] = useState('')
   const userType = "doctor";
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,10 +43,11 @@ const AddDetail = () => {
     const getDepartments = async () => {
       try {
         const res = await axios.get("/all-departments");
+        if(res.status===200){
 
-        const departmentNames = res.data.map(department => department.name);
+        const departmentNames = res.data?.map(department => department.name);
         setDepartmentOptions(departmentNames)
-
+        }
       } catch (error) {
         toast.error(`${error.response}`);
       }
@@ -52,6 +55,12 @@ const AddDetail = () => {
     getDepartments();
   }, []);
 
+const handleDocumentChange=(e)=>{
+  e.preventDefault()
+if(e.target.files){
+  setdocument(e.target.files[0])
+}
+}
 
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -59,11 +68,25 @@ const AddDetail = () => {
       initialValues,
       validationSchema: validateDetails,
       onSubmit: async (values, action) => {
+        try{
+          let formData= new FormData()
+          formData.append('file',document);
+          formData.append("upload_preset", "dsavfcph");
+          formData.append("cloud_name", "dw6hpsoj9");
+          const response = await Axios.post(
+            "https://api.cloudinary.com/v1_1/dw6hpsoj9/image/upload",
+            formData
+          );
+          console.log(response)
+          if(response.status===200){
+            const newValues={...values,document:response.data.secure_url}
+
+
+
         try {
-          const response = await axios.post("/doctor/add-details", {...values,id});
+          const response = await axios.post("/doctor/add-details",{newValues,id});
 
           if (response.status === 201) {
-            console.log(response.data);
             dispatch(doctorLoginSucces(response.data.updatedDoctor));
             toast.success("Added succesfully", {
               position: toast.POSITION.TOP_CENTER,
@@ -75,8 +98,13 @@ const AddDetail = () => {
             position: toast.POSITION.TOP_CENTER,
           });
         }
+      }
+      } catch(error){
+        toast.error(`${error.response.data.message}`, {
+          position: toast.POSITION.TOP_CENTER,
+        });
+      }
 
-        action.resetForm();
       },
     });
   return (
@@ -308,11 +336,11 @@ const AddDetail = () => {
               type="file"
               name="document"
               id="document"
-              value={values.document}
-              onChange={handleChange}
-              onBlur={handleBlur}
+              required
+              onChange={(e)=>{handleDocumentChange(e)}}
+            
             />
-            {touched.document && errors.document ? <span>{errors.document}</span> : null}
+
           </div>
           <button type="submit">Submit</button>
         </form>

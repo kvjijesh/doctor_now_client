@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Table,
   TableBody,
@@ -14,26 +14,29 @@ import "datatables.net";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import { toast } from "react-toastify";
 import axios from "../../Servies/axiosInterceptor";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Header from "../../components/header/Header";
 import Spinner from "../../components/Spinner";
 import Footer from "../../components/Footer";
+import DownloadButton from "../../components/Download";
+import { useSocket } from "../../context/socketProvider";
+import { useNavigate } from "react-router-dom";
+import { appointmentData } from "../../features/user/appoinmentSlice";
 
 function BookingList() {
   const userData = useSelector((state) => state.user.user);
   const [bookings, setBookings] = useState([]);
   const tableRef = useRef(null);
   const [loading, setLoading] = useState(true);
+  const socket = useSocket()
+  const navigate = useNavigate()
+  const dispatch=useDispatch()
 
   const cancelBooking = async (id) => {
     try {
-      await axios.patch(`/cancell-bookings/${id}`, null, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await axios.patch(`/cancell-bookings/${id}`);
       const updatedBookings = bookings.map((booking) =>
-        booking._id === id ? { ...booking, status: "Cancelled" } : booking
+        booking._id === id ? { ...booking, status: "cancelled" } : booking
       );
       setBookings(updatedBookings);
     } catch (error) {
@@ -51,11 +54,11 @@ function BookingList() {
         setBookings(books);
         setLoading(false);
       } catch (error) {
-        toast.error(`${error?.response.data.message}`);
+        toast.error(`${error.response?.data.message}`);
       }
     };
     getAppointmentList();
-  }, [userData?._id]);
+  }, []);
 
   useEffect(() => {
     if (bookings.length > 0) {
@@ -75,18 +78,36 @@ function BookingList() {
     }
   };
 
+  const handleJoin = useCallback((roomId,email,obj) => {
+    const room = roomId
+    dispatch(appointmentData(obj))
+    socket.emit("room:join", { email, room })
+}, [dispatch, socket])
+
+const handleJoinRoom = useCallback((data) => {
+  const { room } = data
+  navigate(`/user/call/${room}`)
+}, [navigate])
+
+useEffect(() => {
+  socket.on('room:join', handleJoinRoom)
+  return () => {
+      socket.off('room:join', handleJoinRoom)
+  }
+}, [socket, handleJoinRoom])
+
   return (
     <>
       <Header />
       {loading ? (
-              <Spinner />
-            ) : (<>
-      <div className="list">
-        <h2>Your Bookings</h2>
-      </div>
-      <div style={{ padding: "50px" }}>
-        <div className="table">
-          <TableContainer>
+        <Spinner />
+      ) : (<>
+        <div className="list">
+          <h2>Your Bookings</h2>
+        </div>
+        <div style={{ padding: "50px" }}>
+          <div className="table">
+            <TableContainer>
 
               <Table ref={tableRef} id="myTable">
                 <TableHead>
@@ -122,44 +143,29 @@ function BookingList() {
                         {obj.status}
                       </TableCell>
                       <TableCell>
-                        {obj.status === "Pending" ||
-                        obj.status === "confirmed" ? (
-                          <Button
-                            variant="contained"
-                            sx={{
-                              backgroundColor: "orangered",
-                              width: "100px",
-                              fontSize: "12px",
-                            }}
-                            onClick={() => {
-                              cancelBooking(obj._id);
-                            }}
-                          >
-                            Cancell
-                          </Button>
-                        ) : (
-                          <Button
-                            variant="contained"
-                            disabled
-                            sx={{ width: "100px", fontSize: "12px" }}
-                          >
-                            {obj.status}
-                          </Button>
-                        )}
+                        {obj.status === "pending" ?(<Button onClick={() => {
+                          cancelBooking(obj._id);
+                        }} variant="contained" color="success">cancell</Button>):(null)}
+                        {obj.status === "confirmed"  ? (<><Button onClick={() => {
+                          cancelBooking(obj._id);
+                        }} variant="contained" color="success">cancell</Button>
+                        <Button sx={{m:1}} variant="contained" color="secondary" onClick={() => handleJoin(obj._id + obj.userId._id,obj.userId.email,obj)} >Join</Button></>) : (null)}
+                        {obj.status === "cancelled" ? (<Button variant="contained" disabled>{obj.status}</Button>) : (null)}
+                        {obj.status === "completed" ? (<DownloadButton data={obj} user={userData} />) : (null)}
                       </TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
               </Table>
 
-          </TableContainer>
+            </TableContainer>
+          </div>
         </div>
-      </div>
-      <footer>
-      <Footer/>
-      </footer>
+        <footer>
+          <Footer />
+        </footer>
       </>
-       )}
+      )}
     </>
   );
 }

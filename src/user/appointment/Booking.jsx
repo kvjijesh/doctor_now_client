@@ -1,14 +1,12 @@
 import React from "react";
 import BookingCard from "./BookingCard";
 import "./booking.scss";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "../../Servies/axiosInterceptor";
-import { toast } from "react-toastify";
-import { appointmentData } from "../../features/user/appoinmentSlice";
+
 
 const Booking = () => {
-    const dispatch=useDispatch()
   const location = useLocation();
   const doctorData = location.state?.doctorData;
   const slot=location.state?.slot;
@@ -17,25 +15,7 @@ const Booking = () => {
   const user = useSelector((state) => state.user.user);
   const Patient = "Patient Details";
   const Doctor = "Doctor Details";
-  // const handleAppointment=async ()=>{
-  //   try {
-  //       const response=await axios.post('/confirm-appointment',{doctorData,user,slot},{
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //         },
-  //       })
-  //       if(response.status===201){
-  //           dispatch(appointmentData(response.data))
-  //           toast.success('Booking confirmed',{position:toast.POSITION.TOP_CENTER})
-  //           navigate('/booking-success')
 
-  //       }
-
-  //   } catch (error) {
-  //     console.log(error)
-  //       toast.error(`${error.response.data?.message}`,{position:toast.POSITION.TOP_CENTER})
-  //   }
-  // }
 
   const handleAppointment=async()=>{
     try {
@@ -45,7 +25,7 @@ const Booking = () => {
       }
 
     } catch (error) {
-      toast.error(`${error.message}`)
+      navigate(-1)
     }
 
   }
