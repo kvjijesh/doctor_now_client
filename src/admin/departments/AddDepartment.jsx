@@ -246,7 +246,6 @@
 
 import { useEffect, useState } from "react";
 import { Button, Modal } from "@mui/material";
-import AddDepartment from "./AddDepartment";
 import "./departmentpage.scss";
 import DataTable from "../../components/table/DataTable";
 import axios from "../../Servies/axiosInterceptor";
