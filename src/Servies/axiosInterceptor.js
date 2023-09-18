@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 
 const instance = axios.create({
-  baseURL: "http://localhost:8000/",
+  baseURL: "https://mydoctornow.online/",
   // timeout: 5000,
 });
 
