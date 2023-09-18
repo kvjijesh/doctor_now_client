@@ -44,9 +44,11 @@ const AddDetail = () => {
       try {
         const res = await axios.get("/all-departments");
         if(res.status===200){
+          console.log(res);
 
-        const departmentNames = res.data?.map(department => department.name);
+        const departmentNames = res.data?.map(department => department);
         setDepartmentOptions(departmentNames)
+        console.log(departmentNames);
         }
       } catch (error) {
         toast.error(`${error.response}`);
@@ -77,7 +79,7 @@ if(e.target.files){
             "https://api.cloudinary.com/v1_1/dw6hpsoj9/image/upload",
             formData
           );
-          console.log(response)
+
           if(response.status===200){
             const newValues={...values,document:response.data.secure_url}
 
@@ -213,8 +215,8 @@ if(e.target.files){
                 Select Specialisation
               </option>
               {departmentOptions?.map((department, index) => (
-                <option key={index} value={department}>
-                  {department}
+                <option key={index} value={department._id}>
+                  {department.name}
                 </option>
               ))}
             </select>
@@ -338,7 +340,7 @@ if(e.target.files){
               id="document"
               required
               onChange={(e)=>{handleDocumentChange(e)}}
-            
+
             />
 
           </div>

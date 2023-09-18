@@ -11,17 +11,18 @@ import axios from "../../Servies/axiosInterceptor";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloseIcon from "@mui/icons-material/Close";
 import ConfirmationModal from '../../components/ConfirmationModal'
+import Axios from 'axios'
 
 const DepartmentPage = () => {
-  const [isLoading,setIsLoading]=useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const tableRef = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [name, setName] = useState("");
   const [image, setImage] = useState(null);
   const [dept, setDept] = useState([]);
-  const [confirmModal,setConfirmModal]=useState(false)
-  const openModal=()=>{setConfirmModal(true)}
-  const closeModal=()=>{setConfirmModal(false)}
+  const [confirmModal, setConfirmModal] = useState(false)
+  const openModal = () => { setConfirmModal(true) }
+  const closeModal = () => { setConfirmModal(false) }
   const handleAdd = () => {
     setIsModalOpen(true);
   };
@@ -29,21 +30,35 @@ const DepartmentPage = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("image", image);
+    formData.append("file", image);
+    formData.append("upload_preset", "dsavfcph");
+    formData.append("cloud_name", "dw6hpsoj9");
 
     try {
-      const response = await axios.post("/admin/add-department", formData);
-      if (response.status === 201) {
+      const imageRes = await Axios.post("https://api.cloudinary.com/v1_1/dw6hpsoj9/image/upload",
+        formData)
+      if (imageRes) {
 
-        setDept([...dept, response.data.newSpeciality]);
-        toast.success(`${response.data.message}`, { position: toast.POSITION.TOP_CENTER });
-        setIsModalOpen(false);
+        let image=imageRes.data.secure_url
+        try {
+          const response = await axios.post("/admin/add-department", {name,image});
+          if (response.status === 201) {
+
+            setDept([...dept, response.data.newSpeciality]);
+            toast.success(`${response.data.message}`, { position: toast.POSITION.TOP_CENTER });
+            setIsModalOpen(false);
+          }
+        } catch (error) {
+          console.log(error);
+
+        }
       }
     } catch (error) {
-
-      toast.error(`${error.response.data.message}`,{position:toast.POSITION.TOP_CENTER})
+      console.log(error);
     }
-  };
+  }
+
+
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
@@ -100,55 +115,55 @@ const DepartmentPage = () => {
 
   return (
     <>
-    <div className="dept-container">
-      <Navbar/>
-      <div className="dept-heading">
-        <h2>Department Management</h2>
-      </div>
-      <div style={{ padding: "50px" }}>
-            <div className="user-table">
-              {isLoading ? (
-                <Spinner loading={isLoading} />
-              ) : (
-                <TableContainer>
-                  <Table ref={tableRef} id="myTable">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell sx={{ fontSize: "15px" }}>No</TableCell>
-                        <TableCell sx={{ fontSize: "15px" }}>Department Name</TableCell>
-                        <TableCell sx={{ fontSize: "15px" }}>Image</TableCell>
-                        <TableCell sx={{ fontSize: "15px" }}>Action</TableCell>
+      <div className="dept-container">
+        <Navbar />
+        <div className="dept-heading">
+          <h2>Department Management</h2>
+        </div>
+        <div style={{ padding: "50px" }}>
+          <div className="user-table">
+            {isLoading ? (
+              <Spinner loading={isLoading} />
+            ) : (
+              <TableContainer>
+                <Table ref={tableRef} id="myTable">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell sx={{ fontSize: "15px" }}>No</TableCell>
+                      <TableCell sx={{ fontSize: "15px" }}>Department Name</TableCell>
+                      <TableCell sx={{ fontSize: "15px" }}>Image</TableCell>
+                      <TableCell sx={{ fontSize: "15px" }}>Action</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {dept?.map((obj, index) => (
+                      <TableRow key={index}>
+                        <TableCell sx={{ fontSize: "15px" }}>
+                          {index + 1}
+                        </TableCell>
+                        <TableCell sx={{ fontSize: "15px" }}>
+                          {obj.name}
+                        </TableCell>
+                        <TableCell sx={{ fontSize: "15px" }}>
+                          <img src={obj?.image} alt={obj.name} style={{ width: "50px" }} />
+                        </TableCell>
+                        <TableCell>
+                          <Button onClick={openModal}><DeleteIcon /></Button>
+                          <ConfirmationModal open={confirmModal} onClose={closeModal} onConfirm={() => { handleDelete(obj._id) }} />
+                        </TableCell>
                       </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {dept?.map((obj, index) => (
-                        <TableRow key={index}>
-                          <TableCell sx={{ fontSize: "15px" }}>
-                            {index + 1}
-                          </TableCell>
-                          <TableCell sx={{ fontSize: "15px" }}>
-                            {obj.name}
-                          </TableCell>
-                          <TableCell sx={{ fontSize: "15px" }}>
-                          <img  src={`http://localhost:8000/images/${obj?.image}`} alt={obj.name} style={{width:"50px"}} />
-                          </TableCell>
-                          <TableCell>
-                            <Button onClick={openModal}><DeleteIcon/></Button>
-                            <ConfirmationModal open={confirmModal} onClose={closeModal} onConfirm={()=>{handleDelete(obj._id)}}/>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              )}
-            </div>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
           </div>
-          <div className="dept-button">
-            <Button variant='contained' color='success'onClick={handleAdd}>Add</Button>
-          </div>
-    </div>
-    <Modal open={isModalOpen} onClose={handleClose}>
+        </div>
+        <div className="dept-button">
+          <Button variant='contained' color='success' onClick={handleAdd}>Add</Button>
+        </div>
+      </div>
+      <Modal open={isModalOpen} onClose={handleClose}>
         <div className="modal-container">
           <div className="modal-content">
             <h2>Add a speciality</h2>
@@ -185,6 +200,6 @@ const DepartmentPage = () => {
       </Modal>
     </>
   )
-}
+};
 
 export default DepartmentPage

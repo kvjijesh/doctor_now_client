@@ -39,13 +39,12 @@ const LoginDoctor = () => {
           const response = await axios.post("/auth/doctorlogin", values);
           if (response.status === 200) {
             localStorage.setItem('token', response.data.token);
-            console.log(response.data)
+            console.log(response)
             dispatch(doctorLoginSucces(response.data));
             navigate("/doctorhome");
           }
         } catch (error) {
           dispatch(doctorLoginFailure());
-
 
         }
         action.resetForm();

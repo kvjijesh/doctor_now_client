@@ -10,19 +10,20 @@ const DoctorsList = () => {
   const [isLoading,setIsLoading]=useState(true);
   const [doctors, setDoctors] = useState([]);
   const [allDoctors, setAllDoctors] = useState([]);
-
+  
   useEffect(() => {
     (async () => {
       try {
         setIsLoading(true)
         const response = await axios.get("/available-doctors");
+
         if (response?.status === 200) {
           setDoctors(response.data);
           setAllDoctors(response.data);
           setIsLoading(false)
         }
       } catch (error) {
-        toast.error(`${error.message}`);
+        console.log(error)
       }
     })();
   }, []);
@@ -31,7 +32,6 @@ const DoctorsList = () => {
     const value = event.target.value?.toLowerCase();
     const filteredDoctors = allDoctors.filter(
       (doctor) =>
-        doctor.specialisation?.toLowerCase().includes(value) ||
         doctor.name?.toLowerCase().includes(value)
     );
     setDoctors(filteredDoctors);

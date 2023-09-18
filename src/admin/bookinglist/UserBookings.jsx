@@ -51,7 +51,7 @@ function UserBookings() {
         setBookings(books);
         setIsLoading(false);
       } catch (error) {
-        toast.error(`${error.response}`);
+        setIsLoading(true)
       }
     };
     getAppointmentList();

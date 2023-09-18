@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Header from "./components/header/Header";
-
 import Home from "./pages/home/Home";
 import "./scss/main.scss";
 import Login from "./pages/login/Login";
@@ -34,7 +33,7 @@ import UserBookings from "./admin/bookinglist/UserBookings";
 import Footer from "./components/Footer";
 import { VideoCall } from "./components/VideoCall";
 import Ratings from "./components/Ratings";
-
+import DoctorsByDepartment from "./user/doctorlist/DoctorsByDepartment";
 function App() {
   return (
     <>
@@ -49,7 +48,6 @@ function App() {
               </>
             }
           />
-
           <Route
             path="/signup"
             element={
@@ -61,8 +59,16 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/doctor" element={<RegisterDoctor />} />
           <Route path="/doctorlogin" element={<LoginDoctor />} />
-          <Route path="/doctor-details" element={<><DoctorDetails /><Footer/></>} />
-
+          <Route path="/doctors-by-departments" element={<><Header userType={'user'}/><DoctorsByDepartment/></>} />
+          <Route
+            path="/doctor-details"
+            element={
+              <>
+                <DoctorDetails />
+                <Footer />
+              </>
+            }
+          />
           <Route
             path="/admin"
             element={
@@ -80,7 +86,6 @@ function App() {
               </>
             }
           />
-
           {/* admins protected routes */}
           <Route element={<ProtectedRouteAdmin />}>
             <Route
@@ -112,7 +117,6 @@ function App() {
             <Route path="/departments" element={<DepartmentPage />} />
             <Route path="/bookings" element={<UserBookings />} />
           </Route>
-
           {/* Doctors Protected Routes */}
           <Route element={<ProtectedRouteDoctor />}>
             <Route path="/doctorhome" element={<DoctorHome />} />
@@ -120,7 +124,12 @@ function App() {
             <Route path="/appointments" element={<Appointments />} />
             <Route
               path="/doctor/call/:roomId"
-              element={<><Header userType={'doctor'}/><VideoCall value={"doctor"} /></>}
+              element={
+                <>
+                  <Header userType={"doctor"} />
+                  <VideoCall value={"doctor"} />
+                </>
+              }
             />
             <Route
               path="/doctorprofile"
@@ -131,7 +140,6 @@ function App() {
               }
             />
           </Route>
-
           {/* user protected routes */}
           <Route element={<ProtectedRoute />}>
             <Route
@@ -179,12 +187,19 @@ function App() {
                 </>
               }
             />
-            <Route path="/user/call/:roomId" element={<><Header userType={'user'}/><VideoCall value={'user'}/></>} />
-            <Route path="feedback" element={<Ratings/>} />
+            <Route
+              path="/user/call/:roomId"
+              element={
+                <>
+                  <Header userType={"user"} />
+                  <VideoCall value={"user"} />
+                </>
+              }
+            />
+            <Route path="feedback" element={<Ratings />} />
           </Route>
         </Routes>
       </Router>
-
       <ToastContainer />
     </>
   );

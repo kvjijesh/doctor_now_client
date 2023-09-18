@@ -49,7 +49,6 @@ function LoginAdmin() {
           }
         } catch (error) {
           dispatch(adminLoginFailure());
-          toast.error(`${error.response.data.message}`,{position:toast.POSITION.TOP_CENTER})
         }
         action.resetForm();
       },

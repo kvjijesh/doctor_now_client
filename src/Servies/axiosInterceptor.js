@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 const instance = axios.create({
   baseURL: "http://localhost:8000/",
-  timeout: 5000,
+  // timeout: 5000,
 });
 
 instance.interceptors.request.use(
@@ -25,8 +25,8 @@ instance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error);
-    if (error.response.status === 403) {
+    if(error.code==="ECONNABORTED") toast.error("This request tooking long to respond",{position:toast.POSITION.TOP_CENTER})
+   else if (error.response.status === 403) {
       toast.error(`${error.response.data.message}`,{position:toast.POSITION.TOP_CENTER})
       localStorage.removeItem('token')
       window.location.href = '/login';

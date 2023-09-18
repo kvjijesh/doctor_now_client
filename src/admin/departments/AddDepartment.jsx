@@ -282,9 +282,7 @@ const DepartmentPage = () => {
         setDept(response.data);
         setIsLoading(false);
       } catch (error) {
-        toast.error(`${error.message}`, {
-          position: toast.POSITION.TOP_CENTER,
-        });
+        setIsLoading(true);
       }
     };
     fetchDept();

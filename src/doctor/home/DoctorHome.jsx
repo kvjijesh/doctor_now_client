@@ -14,16 +14,16 @@ const DoctorHome = () => {
 
 useEffect(() => {
   const fetchCount = async () => {
-    await axios.get(`/doctor/total-appointments/${doctorData._id}`).then((res) => { setAppointCount(res.data) });
+    await axios.get(`/doctor/total-appointments/${doctorData?._id}`).then((res) => { setAppointCount(res.data) }).catch();
   }
   fetchCount()
-}, [doctorData._id])
+}, [])
 useEffect(() => {
   const fetchAppoint = async () => {
-    await axios.get(`/doctor/appointment-list/${doctorData._id}`).then((res) => { setAppoint(res.data)  });
+    await axios.get(`/doctor/appointment-list/${doctorData._id}`).then((res) => { setAppoint(res.data)  }).catch();
   }
   fetchAppoint()
-}, [doctorData._id])
+}, [])
 
   return (
     <>
@@ -41,7 +41,7 @@ useEffect(() => {
                 <Grid>
                   <Paper variant="outlined" sx={{ display: 'flex', flexDirection: 'column', justifyContent: "center", width: 250, height: 200, boxShadow: 5, ml: 5, mt: 5 }}>
                     <Typography variant="h4" textAlign={'center'} >Amount Recieved</Typography>
-                    <Typography variant="h4" textAlign={'center'} mt={2}>{doctorData.payments}</Typography>
+                    <Typography variant="h4" textAlign={'center'} mt={2}>{doctorData?.payments}</Typography>
                   </Paper>
                 </Grid>
                 <Grid>

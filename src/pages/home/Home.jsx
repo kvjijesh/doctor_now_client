@@ -4,6 +4,7 @@ import CardComponent from '../../components/card/CardComponent'
 import Info from '../../components/info/Info'
 import Header from '../../components/header/Header';
 import './home.scss'
+import TopSpeciality from '../../components/TopSpeciality';
 
 
 
@@ -15,6 +16,7 @@ const Home = () => {
    <Header/>
    <Hero/>
    <Info/>
+   <TopSpeciality/>
    </div>
    </>
   )

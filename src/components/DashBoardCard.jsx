@@ -6,10 +6,10 @@ import Typography from '@mui/material/Typography';
 
 
 
-export default function DashBoardCard({ title ,count}) {
+export default function DashBoardCard({ title ,count,color}) {
   return (
     <Box sx={{ minWidth: 275, boxShadow:5, margin:5 }}>
-      <Card variant="outlined" sx={{background:'#8eb8e6'}}>
+      <Card variant="outlined" sx={{background:color}}>
         <CardContent>
           <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
             {title}

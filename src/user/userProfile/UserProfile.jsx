@@ -27,19 +27,8 @@ const UserProfile = () => {
   const [image, setImage] = useState(userData?.image);
   const [isEditMode, setIsEditMode] = useState(false);
   const [preview, setPreview] = useState("");
-  const [imgUrl, setImgUrl] = useState("")
   const [isLoading,setIsLoading]=useState(false)
 
-
-  // useEffect(() => {
-  //   return async() => {
-  //     const id=userData?._id}
-  //     const response=await axios.get('/userdetails',id)
-  //    if(userData?.is_blocked){
-  //     navigate('login')
-  //    }
-  //   }
-  // },[userData])
 
 
   const handleImageChange = (e) => {
@@ -53,23 +42,7 @@ const UserProfile = () => {
     setIsEditMode(true);
   };
 
-  // const uploadImageToCloudinary = async () => {
-  //  let formData = new FormData();
-  //   formData.append("file", image);
-  //   formData.append("upload_preset", "dsavfcph");
-  //   formData.append("cloud_name", "dw6hpsoj9");
-  //   try {
-  //     const response = await Axios.post(
-  //       "https://api.cloudinary.com/v1_1/dw6hpsoj9/image/upload",
-  //       formData
-  //     );
-  //     console.log(response.data.secure_url);
-  //     return response.data.secure_url;
-  //   } catch (error) {
-  //     console.error("Error uploading image to Cloudinary:", error);
-  //     throw error;
-  //   }
-  // };
+
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -79,44 +52,6 @@ const UserProfile = () => {
     }))
   }
 
-  // const handleSaveClick = async (e) => {
-  //   e.preventDefault()
-
-  //     let formData = new FormData();
-  //     formData.append("file", image);
-  //     formData.append("upload_preset", "dsavfcph");
-  //     formData.append("cloud_name", "dw6hpsoj9");
-  //     try {
-  //       const response = await Axios.post(
-  //         "https://api.cloudinary.com/v1_1/dw6hpsoj9/image/upload",
-  //         formData
-  //       );
-  //       if(response.status===200){
-  //          setImgUrl(response.data.secure_url);
-  //       }
-
-  //     } catch (error) {
-  //       console.error("Error uploading image to Cloudinary:", error);
-  //       throw error;
-  //     };
-
-  // try {
-  //     const newForm={...formdata,imgUrl}
-  //     const response = await axios.post(`/update/${userData?._id}`,newForm,
-  //      {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`
-  //       },
-  //     }
-  //     );
-  //     if (response.status === 200) {
-  //       dispatch(loginSucces(response.data));
-  //       setIsEditMode(false);
-  //     }
-  //   } catch (error) {
-  //     toast.error(`${error.message}`, { position: toast.POSITION.TOP_CENTER });
-  //   }
-  // };
 
   const handleSaveClick = async (e) => {
     e.preventDefault();

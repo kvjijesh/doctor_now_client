@@ -56,9 +56,6 @@ const Login = () => {
         }
       } catch (error) {
         dispatch(loginFailure());
-        toast.error(`${error.response.data.message}`, {
-          position: toast.POSITION.TOP_CENTER,
-        });
       }
     }
   };

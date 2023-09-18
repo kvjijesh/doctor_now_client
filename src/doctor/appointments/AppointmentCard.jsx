@@ -73,7 +73,6 @@ const AppointmentCard = ({ appointment }) => {
     await axios.put(`/doctor/update-status/${appointment._id}`, {
       status: newStatus,
     }).then((res)=>{
-      console.log(res)
       toast.success(`${res.data.message}`,{position:toast.POSITION.TOP_CENTER})
     })
 

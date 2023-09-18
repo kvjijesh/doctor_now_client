@@ -3,6 +3,7 @@ import "./doctorcard.scss";
 import { useNavigate } from "react-router-dom";
 
 const DoctorsCard = ({ doctorData }) => {
+  
   const navigate=useNavigate()
   const imageUrl = `http://localhost:8000/images/${doctorData?.image}`;
   const handleClick=()=>{
@@ -13,7 +14,8 @@ const DoctorsCard = ({ doctorData }) => {
     <div className="card">
       <div className="card__title">{doctorData.name} </div>
       <div className="card__body">
-        <p>{doctorData.specialisation}</p>
+
+        <p>{doctorData.specialisation?.name}</p>
         <p>{doctorData.city}</p>
         <p>{doctorData.state}</p>
         <p>{doctorData.pin}</p>
