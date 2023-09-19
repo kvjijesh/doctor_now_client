@@ -25,7 +25,7 @@ const DoctorDetails = () => {
         });
         setratings(response.data.allRatings);
         setavgReview(response.data.averageRating)
-        
+
 
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -74,7 +74,7 @@ const DoctorDetails = () => {
           <Grid display={'flex'} flexDirection={'row'} flexWrap={'wrap'} marginLeft={3}>
             <Paper sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: isMobile ? '100%' : 328, height: 328, m: 3, boxShadow: 4 }} variant="outlined" >
               <Grid m={2} >
-                {doctorData?.image ? (<img style={{ width: "10rem", height: "10rem", borderRadius: "100%" }} src={`http://localhost:8000/images/${doctorData?.image}`} alt="Profile" />) : (<img style={{ width: "10rem", height: "10rem", borderRadius: "100%" }} src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'
+                {doctorData?.image ? (<img style={{ width: "10rem", height: "10rem", borderRadius: "100%" }} src={`https://mydoctornow.online/images/${doctorData?.image}`} alt="Profile" />) : (<img style={{ width: "10rem", height: "10rem", borderRadius: "100%" }} src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'
                   alt="Profile" />)}
               </Grid>
               <Grid>

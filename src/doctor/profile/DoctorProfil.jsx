@@ -81,7 +81,7 @@ const DoctorProfile = () => {
               <img src={preview} alt="Doctor" />
             ) : doctorData?.image ? (
               <img
-                src={`http://localhost:8000/images/${doctorData?.image}`}
+                src={`https://mydoctornow.online/images/${doctorData?.image}`}
                 alt="Doctor"
               />
             ) : (
@@ -89,7 +89,7 @@ const DoctorProfile = () => {
             )
           ) : (
             <img
-              src={`http://localhost:8000/images/${doctorData?.image}`}
+              src={`https://mydoctornow.online/images/${doctorData?.image}`}
               alt="Doctor"
             />
           )}

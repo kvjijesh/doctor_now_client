@@ -57,12 +57,12 @@ const Booking = () => {
               <Divider sx={{ mt: 2 }} />
               <Grid display={'flex'} gap={5}>
                 <Grid sx={{ width: 70, mt: 2, ml: 2 }}>
-                  <img src={`http://localhost:8000/images/${doctorData?.image}`} alt="" />
+                  <img src={`https://mydoctornow.online/images/${doctorData?.image}`} alt="" />
                 </Grid>
                 <Grid display={'flex'} flexDirection={'column'} mt={2} >
                   <Typography variant="subtitle2" sx={{ fontSize: 15 }}>Dr.{doctorData.name} </Typography>
                   <Typography variant="subtitle2" sx={{ fontSize: 13 ,color:"GrayText"}}>{doctorData.qualification} </Typography>
-                  <Typography variant="subtitle2" sx={{ fontSize: 13 ,color:"GrayText"}}>{doctorData.specialisation} </Typography>
+                  <Typography variant="subtitle2" sx={{ fontSize: 13 ,color:"GrayText"}}>{doctorData.specialisation.name} </Typography>
 
                 </Grid>
               </Grid>

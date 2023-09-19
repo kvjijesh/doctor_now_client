@@ -69,7 +69,7 @@ const DoctorsByDepartment = () => {
           {doctors && doctors.map((element) => (
             <><Box display={'flex'} ml={10} height={150} mt={5}>
               <Grid>
-                {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`http://localhost:8000/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
+                {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://mydoctornow.online/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
 
 
               </Grid>

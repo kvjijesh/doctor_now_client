@@ -3,9 +3,9 @@ import "./doctorcard.scss";
 import { useNavigate } from "react-router-dom";
 
 const DoctorsCard = ({ doctorData }) => {
-  
+
   const navigate=useNavigate()
-  const imageUrl = `http://localhost:8000/images/${doctorData?.image}`;
+  const imageUrl = `https://mydoctornow.online/images/${doctorData?.image}`;
   const handleClick=()=>{
     navigate('/doctor-details',{ state: { doctorData: doctorData }})
   }
