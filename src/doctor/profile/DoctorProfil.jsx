@@ -15,7 +15,7 @@ const DoctorProfile = () => {
   const [doctorName, setDoctorName] = useState(doctorData?.name || "");
   const [doctorEmail, setDoctorEmail] = useState(doctorData?.email || "");
   const [doctorMobile, setDoctorMobile] = useState(doctorData?.mobile || "");
-  const [specialisation,setSpecialisation]=useState(doctorData?.specialisation)
+  const [specialisation,setSpecialisation]=useState(doctorData?.specialisation.name)
   const [qualification,setQualification]=useState(doctorData?.qualification)
   const [registrationNumber,setRegistrationNumber]=useState(doctorData?.registrationNumber)
   const [registrationCouncil,setRegistrationCouncil]=useState(doctorData?.registrationYear)
@@ -158,6 +158,7 @@ const DoctorProfile = () => {
             <label>Specialisation:</label>
             {isEditMode ? (
               <input
+                disabled
                 type="text"
                 value={specialisation}
                 onChange={(e) => setSpecialisation(e.target.value)}
