@@ -85,7 +85,6 @@ const Register = ({ userType }) => {
     }
     try {
       const response = await axios.post(link, { email, otp });
-      console.log(response);
       if (response.status === 201) {
         toast.success(`Registration successful!`, {
           position: toast.POSITION.TOP_CENTER,

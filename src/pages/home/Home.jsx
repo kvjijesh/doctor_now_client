@@ -5,6 +5,8 @@ import Info from '../../components/info/Info'
 import Header from '../../components/header/Header';
 import './home.scss'
 import TopSpeciality from '../../components/TopSpeciality';
+import Topdoctors from '../../components/Topdoctors';
+import { Divider } from '@mui/material';
 
 
 
@@ -16,7 +18,10 @@ const Home = () => {
    <Header/>
    <Hero/>
    <Info/>
+   <Divider sx={{mx:5,my:1}}/>
    <TopSpeciality/>
+   <Divider sx={{mx:5,my:1}}/>
+   <Topdoctors/>
    </div>
    </>
   )

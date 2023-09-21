@@ -5,7 +5,8 @@ import { Box, FormControl, Grid, InputLabel, MenuItem, Select } from "@mui/mater
 
 
 function BarChart({ appoints }) {
-    const [year, setYear] = useState(new Date().getFullYear())
+    const currentyear=new Date().getFullYear()
+    const [year, setYear] = useState(`${currentyear}`)
     const handleChange = (event) => {
         setYear(event.target.value);
     };
