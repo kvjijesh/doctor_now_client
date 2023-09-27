@@ -121,7 +121,10 @@ const Header = ({ userType }) => {
                 <Link to={"/appointments"}>
                   <li style={{color:"black"}}>Appointments</li>
                 </Link>
-                <li>Video Consult</li>
+                <Link to={'/doctor-reviews'}>
+                <li>Reviews</li>
+                </Link>
+
 
                 {doctor ? (
                   <ul>

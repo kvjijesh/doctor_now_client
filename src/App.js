@@ -34,6 +34,7 @@ import Footer from "./components/Footer";
 import { VideoCall } from "./components/VideoCall";
 import Ratings from "./components/Ratings";
 import DoctorsByDepartment from "./user/doctorlist/DoctorsByDepartment";
+import Reviews from "./doctor/reviews/Reviews";
 function App() {
   return (
     <>
@@ -122,6 +123,7 @@ function App() {
             <Route path="/doctorhome" element={<DoctorHome />} />
             <Route path="/manage-slots" element={<AddSlot />} />
             <Route path="/appointments" element={<Appointments />} />
+            <Route path="/doctor-reviews" element={<Reviews />} />
             <Route
               path="/doctor/call/:roomId"
               element={

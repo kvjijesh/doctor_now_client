@@ -74,6 +74,7 @@ const DoctorsByDepartment = () => {
               </Select>
             </FormControl>
           </Grid>
+          <Grid></Grid>
         </Grid>
         <Grid minHeight={'70vh'}>
           <Typography variant='h3' sx={{ ml: 2, mt: 2 }}>Found doctors </Typography>
