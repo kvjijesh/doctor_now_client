@@ -35,6 +35,7 @@ import { VideoCall } from "./components/VideoCall";
 import Ratings from "./components/Ratings";
 import DoctorsByDepartment from "./user/doctorlist/DoctorsByDepartment";
 import Reviews from "./doctor/reviews/Reviews";
+import AllDoctors from "./components/AllDoctors";
 function App() {
   return (
     <>
@@ -87,6 +88,7 @@ function App() {
               </>
             }
           />
+          <Route path="/all-doctors" element={<><AllDoctors/></>}/>
           {/* admins protected routes */}
           <Route element={<ProtectedRouteAdmin />}>
             <Route

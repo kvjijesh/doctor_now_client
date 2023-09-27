@@ -18,7 +18,7 @@ function Info() {
     <div>
       <Grid container spacing={3}>
         <Grid item xs={12} lg={4} md={2.4}>
-          <Link to="/available-doctors">
+          <Link to="/all-doctors">
             <CardComponent imageUrl={imageUrl1} title={title1} desc={desc1} />
           </Link>
         </Grid>

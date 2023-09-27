@@ -40,6 +40,9 @@ const Topdoctors = () => {
                                     <Typography variant='h5' textAlign={'center'} mt={3}>
                                         {item.specialisation.name}
                                     </Typography>
+                                    <Typography variant='h5' textAlign={'center'} mt={3}>
+                                        {item.qualification}
+                                    </Typography>
                                     <Button onClick={() => handleBook(item)} sx={{ width: '50%', mt: 5 ,mb:5}} variant='contained' color='primary' >book now</Button>
                                 </Grid>
                             </Paper>
@@ -48,6 +51,9 @@ const Topdoctors = () => {
                     })}
 
 
+                </Grid>
+                <Grid  display={'flex'} justifyContent={'center'} alignItems={'center'}>
+                    <Button onClick={()=>{navigate("/all-doctors")}} variant='outlined' sx={{width:220,mt:3}}>View all doctors</Button>
                 </Grid>
 
             </Box>
