@@ -2,11 +2,12 @@ import React from "react";
 import Header from "../../components/header/Header";
 import "./confirmbooking.scss";
 import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const ConfirmBooking = () => {
     const navigate=useNavigate()
     const handleBack=()=>{
-        navigate('/available-doctors')
+        navigate('/all-doctors')
     }
 
   return (
@@ -16,7 +17,7 @@ const ConfirmBooking = () => {
         <div className="booking-card">
           <h2>BOOKING CONFIRMED</h2>
           <br />
-          <button onClick={handleBack}>Go Back</button>
+          <Button onClick={handleBack}>Go Back</Button>
         </div>
       </div>
     </>

@@ -232,7 +232,7 @@ const Header = ({ userType }) => {
                 </Link>
               </div>
               <ul className={opena ? `nav-items active ` : `nav-items`}>
-                <Link to="/available-doctors">
+                <Link to="/all-doctors">
                   <li>Find Doctors</li>
                 </Link>
                 <li>Video Consult</li>
