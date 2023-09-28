@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const instance = axios.create({
    baseURL: "https://mydoctornow.online/",
    //baseURL: "http://localhost:8000/",
-   timeout: 5000,
+  //  timeout: 5000,
 });
 
 instance.interceptors.request.use(
