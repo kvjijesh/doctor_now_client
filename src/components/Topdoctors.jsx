@@ -31,7 +31,7 @@ const Topdoctors = () => {
                         return (
                             <Paper key={i} display={'flex'} flexDirection={'column'} sx={{ width: 250, m:3 ,boxShadow:2}}>
                                 <Grid display={'flex'} justifyContent={'center'} mt={2}>
-                                {item.image?(<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`http://mydoctornow.online/images/${item.image}`} alt="" />):(<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt="" />)}
+                                {item.image?(<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://mydoctornow.online/images/${item.image}`} alt="" />):(<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt="" />)}
                                 </Grid>
                                 <Grid display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                                     <Typography variant='h4' textAlign={'center'} mt={3}>
