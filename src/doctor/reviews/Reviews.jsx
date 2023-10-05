@@ -4,7 +4,7 @@ import Header from '../../components/header/Header'
 import { useSelector } from 'react-redux'
 import axios from '../../Servies/axiosInterceptor'
 import { error } from 'jquery'
-import Spinner from '../../components/Spinner'
+import Spinner from '../../components/Spinner';
 function Reviews() {
     const doctorData = useSelector((state) => state.doctor.doctor);
     const [doctorReview, setDoctorReview] = useState([])
