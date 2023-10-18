@@ -9,11 +9,11 @@ function Info() {
   const imageUrl2 = images.video_consult;
   const imageUrl3 = images.chat;
   const title1 = "Find doctors near you";
-  const title2 = "Instant video chat";
-  const title3 = "Chat with your doctor";
+  const title2 = "video chat";
+  const title3 = "Chat with your doctor *";
   const desc1 = "Book appointments with doctors near you online";
   const desc2 = "consult through video with doctors available online";
-  const desc3 = "Chat with your doctor who is available online";
+  const desc3 = "Chat with your doctor who is available online(This feature is under development)";
   return (
     <div>
       <Grid container spacing={3}>
@@ -23,7 +23,8 @@ function Info() {
           </Link>
         </Grid>
         <Grid item xs={12} lg={4} md={2.4}>
-          <CardComponent imageUrl={imageUrl2} title={title2} desc={desc2} />
+          <Link to="/all-doctors">
+          <CardComponent imageUrl={imageUrl2} title={title2} desc={desc2} /> </Link>
         </Grid>
         <Grid item xs={12} lg={4} md={2.4}>
           <CardComponent imageUrl={imageUrl3} title={title3} desc={desc3} />

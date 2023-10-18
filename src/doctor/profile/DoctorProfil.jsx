@@ -166,7 +166,7 @@ const DoctorProfile = () => {
                 required
               />
             ) : (
-              <span>{specialisation.name}</span>
+              <span>{specialisation}</span>
             )}
           </div>
           <div className="info-item">

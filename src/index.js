@@ -19,5 +19,5 @@ root.render(
         </SocketProvider>
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+   </React.StrictMode>
 );

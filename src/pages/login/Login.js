@@ -12,6 +12,7 @@ import {
 import validate from "../../helper/validateLogin";
 import { toast } from "react-toastify";
 import Header from "../../components/header/Header";
+import { loginApiCall } from "../../api/apiCalls";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -47,7 +48,8 @@ const Login = () => {
     if (Object.keys(errors).length === 0) {
       dispatch(loginStart());
       try {
-        const response = await axios.post("auth/login", formData);
+        // const response = await axios.post("auth/login", formData);
+        const response =await loginApiCall(formData);
         if (response.status === 200) {
           localStorage.setItem("token", response.data.token);
 

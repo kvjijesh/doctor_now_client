@@ -9,7 +9,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import axios from "../../Servies/axiosInterceptor";
 import { useDispatch } from "react-redux";
-import { loginFailure, loginSucces, logout } from "../../features/user/userSlice";
+import {
+  loginFailure,
+  loginSucces,
+  logout,
+} from "../../features/user/userSlice";
 import {
   doctorLoginSucces,
   doctorLogout,
@@ -44,18 +48,20 @@ const Header = ({ userType }) => {
       .put("/doctor/update-notification", { id, notification })
       .then((res) => dispatch(doctorLoginSucces(res.data)));
   };
-  const handleUserNotification=async(notificationId)=>{
+  const handleUserNotification = async (notificationId) => {
     try {
-      const id=user._id;
-      const notification=notificationId;
-      const res=await axios.put('/update-usernotification',{id,notification})
-     dispatch(loginSucces(res.data))
-     setAnchor(null)
+      const id = user._id;
+      const notification = notificationId;
+      const res = await axios.put("/update-usernotification", {
+        id,
+        notification,
+      });
+      dispatch(loginSucces(res.data));
+      setAnchor(null);
     } catch (error) {
-          console.log(error)
+      console.log(error);
     }
-
-  }
+  };
 
   useEffect(() => {
     const authToken = localStorage.getItem("token");
@@ -114,17 +120,16 @@ const Header = ({ userType }) => {
                   <img src={images.logo} alt="logo" />
                 </Link>
               </div>
-              <ul  className={opena ? `nav-items active ` : `nav-items`}>
+              <ul className={opena ? `nav-items active ` : `nav-items`}>
                 <Link to="/manage-slots">
-                  <li style={{color:"black"}}>Slots</li>
+                  <li style={{ color: "black" }}>Slots</li>
                 </Link>
                 <Link to={"/appointments"}>
-                  <li style={{color:"black"}}>Appointments</li>
+                  <li style={{ color: "black" }}>Appointments</li>
                 </Link>
-                <Link to={'/doctor-reviews'}>
-                <li>Reviews</li>
+                <Link to={"/doctor-reviews"}>
+                  <li>Reviews</li>
                 </Link>
-
 
                 {doctor ? (
                   <ul>
@@ -211,7 +216,7 @@ const Header = ({ userType }) => {
                     </div>
                   </ul>
                 ) : (
-                  <li  className="btn btn--nav-btn">
+                  <li className="btn btn--nav-btn">
                     <Link to="/doctor">Login/signup</Link>
                   </li>
                 )}
@@ -235,7 +240,7 @@ const Header = ({ userType }) => {
                 <Link to="/all-doctors">
                   <li>Find Doctors</li>
                 </Link>
-                <li>Video Consult</li>
+
                 <Link to="/user-bookings">
                   <li>Bookings</li>
                 </Link>
