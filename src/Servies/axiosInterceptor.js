@@ -1,7 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 const instance = axios.create({
    baseURL: "https://mydoctornow.online/",
    //baseURL: "http://localhost:8000/",

@@ -45,10 +45,11 @@ export const VideoCall = ({ value }) => {
             socket.emit('call:end', { to: remoteSocketId })
             setCallActive(false)
             setRemoteStream('')
-            if(value==='doctor'){
-            await axios.patch(`/doctor/endAppointment/${id}`).then(res => {
-                toast.success(`${res.data.message}`, { position: toast.POSITION.TOP_CENTER })
-            })}
+            if (value === 'doctor') {
+                await axios.patch(`/doctor/endAppointment/${id}`).then(res => {
+                    toast.success(`${res.data.message}`, { position: toast.POSITION.TOP_CENTER })
+                })
+            }
             socket.emit('socket:disconnect', { socketId: remoteSocketId });
             if (value === 'doctor') {
                 navigate('/appointments')
@@ -70,7 +71,7 @@ export const VideoCall = ({ value }) => {
         setRemoteSocketId(from)
         setCallActive(true)
         try {
-            const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: true})
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true })
 
             setMyStream(stream)
             const ans = await peer.getAnswer(offer)
@@ -158,7 +159,6 @@ export const VideoCall = ({ value }) => {
 
             <Box height={'100vh'} sx={{ flexGrow: 1 }} >
                 <Grid container direction={'column'} justifyContent={'center'}  >
-
                     <Grid display={'flex'} justifyContent={'center'} mt={5}>
                         <Typography variant='h3'>Consultation</Typography>
                     </Grid>
@@ -174,14 +174,13 @@ export const VideoCall = ({ value }) => {
                         </Grid>
                         <Grid display={'flex'} justifyContent={'center'} gap={5} flexWrap={'wrap'}>
                             {
-                              myStream && <ReactPlayer style={{ backgroundColor: 'black' }} url={myStream} playing muted width={'400px'} height={'400px'} />
+                                myStream && <ReactPlayer style={{ backgroundColor: 'black' }} url={myStream} playing muted width={'400px'} height={'400px'} />
 
                             }
                             {
                                 remoteStream && <ReactPlayer style={{ backgroundColor: 'black' }} ref={remoteRef} url={remoteStream} playing muted={muted} width={'400px'} height={'400px'} />
                             }
                         </Grid>
-
                     </Grid>
                     <Grid display={'flex'} justifyContent={'center'} gap={5} mt={5}>
 
@@ -191,15 +190,12 @@ export const VideoCall = ({ value }) => {
                                 <Button onClick={handleMute}>{muted ? <MicOffIcon /> : <MicIcon />}</Button>
                             </>
                         }
-                        {value === 'user' && myStream && <><Button sx={{display: accepted ? "none" : "block"}} onClick={sendStreams}><CallIcon /></Button></>}
+                        {value === 'user' && myStream && <><Button sx={{ display: accepted ? "none" : "block" }} onClick={sendStreams}><CallIcon /></Button></>}
                         {
                             !callActive ? (value === 'doctor' && (remoteSocketId && <Button variant='contained' color='success' onClick={handleCallUser}>Call</Button>)) : ''
                         }
                     </Grid>
-
-
                 </Grid>
-
             </Box>
         </>
     )

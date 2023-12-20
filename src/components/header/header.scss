@@ -1,6 +1,6 @@
 header{
     width: 100%;
-    background-color: var(--white);
+    background-color: ghostwhite;
     .navbar{
         display: flex;
         justify-content: space-between;
@@ -17,12 +17,14 @@ header{
         }
         .nav-items{
             display: flex;
-            width: 50%;
+            width: 30%;
             max-width: 50rem;
             justify-content: space-between;
             align-items: center;
             li{
                 font-size: 1.5rem;
+                font-weight: 600;
+                color: #0b0b0b;
 
             }
             @media(max-width: 767px){

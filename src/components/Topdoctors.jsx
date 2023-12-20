@@ -37,10 +37,10 @@ const Topdoctors = () => {
                                     <Typography variant='h4' textAlign={'center'} mt={3}>
                                         Dr.{item.name}
                                     </Typography>
-                                    <Typography variant='h5' textAlign={'center'} mt={3}>
+                                    <Typography variant='button' fontSize={14} textAlign={'center'} mt={3}>
                                         {item.specialisation.name}
                                     </Typography>
-                                    <Typography variant='h5' textAlign={'center'} mt={3}>
+                                    <Typography variant='button' fontSize={16} textAlign={'center'} mt={3}>
                                         {item.qualification}
                                     </Typography>
                                     <Button onClick={() => handleBook(item)} sx={{ width: '50%', mt: 5 ,mb:5}} variant='contained' color='primary' >book now</Button>

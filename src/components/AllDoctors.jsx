@@ -111,7 +111,7 @@ const AllDoctors = () => {
                     <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>{element.city},{element.state}</Typography>
                     <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>Rs.{element.videoChatFee} Fee</Typography>
                   </Grid>
-                  <Grid display={'flex'} alignItems={'flex-end'}>
+                  <Grid display={'flex'} alignItems={'flex-end'} flexWrap={'wrap'}>
                     <Button onClick={() => handleBook(element)} variant='contained' color='primary' sx={{ ml: 15, }}>BOOK NOW</Button>
                   </Grid>
                 </Box><Divider sx={{ mx: 10, mt: 5, }} /></>
