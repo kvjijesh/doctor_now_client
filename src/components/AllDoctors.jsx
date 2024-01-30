@@ -19,8 +19,18 @@ const AllDoctors = () => {
   const navigate = useNavigate()
   useEffect(() => {
     (async () => {
-      setLoading(true)
-      await axios.get(`/available-doctors`).then((res) => { setDoctors(res.data); setAllDoctors(res.data); setLoading(false); })
+      try {
+        setLoading(true)
+        const res=await axios.get(`/available-doctors`)
+        console.log(res.data);
+        setDoctors(res.data);
+        setAllDoctors(res.data);
+        setLoading(false)
+
+      } catch (error) {
+        console.log(error);
+      }
+
     })()
   }, [])
 
@@ -67,10 +77,11 @@ const AllDoctors = () => {
       {loading ? (<Spinner loading={loading} />) : (
         <>
           <Header />
-          <Grid container flexDirection={'column'} flexWrap={'wrap'}>
-            <Grid display={'flex'} flexWrap={'wrap'} justifyContent={'flex-start'} alignItems={'center'} width={'100%'} height={65} sx={{ background: "#202094" }}>
+          <Grid width={'100%'} sx={{ background: "#202094",  }}>
+          <Grid container flexDirection={'column'} flexWrap={'wrap'} mx={'auto'} maxWidth={'120rem'}  >
+            <Grid display={'flex'} flexWrap={'wrap'} justifyContent={'flex-start'} alignItems={'center'} width={'100%'} height={65} >
               <Grid>
-                <Typography variant='h6' sx={{ color: 'white', ml: 5 }}>Sort by:</Typography>
+                <Typography variant='h6' sx={{ color: 'white'}}>Sort by:</Typography>
               </Grid>
               <Grid sx={{ minWidth: 100, ml: 2 }}>
                 <FormControl sx={{ padding: 0, border: 'white' }} fullWidth>
@@ -95,13 +106,18 @@ const AllDoctors = () => {
                 <input style={{ marginLeft: 10, width: 200, height: 30, borderRadius: 5 }} type="search" placeholder=' search doctors...' onInput={filterCards} />
               </Grid>
             </Grid>
+          </Grid>
+          </Grid>
+
+          <Grid sx={{mx:'auto',maxWidth:'120rem'}}>
+
             <Grid minHeight={'70vh'}>
-              <Typography variant='h3' sx={{ ml: 2, mt: 2 }}>Found doctors </Typography>
+              <Typography variant='h3' sx={{ mt: 2 }}>Found doctors </Typography>
 
               {currentDoctors && currentDoctors.map((element, i) => (
                 <><Box key={i} display={'flex'} ml={10} height={150} mt={5} flexWrap={'wrap'}>
                   <Grid>
-                    {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://mydoctornow.online/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
+                    {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%', objectFit:'cover' }} src={`https://mydoctornow.online/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
 
                   </Grid>
                   <Grid display={'flex'} flexDirection={'column'} ml={5}>

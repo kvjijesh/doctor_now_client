@@ -1,0 +1,13 @@
+
+.cursor {
+    width: 30px;
+    height: 30px;
+    border: 3px solid hsl(9, 77%, 64%);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease;
+    // mix-blend-mode: difference;
+    z-index: 999;
+  }

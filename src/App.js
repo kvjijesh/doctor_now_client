@@ -36,6 +36,7 @@ import Ratings from "./components/Ratings";
 import DoctorsByDepartment from "./user/doctorlist/DoctorsByDepartment";
 import Reviews from "./doctor/reviews/Reviews";
 import AllDoctors from "./components/AllDoctors";
+import Cursor from "./components/Cursor";
 function App() {
   return (
     <>
@@ -204,6 +205,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
+      <Cursor/>
       <ToastContainer />
     </>
   );

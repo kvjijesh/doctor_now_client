@@ -16,7 +16,7 @@ function Info() {
   const desc3 = "Chat with your doctor who is available online(This feature is under development)";
   return (
     <div>
-      <Grid container spacing={3}>
+      <Grid container mx={'auto'} maxWidth={'120rem'}>
         <Grid item xs={12} lg={4} md={2.4}>
           <Link to="/all-doctors">
             <CardComponent imageUrl={imageUrl1} title={title1} desc={desc1} />

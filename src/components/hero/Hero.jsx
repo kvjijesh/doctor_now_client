@@ -51,7 +51,7 @@ const Hero = () => {
   const openMenu = Boolean(anchorEl);
 
   return (
-    <Box container flexDirection={'column'}>
+    <Box container flexDirection={'column'} margin={'auto'} maxWidth={'120rem'} flexWrap={'wrap'}>
       <Grid
         display={'flex'}
         width={'100%'}
@@ -87,7 +87,7 @@ const Hero = () => {
         </Menu>
       </Grid>
       <Grid >
-      <img src={images.heroImage} alt="" />
+      <img style={{borderRadius:'30px'}} src={images.heroImage} alt="" />
       </Grid>
     </Box>
   );

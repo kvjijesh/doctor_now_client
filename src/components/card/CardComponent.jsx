@@ -9,12 +9,13 @@ import { images } from '../../images/image';
 export default function CardComponent(props) {
 
   return (
-    <Card sx={{ maxWidth: 280, marginLeft:10 , marginTop:10 ,marginBottom:10, borderRadius:5,boxShadow:5}}>
-      <CardActionArea>
+    <Card sx={{ maxWidth: 280, marginLeft:10 , marginTop:10 ,marginBottom:10, borderRadius:5,boxShadow:5 ,transition: 'transform 0.3s',
+    '&:hover': {
+        transform: 'translateY(-10px)',backgroundColor:'inherit'}}}>
+      <CardActionArea sx={{":hover":{background:'white'}}}>
         <CardMedia
           component="img"
           height="300"
-          ma
           image={props.imageUrl}
           alt="green iguana"
           sx={{m:1}}
@@ -30,7 +31,7 @@ export default function CardComponent(props) {
       </CardActionArea>
       <CardActions>
         <Button size="large" color="primary">
-          Click
+          Click Here
         </Button>
       </CardActions>
     </Card>

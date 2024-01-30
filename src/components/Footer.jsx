@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <Box sx={{ backgroundColor:'#4c92ed' }}>
-        <Box sx={{ display: "flex", justifyContent: "space-around",flexWrap: 'wrap', p: 2 }}>
+      <Box sx={{ backgroundColor:'#4c92ed',  }}>
+        <Box sx={{ display: "flex", justifyContent: "space-around",flexWrap: 'wrap', p: 2, mx:'auto',maxWidth:'120rem' }}>
           <Box sx={{ width: "100%", maxWidth: "300px", mb: 2 }}>
             <Typography
               sx={{ color: "white", fontSize: { xs: 25, sm: 35 }, fontWeight: 500, mt: 3, textAlign: { xs: 'center', sm: 'left' } }}

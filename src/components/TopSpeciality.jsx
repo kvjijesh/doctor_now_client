@@ -44,7 +44,7 @@ const TopSpeciality = () => {
   return (
     <>
       <Box>
-        <Grid container flexDirection={'column'}>
+        <Grid container flexDirection={'column'} mx={'auto'} maxWidth={'120rem'}>
           <Grid>
             <Typography variant='h4' textAlign={'center'}>
               Top specialities

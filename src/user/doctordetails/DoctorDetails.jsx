@@ -64,8 +64,8 @@ const DoctorDetails = () => {
   return (
     <>
       <Header />
-      <Box>
-        <Grid container display={'flex'} flexDirection={'column'}>
+      <Box >
+        <Grid container display={'flex'} flexDirection={'column'} mx={'auto'} maxWidth={'120rem'}>
           <Grid>
             <Typography textAlign={'center'} mt={3} variant="h4">
               BOOK SLOTS HERE
@@ -92,7 +92,7 @@ const DoctorDetails = () => {
                 </Typography>
               </Grid>
             </Paper>
-            <Paper variant="outlined" sx={{ width: isMobile ? '100%' : 900, height: 328, m: 3, boxShadow: 4, overflow: 'scroll', overflowX: "auto" }}>
+            <Paper variant="outlined" sx={{ width: isMobile ? '100%' : 850, height: 328, m: 3, boxShadow: 4, overflow: 'scroll', overflowX: "auto" }}>
               <Grid>
                 <Typography variant="h5" mt={2} ml={2}>Available slots</Typography>
                 <Divider sx={{ width: "95%", mx: 2 }} />
