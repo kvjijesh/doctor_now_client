@@ -9,7 +9,7 @@ function Info() {
   const imageUrl2 = images.video_consult;
   const imageUrl3 = images.chat;
   const title1 = "Find doctors near you";
-  const title2 = "video chat";
+  const title2 = "Video chat";
   const title3 = "Chat with your doctor *";
   const desc1 = "Book appointments with doctors near you online";
   const desc2 = "consult through video with doctors available online";

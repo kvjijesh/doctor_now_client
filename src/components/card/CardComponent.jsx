@@ -18,7 +18,7 @@ export default function CardComponent(props) {
           height="300"
           image={props.imageUrl}
           alt="green iguana"
-          sx={{m:1}}
+          sx={{objectFit:'fill'}}
         />
         <CardContent>
           <Typography gutterBottom variant="h4" component="div">

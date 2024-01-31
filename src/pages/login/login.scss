@@ -3,10 +3,12 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #e9e3e3;
+  background: linear-gradient(to left, #0ea7d6, #fafaff);
 
   .container {
     display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 6px;

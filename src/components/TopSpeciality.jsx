@@ -43,10 +43,10 @@ const TopSpeciality = () => {
 
   return (
     <>
-      <Box>
-        <Grid container flexDirection={'column'} mx={'auto'} maxWidth={'120rem'}>
+      <Box bgcolor={'lightblue'} mb={2}>
+        <Grid container flexDirection={'column'} mx={'auto'} maxWidth={'120rem'}  >
           <Grid>
-            <Typography variant='h4' textAlign={'center'}>
+            <Typography variant='h4' textAlign={'center'} mt={2}>
               Top specialities
             </Typography>
           </Grid>
@@ -67,7 +67,7 @@ const TopSpeciality = () => {
               );
             })}
           </Grid>
-          <Grid container justifyContent="center">
+          <Grid container justifyContent="center" mb={2}>
             <Button onClick={prevPage} disabled={currentPage === 0}>
               <ArrowBackIosIcon />Prev
             </Button>

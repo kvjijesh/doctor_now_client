@@ -29,9 +29,12 @@ const Topdoctors = () => {
                 <Grid display={'flex'} justifyContent={'space-around'} flexWrap={'wrap'} mt={2} mb={2}>
                     {doctors.map((item, i) => {
                         return (
-                            <Paper key={i} display={'flex'} flexDirection={'column'} sx={{ width: 250, m: 3, boxShadow: 2 ,transition: 'transform 0.2s',
-                            '&:hover': {
-                              transform: 'translateY(-30px)'}}}>
+                            <Paper key={i} display={'flex'} flexDirection={'column'} sx={{
+                                width: 250, m: 3, boxShadow: 10, borderRadius: 4, transition: 'transform 0.2s',
+                                '&:hover': {
+                                    transform: 'translateY(-30px)'
+                                }
+                            }}>
                                 <Grid display={'flex'} justifyContent={'center'} mt={2}>
                                     {item.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://mydoctornow.online/images/${item.image}`} alt="" />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt="" />)}
                                 </Grid>

@@ -105,7 +105,7 @@ useEffect(() => {
         <div className="list">
           <h2>Your Bookings</h2>
         </div>
-        <div style={{ padding: "50px" }}>
+        <div style={{ padding: "10px" , maxWidth:'120rem',marginLeft:'auto',marginRight:'auto'}}>
           <div className="table">
             <TableContainer>
 

@@ -18,9 +18,9 @@ const Home = () => {
    <Header/>
    <Hero/>
    <Info/>
-   <Divider sx={{mx:5,my:1}}/>
+   {/* <Divider sx={{mx:5,my:1}}/> */}
    <TopSpeciality/>
-   <Divider sx={{mx:5,my:1}}/>
+   {/* <Divider sx={{mx:5,my:1}}/> */}
    <Topdoctors/>
    </div>
    </>
