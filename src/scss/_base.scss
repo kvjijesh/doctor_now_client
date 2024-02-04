@@ -12,14 +12,10 @@
     width: 100%;
     max-width: 15rem;
     padding: 1rem 2rem;
-    border: 1px solid var(--white);
-    background: transparent;
-    color: var(--blue);
+    background-color: orangered;
     text-align: center;
     &--nav-btn {
-      border: 1px solid var(--dark-violet);
-      color: var(--dark-violet);
-      border-radius: 10px;
+      border-radius: 20px;
     }
   }
 

@@ -9,7 +9,7 @@ import { images } from '../../images/image';
 export default function CardComponent(props) {
 
   return (
-    <Card sx={{ maxWidth: 280, marginLeft:10 , marginTop:10 ,marginBottom:10, borderRadius:5,boxShadow:5 ,transition: 'transform 0.3s',
+    <Card sx={{ maxWidth: 280, marginTop:10 ,marginBottom:10,borderRadius:5,boxShadow:5 ,transition: 'transform 0.3s',
     '&:hover': {
         transform: 'translateY(-10px)',backgroundColor:'inherit'}}}>
       <CardActionArea sx={{":hover":{background:'white'}}}>

@@ -16,7 +16,8 @@ function Info() {
   const desc3 = "Chat with your doctor who is available online(This feature is under development)";
   return (
     <div>
-      <Grid container mx={'auto'} maxWidth={'120rem'}>
+      <Grid >
+      <Grid display={'flex'} justifyContent={'space-around'} mx={'auto'} maxWidth={'120rem'} flexWrap={'wrap'}>
         <Grid item xs={12} lg={4} md={2.4}>
           <Link to="/all-doctors">
             <CardComponent imageUrl={imageUrl1} title={title1} desc={desc1} />
@@ -29,6 +30,7 @@ function Info() {
         <Grid item xs={12} lg={4} md={2.4}>
           <CardComponent imageUrl={imageUrl3} title={title3} desc={desc3} />
         </Grid>
+      </Grid>
       </Grid>
     </div>
   );

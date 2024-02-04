@@ -340,7 +340,7 @@ const Header = ({ userType }) => {
                   </ul>
                 ) : (
                   <li className="btn btn--nav-btn">
-                    <Link to="/signup">Login/signup</Link>
+                    <Link style={{color:'white'}} to="/signup">Login/signup</Link>
                   </li>
                 )}
               </ul>
