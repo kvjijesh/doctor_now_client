@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from './header/Header';
 import Footer from './Footer';
 import Spinner from './Spinner';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
 const AllDoctors = () => {
@@ -13,7 +14,7 @@ const AllDoctors = () => {
   const [doctors, setDoctors] = useState([])
   const [allDoctors, setAllDoctors] = useState([])
   const [loading, setLoading] = useState(true)
-
+  const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(3);
   const navigate = useNavigate()
@@ -79,7 +80,7 @@ const AllDoctors = () => {
           <Header />
           <Grid width={'100%'} sx={{ background: "#202094",  }}>
           <Grid container flexDirection={'column'} flexWrap={'wrap'} mx={'auto'} maxWidth={'120rem'}  >
-            <Grid display={'flex'} flexWrap={'wrap'} justifyContent={'flex-start'} alignItems={'center'} width={'100%'} height={65} >
+            <Grid display={'flex'} flexWrap={'wrap'} justifyContent={'flex-start'} alignItems={'center'} width={'100%'} height={75} >
               <Grid>
                 <Typography variant='h6' sx={{ color: 'white'}}>Sort by:</Typography>
               </Grid>
@@ -101,10 +102,12 @@ const AllDoctors = () => {
                   </Select>
                 </FormControl>
               </Grid >
-              <Grid ml={3} sx={{ display: 'flex', alignItems: 'center' }}>
-                <Typography variant='h6' sx={{ color: 'white', ml: 1 }}> Search: </Typography>
-                <input style={{ marginLeft: 10, width: 200, height: 30, borderRadius: 5 }} type="search" placeholder=' search doctors...' onInput={filterCards} />
-              </Grid>
+              {!isSmallScreen && (
+                  <Grid ml={3} sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Typography variant='h6' sx={{ color: 'white', ml: 1 }}> Search: </Typography>
+                    <input style={{ marginLeft: 10, width: 200, height: 30, borderRadius: 5 }} type="search" placeholder=' search doctors...' onInput={filterCards} />
+                  </Grid>
+                )}
             </Grid>
           </Grid>
           </Grid>

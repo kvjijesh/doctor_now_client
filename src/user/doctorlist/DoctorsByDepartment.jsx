@@ -2,6 +2,7 @@ import { Box, Button, Divider, FormControl, Grid, InputLabel, MenuItem, Paginati
 import axios from '../../Servies/axiosInterceptor';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import Footer from '../../components/Footer';
 
 
 const DoctorsByDepartment = () => {
@@ -51,10 +52,10 @@ const DoctorsByDepartment = () => {
 
   return (
     <>
-      <Grid container flexDirection={'column'} flexWrap={'wrap'}>
-        <Grid display={'flex'} justifyContent={'flex-start'} alignItems={'center'} width={'100%'} height={65} sx={{ background: "#202094" }}>
+  <Grid maxWidth={'100%'} sx={{ background: "#202094" }}>
+        <Grid display={'flex'} justifyContent={'flex-start'} alignItems={'center'} mx={'auto'}  maxWidth={'120rem'} height={65} >
           <Grid>
-            <Typography sx={{ color: 'white', ml: 5 }}>Sort by:</Typography>
+            <Typography sx={{ color: 'white', }}>Sort by:</Typography>
           </Grid>
           <Grid sx={{ minWidth: 100, ml: 2 }}>
             <FormControl sx={{ padding: 0, border: 'white' }} fullWidth>
@@ -74,13 +75,13 @@ const DoctorsByDepartment = () => {
               </Select>
             </FormControl>
           </Grid>
-          <Grid></Grid>
+          </Grid>
         </Grid>
-        <Grid minHeight={'70vh'}>
-          <Typography variant='h3' sx={{ ml: 2, mt: 2 }}>Found doctors </Typography>
+        <Grid mx={'auto'} maxWidth={'120rem'} minHeight={'70vh'}>
+          <Typography variant='h3' sx={{mt: 2 }}>Found doctors </Typography>
 
-          {currentDoctors && currentDoctors.map((element,i) => (
-            <><Box key={i} display={'flex'} ml={10} height={150} mt={5}>
+          {currentDoctors && currentDoctors.map((element, i) => (
+            <><Box key={i} display={'flex'} ml={1} height={150} mt={5}>
               <Grid>
                 {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://mydoctornow.online/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
 
@@ -108,7 +109,7 @@ const DoctorsByDepartment = () => {
             shape="rounded" />
         </Stack>
         </Grid>
-      </Grid>
+ <Footer/>
     </>
   )
 }
