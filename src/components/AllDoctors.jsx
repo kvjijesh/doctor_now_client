@@ -118,7 +118,7 @@ const AllDoctors = () => {
               <Typography variant='h3' sx={{ mt: 2 }}>Found doctors </Typography>
 
               {currentDoctors && currentDoctors.map((element, i) => (
-                <><Box key={i} display={'flex'}  height={150} mt={5} flexWrap={'wrap'}>
+                <><Box key={i} display={'flex'}  height={150} mt={5} mb={10} flexWrap={'wrap'}>
                   <Grid>
                     {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%', objectFit:'cover' }} src={`https://mydoctornow.online/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
 
@@ -128,12 +128,12 @@ const AllDoctors = () => {
                     <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 2 }}>{element.specialisation.name.toUpperCase()}</Typography>
                     <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 2 }}>{element.qualification[0].toUpperCase()}</Typography>
                     <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>{element.city},{element.state}</Typography>
-                    <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>Rs.{element.videoChatFee} Fee</Typography>
+                    <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 ,mb:2}}>Rs.{element.videoChatFee} Fee</Typography>
                   </Grid>
-                  <Grid display={'flex'} alignItems={'flex-end'} flexWrap={'wrap'}>
-                    <Button onClick={() => handleBook(element)} variant='contained' color='primary' sx={{ ml: 15, }}>BOOK NOW</Button>
+                  <Grid display={'flex'} alignItems={'flex-start'} justifyContent={'flex-end'} flexWrap={'wrap'}>
+                    <Button onClick={() => handleBook(element)} variant='contained' color='primary' sx={{ ml: 17, }}>BOOK NOW</Button>
                   </Grid>
-                </Box><Divider sx={{ mx: 10, mt: 5, }} /></>
+                </Box><Divider sx={{ mx: 5, mt: 5, }} /></>
               ))}
 
             </Grid>
