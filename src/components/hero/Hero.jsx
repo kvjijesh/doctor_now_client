@@ -56,20 +56,20 @@ const Hero = () => {
         display={'flex'}
         width={'100%'}
         sx={{}}
-        height={70}
+        height={40}
         justifyContent={'center'}
         gap={2}
         alignItems={'center'}
       >
-        <Typography variant='subtitle1' sx={{color:'blue',fontSize:15}}>
-          Search doctors
-        </Typography>
-        <TextField
+
+        <input
           type='search'
           placeholder="Search doctors by departments"
           value={value}
           onChange={handleInputChange}
-          sx={{ width: 250,background:"white",borderRadius:2,border:'none' }}
+          style={{ width: 240,maxWidth:'auto', height:30,padding:3,
+          borderRadius: '4px',
+          color:'white'}}
         />
         <Menu
           anchorEl={anchorEl}
@@ -86,9 +86,9 @@ const Hero = () => {
           ))}
         </Menu>
       </Grid>
-      <Grid >
+      {/* <Grid >
       <img style={{borderRadius:'30px'}} src={images.heroImage} alt="" />
-      </Grid>
+      </Grid> */}
     </Box>
   );
 };

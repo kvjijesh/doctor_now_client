@@ -22,6 +22,7 @@ import { clearAppointment } from "../../features/user/appoinmentSlice";
 import { toast } from "react-toastify";
 import { Badge, Divider } from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
+import Hero from "../hero/Hero";
 
 const Header = ({ userType }) => {
   const { user } = useSelector((state) => state.user);
@@ -236,6 +237,7 @@ const Header = ({ userType }) => {
                   <img src={images.logo} alt="logo" />
                 </Link>
               </div>
+              <Hero/>
               <ul className={opena ? `nav-items active ` : `nav-items`}>
                 <Link to="/all-doctors">
                   <li>Find Doctors</li>

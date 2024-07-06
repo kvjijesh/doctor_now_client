@@ -16,7 +16,7 @@ const Home = () => {
    <>
    <div className="home-container">
    <Header/>
-   <Hero/>
+   {/* <Hero/> */}
    <Info/>
    {/* <Divider sx={{mx:5,my:1}}/> */}
    <TopSpeciality/>
