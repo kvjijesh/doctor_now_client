@@ -40,7 +40,7 @@ const Booking = () => {
 
   return (
     <>
-      <Box sx={{backgroundColor:"#f7f7f7" }}>
+      <Box sx={{ backgroundColor: "#f7f7f7" }}>
         <Grid container display={'flex'} justifyContent={'center'} flexWrap={"wrap"} >
           <Grid >
             <Typography sx={{ m: 3 }} variant="h4"> Doctor Details </Typography>
@@ -57,12 +57,12 @@ const Booking = () => {
               <Divider sx={{ mt: 2 }} />
               <Grid display={'flex'} gap={5}>
                 <Grid sx={{ width: 70, mt: 2, ml: 2 }}>
-                  <img src={`https://mydoctornow.online/images/${doctorData?.image}`} alt="" />
+                  <img src={`https://doctor-now-server-1.onrender.com/images/${doctorData?.image}`} alt="" />
                 </Grid>
                 <Grid display={'flex'} flexDirection={'column'} mt={2} >
                   <Typography variant="subtitle2" sx={{ fontSize: 15 }}>Dr.{doctorData.name} </Typography>
-                  <Typography variant="subtitle2" sx={{ fontSize: 13 ,color:"GrayText"}}>{doctorData.qualification} </Typography>
-                  <Typography variant="subtitle2" sx={{ fontSize: 13 ,color:"GrayText"}}>{doctorData.specialisation.name} </Typography>
+                  <Typography variant="subtitle2" sx={{ fontSize: 13, color: "GrayText" }}>{doctorData.qualification} </Typography>
+                  <Typography variant="subtitle2" sx={{ fontSize: 13, color: "GrayText" }}>{doctorData.specialisation?.name} </Typography>
 
                 </Grid>
               </Grid>
@@ -72,20 +72,20 @@ const Booking = () => {
                   <img src={`https://upload.wikimedia.org/wikipedia/commons/7/74/Location_icon_from_Noun_Project.png`} alt="" />
                 </Grid>
                 <Grid display={'flex'} flexDirection={'column'} mt={2} >
-                  <Typography variant="subtitle2" sx={{ fontSize: 13 ,color:"GrayText"}}>{doctorData.street} </Typography>
-                  <Typography variant="subtitle2" sx={{ fontSize: 13,color:"GrayText"}}>{doctorData.city} </Typography>
-                  <Typography variant="subtitle1" sx={{ fontSize: 13 ,color:"GrayText"}}>{doctorData.state} </Typography>
+                  <Typography variant="subtitle2" sx={{ fontSize: 13, color: "GrayText" }}>{doctorData.street} </Typography>
+                  <Typography variant="subtitle2" sx={{ fontSize: 13, color: "GrayText" }}>{doctorData.city} </Typography>
+                  <Typography variant="subtitle1" sx={{ fontSize: 13, color: "GrayText" }}>{doctorData.state} </Typography>
 
                 </Grid>
               </Grid>
             </Paper>
           </Grid>
           <Grid>
-            <Typography sx={{ m: 3,ml:5 }} variant="h4"> Patient details </Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", width: 500, m: 3}}>
-              <Typography fontSize={16} sx={{ ml: 2, mt: 2,fontWeight:"bold" }}>This appointment is for</Typography>
+            <Typography sx={{ m: 3, ml: 5 }} variant="h4"> Patient details </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", width: 500, m: 3 }}>
+              <Typography fontSize={16} sx={{ ml: 2, mt: 2, fontWeight: "bold" }}>This appointment is for</Typography>
               <Grid ml={2} mt={1} mr={10}>
-              <TextField
+                <TextField
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -95,17 +95,17 @@ const Booking = () => {
                   type="standard"
                   variant="outlined"
                   disabled
-                  value={user.name}
+                  value={user?.name}
                   fullWidth
-                  sx={{backgroundColor:"white",}}
+                  sx={{ backgroundColor: "white", }}
                 />
               </Grid>
               <Grid>
-                <Typography sx={{fontSize:15,ml:2,mt:2,fontWeight:"bold"}}>Check following details</Typography>
-                <Typography sx={{fontSize:13,ml:2,}}>Email</Typography>
+                <Typography sx={{ fontSize: 15, ml: 2, mt: 2, fontWeight: "bold" }}>Check following details</Typography>
+                <Typography sx={{ fontSize: 13, ml: 2, }}>Email</Typography>
               </Grid>
               <Grid ml={2} mr={10}>
-              <TextField
+                <TextField
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -115,16 +115,16 @@ const Booking = () => {
                   type="standard"
                   variant="outlined"
                   disabled
-                  value={user.email}
+                  value={user?.email}
                   fullWidth
-                  sx={{backgroundColor:"white",}}
+                  sx={{ backgroundColor: "white", }}
                 />
               </Grid>
               <Grid>
-                <Typography sx={{fontSize:13,ml:2}}>Mobile</Typography>
+                <Typography sx={{ fontSize: 13, ml: 2 }}>Mobile</Typography>
               </Grid>
               <Grid ml={2} mr={10}>
-              <TextField
+                <TextField
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -134,19 +134,19 @@ const Booking = () => {
                   type="standard"
                   variant="outlined"
                   disabled
-                  value={user.mobile}
+                  value={user?.mobile}
                   fullWidth
-                  sx={{backgroundColor:"white",}}
+                  sx={{ backgroundColor: "white", }}
                 />
               </Grid>
               <Grid>
-                <Paper sx={{display:"flex", ml:2,mt:2,width:'81%',height:50}}>
-                  <Radio sx={{m:1}} checked/>
-                  <Typography sx={{mt:0.5,fontSize:15}}>Rs.{doctorData.videoChatFee}</Typography>
-                  <Typography sx={{mt:0.7,ml:1,fontSize:13}}>Pay online</Typography>
+                <Paper sx={{ display: "flex", ml: 2, mt: 2, width: '81%', height: 50 }}>
+                  <Radio sx={{ m: 1 }} checked />
+                  <Typography sx={{ mt: 0.5, fontSize: 15 }}>Rs.{doctorData.videoChatFee}</Typography>
+                  <Typography sx={{ mt: 0.7, ml: 1, fontSize: 13 }}>Pay online</Typography>
                 </Paper>
-                <Grid sx={{mt:3,ml:2,mb:2}}>
-                <Button onClick={handleAppointment} sx={{width:"84%"}} size="large" variant="contained" color="primary">confirm appointment</Button>
+                <Grid sx={{ mt: 3, ml: 2, mb: 2 }}>
+                  <Button onClick={handleAppointment} sx={{ width: "84%" }} size="large" variant="contained" color="primary">confirm appointment</Button>
                 </Grid>
 
               </Grid>

@@ -22,7 +22,7 @@ const AllDoctors = () => {
     (async () => {
       try {
         setLoading(true)
-        const res=await axios.get(`/available-doctors`)
+        const res = await axios.get(`/available-doctors`)
         console.log(res.data);
         setDoctors(res.data);
         setAllDoctors(res.data);
@@ -78,49 +78,49 @@ const AllDoctors = () => {
       {loading ? (<Spinner loading={loading} />) : (
         <>
           <Header />
-          <Grid width={'100%'} sx={{ background: "#202094",  }}>
-          <Grid container flexDirection={'column'} flexWrap={'wrap'} mx={'auto'} maxWidth={'120rem'}  >
-            <Grid display={'flex'} flexWrap={'wrap'} justifyContent={'flex-start'} alignItems={'center'} width={'100%'} height={75} >
-              <Grid>
-                <Typography variant='h6' sx={{ color: 'white'}}>Sort by:</Typography>
-              </Grid>
-              <Grid sx={{ minWidth: 100, ml: 2 }}>
-                <FormControl sx={{ padding: 0, border: 'white' }} fullWidth>
-                  <InputLabel sx={{ color: "white" }}>Sort By</InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={options}
-                    label="Age"
-                    onChange={handleChange}
-                    sx={{ color: 'white' }}
-                  >
-                    <MenuItem value="">Select</MenuItem>
-                    <MenuItem value="name">Name</MenuItem>
-                    <MenuItem value="feesLowToHigh">Fees: Low-High</MenuItem>
-                    <MenuItem value="feesHighToLow">Fees: High-Low</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid >
-              {!isSmallScreen && (
+          <Grid width={'100%'} sx={{ background: "#202094", }}>
+            <Grid container flexDirection={'column'} flexWrap={'wrap'} mx={'auto'} maxWidth={'120rem'}  >
+              <Grid display={'flex'} flexWrap={'wrap'} justifyContent={'flex-start'} alignItems={'center'} width={'100%'} height={75} >
+                <Grid>
+                  <Typography variant='h6' sx={{ color: 'white' }}>Sort by:</Typography>
+                </Grid>
+                <Grid sx={{ minWidth: 100, ml: 2 }}>
+                  <FormControl sx={{ padding: 0, border: 'white' }} fullWidth>
+                    <InputLabel sx={{ color: "white" }}>Sort By</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={options}
+                      label="Age"
+                      onChange={handleChange}
+                      sx={{ color: 'white' }}
+                    >
+                      <MenuItem value="">Select</MenuItem>
+                      <MenuItem value="name">Name</MenuItem>
+                      <MenuItem value="feesLowToHigh">Fees: Low-High</MenuItem>
+                      <MenuItem value="feesHighToLow">Fees: High-Low</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid >
+                {!isSmallScreen && (
                   <Grid ml={3} sx={{ display: 'flex', alignItems: 'center' }}>
                     <Typography variant='h6' sx={{ color: 'white', ml: 1 }}> Search: </Typography>
                     <input style={{ marginLeft: 10, width: 200, height: 30, borderRadius: 5 }} type="search" placeholder=' search doctors...' onInput={filterCards} />
                   </Grid>
                 )}
+              </Grid>
             </Grid>
           </Grid>
-          </Grid>
 
-          <Grid sx={{mx:'auto',maxWidth:'120rem'}}>
+          <Grid sx={{ mx: 'auto', maxWidth: '120rem' }}>
 
             <Grid minHeight={'70vh'}>
               <Typography variant='h3' sx={{ mt: 2 }}>Found doctors </Typography>
 
               {currentDoctors && currentDoctors.map((element, i) => (
-                <><Box key={i} display={'flex'}  height={150} mt={5} mb={10} flexWrap={'wrap'}>
+                <><Box key={i} display={'flex'} height={150} mt={5} mb={10} flexWrap={'wrap'}>
                   <Grid>
-                    {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%', objectFit:'cover' }} src={`https://mydoctornow.online/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
+                    {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%', objectFit: 'cover' }} src={`https://doctor-now-server-1.onrender.com/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
 
                   </Grid>
                   <Grid display={'flex'} flexDirection={'column'} ml={5}>
@@ -128,7 +128,7 @@ const AllDoctors = () => {
                     <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 2 }}>{element.specialisation.name.toUpperCase()}</Typography>
                     <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 2 }}>{element.qualification[0].toUpperCase()}</Typography>
                     <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>{element.city},{element.state}</Typography>
-                    <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 ,mb:2}}>Rs.{element.videoChatFee} Fee</Typography>
+                    <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1, mb: 2 }}>Rs.{element.videoChatFee} Fee</Typography>
                   </Grid>
                   <Grid display={'flex'} alignItems={'flex-start'} justifyContent={'flex-end'} flexWrap={'wrap'}>
                     <Button onClick={() => handleBook(element)} variant='contained' color='primary' sx={{ ml: 17, }}>BOOK NOW</Button>

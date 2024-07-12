@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const DoctorsCard = ({ doctorData }) => {
 
-  const navigate=useNavigate()
-  const imageUrl = `https://mydoctornow.online/images/${doctorData?.image}`;
-  const handleClick=()=>{
-    navigate('/doctor-details',{ state: { doctorData: doctorData }})
+  const navigate = useNavigate()
+  const imageUrl = `https://doctor-now-server-1.onrender.com/images/${doctorData?.image}`;
+  const handleClick = () => {
+    navigate('/doctor-details', { state: { doctorData: doctorData } })
   }
 
   return (
@@ -20,7 +20,7 @@ const DoctorsCard = ({ doctorData }) => {
         <p>{doctorData.state}</p>
         <p>{doctorData.pin}</p>
         <div className="card__image">
-         {doctorData?.image?(<img src={imageUrl} alt="doctor" />):(<img src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg' alt="doctor" />)}
+          {doctorData?.image ? (<img src={imageUrl} alt="doctor" />) : (<img src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg' alt="doctor" />)}
         </div>
         <Button variant="contained" color="success" onClick={handleClick}>
           Book

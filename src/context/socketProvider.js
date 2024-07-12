@@ -1,19 +1,20 @@
-import { createContext, useContext, useMemo } from 'react'
-import { io } from 'socket.io-client'
+import { createContext, useContext, useMemo } from "react";
+import { io } from "socket.io-client";
 const SocketContext = createContext(null);
 
-
 export const useSocket = () => {
-    const socket = useContext(SocketContext)
-    return socket
-}
+  const socket = useContext(SocketContext);
+  return socket;
+};
 
 export const SocketProvider = (props) => {
-
-    const socket = useMemo(() => io('https://mydoctornow.online'), [])
-    return (
-        <SocketContext.Provider value={socket} >
-            {props.children}
-        </SocketContext.Provider>
-    )
-}
+  const socket = useMemo(
+    () => io("https://doctor-now-server-1.onrender.com"),
+    []
+  );
+  return (
+    <SocketContext.Provider value={socket}>
+      {props.children}
+    </SocketContext.Provider>
+  );
+};

@@ -27,7 +27,7 @@ const Topdoctors = () => {
                     <Typography variant='h4'>Our Doctors</Typography>
                 </Grid >
                 <Grid display={'flex'} justifyContent={'space-around'} flexWrap={'wrap'} mt={2} mb={2}>
-                    {doctors.map((item, i) => {
+                    {doctors?.map((item, i) => {
                         return (
                             <Paper key={i} display={'flex'} flexDirection={'column'} sx={{
                                 width: 250, m: 3, boxShadow: 10, borderRadius: 4, transition: 'transform 0.2s',
@@ -36,14 +36,14 @@ const Topdoctors = () => {
                                 }
                             }}>
                                 <Grid display={'flex'} justifyContent={'center'} mt={2}>
-                                    {item.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://mydoctornow.online/images/${item.image}`} alt="" />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt="" />)}
+                                    {item?.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://doctor-now-server-1.onrender.com/images/${item?.image}`} alt="" />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt="" />)}
                                 </Grid>
                                 <Grid display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'center'}>
                                     <Typography variant='h4' textAlign={'center'} mt={3}>
-                                        Dr.{item.name}
+                                        Dr.{item?.name}
                                     </Typography>
                                     <Typography variant='button' fontSize={14} textAlign={'center'} mt={3}>
-                                        {item.specialisation.name}
+                                        {item.specialisation?.name}
                                     </Typography>
                                     <Typography variant='button' fontSize={16} textAlign={'center'} mt={3}>
                                         {item.qualification}

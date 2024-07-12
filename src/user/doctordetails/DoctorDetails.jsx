@@ -74,7 +74,7 @@ const DoctorDetails = () => {
           <Grid display={'flex'} flexDirection={'row'} flexWrap={'wrap'} marginLeft={3}>
             <Paper sx={{ display: "flex", flexDirection: "column", alignItems: "center", width: isMobile ? '100%' : 328, height: 328, m: 3, boxShadow: 4 }} variant="outlined" >
               <Grid m={2} >
-                {doctorData?.image ? (<img style={{ width: "10rem", height: "10rem", borderRadius: "100%" }} src={`https://mydoctornow.online/images/${doctorData?.image}`} alt="Profile" />) : (<img style={{ width: "10rem", height: "10rem", borderRadius: "100%" }} src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'
+                {doctorData?.image ? (<img style={{ width: "10rem", height: "10rem", borderRadius: "100%" }} src={`https://doctor-now-server-1.onrender.com/images/${doctorData?.image}`} alt="Profile" />) : (<img style={{ width: "10rem", height: "10rem", borderRadius: "100%" }} src='https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg'
                   alt="Profile" />)}
               </Grid>
               <Grid>
@@ -116,17 +116,17 @@ const DoctorDetails = () => {
               <Typography variant="h4" ml={2} mt={2}>Ratings & Reviews</Typography>
               <Divider sx={{ mx: 2, mt: 1 }} />
               <Grid display={'flex'}>
-              <Typography variant="h5" ml={2} mt={1.8}>{avgReview}</Typography>
-              <Rating sx={{ml:1,mt:2}} name="half-rating-read" value={avgReview} precision={0.5} readOnly /></Grid>
+                <Typography variant="h5" ml={2} mt={1.8}>{avgReview}</Typography>
+                <Rating sx={{ ml: 1, mt: 2 }} name="half-rating-read" value={avgReview} precision={0.5} readOnly /></Grid>
               {ratings.length === 0 ? (<Grid><Typography variant="button" sx={{ ml: 2, mt: 2, fontSize: 20, }}>No Rating yet</Typography></Grid>) : (ratings && ratings.map((element) => {
-                return (<Grid  key={element._id} marginTop={1} marginBottom={1.5}>
+                return (<Grid key={element._id} marginTop={1} marginBottom={1.5}>
                   <Typography variant="button" sx={{ ml: 2, fontSize: 15, }}>{element.userId.name}</Typography>
                   <Typography variant="h5" sx={{ ml: 2, fontSize: 12 }}>{element.createdAt}</Typography>
                   <Typography variant="h5" sx={{ ml: 2, fontSize: 13, }}>"{element.feeedback}"</Typography>
                 </Grid>)
               }))}
-              {ratings.length !== 0 ?(<Grid textAlign={'center'} mb={3}><Button onClick={handleSeeMore} variant="contained" color="primary">see more</Button>
-              </Grid>):(null)}
+              {ratings.length !== 0 ? (<Grid textAlign={'center'} mb={3}><Button onClick={handleSeeMore} variant="contained" color="primary">see more</Button>
+              </Grid>) : (null)}
 
 
             </Paper>

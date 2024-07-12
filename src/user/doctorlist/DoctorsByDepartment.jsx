@@ -52,8 +52,8 @@ const DoctorsByDepartment = () => {
 
   return (
     <>
-  <Grid maxWidth={'100%'} sx={{ background: "#202094" }}>
-        <Grid display={'flex'} justifyContent={'flex-start'} alignItems={'center'} mx={'auto'}  maxWidth={'120rem'} height={65} >
+      <Grid maxWidth={'100%'} sx={{ background: "#202094" }}>
+        <Grid display={'flex'} justifyContent={'flex-start'} alignItems={'center'} mx={'auto'} maxWidth={'120rem'} height={65} >
           <Grid>
             <Typography sx={{ color: 'white', }}>Sort by:</Typography>
           </Grid>
@@ -75,41 +75,41 @@ const DoctorsByDepartment = () => {
               </Select>
             </FormControl>
           </Grid>
-          </Grid>
         </Grid>
-        <Grid mx={'auto'} maxWidth={'120rem'} minHeight={'70vh'}>
-          <Typography variant='h3' sx={{mt: 2 }}>Found doctors </Typography>
+      </Grid>
+      <Grid mx={'auto'} maxWidth={'120rem'} minHeight={'70vh'}>
+        <Typography variant='h3' sx={{ mt: 2 }}>Found doctors </Typography>
 
-          {currentDoctors && currentDoctors.map((element, i) => (
-            <><Box key={i} display={'flex'} ml={1} height={150} mt={5}>
-              <Grid>
-                {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://mydoctornow.online/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
+        {currentDoctors && currentDoctors.map((element, i) => (
+          <><Box key={i} display={'flex'} ml={1} height={150} mt={5}>
+            <Grid>
+              {element.image ? (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://doctor-now-server-1.onrender.com/images/${element?.image}`} alt='photo' />) : (<img style={{ width: 100, height: 100, borderRadius: '50%' }} src={`https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg`} alt='photo' />)}
 
-              </Grid>
-              <Grid display={'flex'} flexDirection={'column'} ml={5}>
-                <Typography variant='button' sx={{ fontSize: 16, color: 'blue' }}>{element.name}</Typography>
-                <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 2 }}>{element.specialisation.name}</Typography>
-                <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>{element.city},{element.state}</Typography>
-                <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>Rs.{element.videoChatFee} Fee</Typography>
-              </Grid>
-              <Grid display={'flex'} alignItems={'flex-end'}>
-                <Button onClick={() => handleBook(element)} variant='contained' color='primary' sx={{ ml: 5, mb: 3 }}>BOOK NOW</Button>
-              </Grid>
-            </Box><Divider sx={{ ml: 10, width: '90%' }} /></>
-          ))}
+            </Grid>
+            <Grid display={'flex'} flexDirection={'column'} ml={5}>
+              <Typography variant='button' sx={{ fontSize: 16, color: 'blue' }}>{element.name}</Typography>
+              <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 2 }}>{element.specialisation.name}</Typography>
+              <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>{element.city},{element.state}</Typography>
+              <Typography variant='subtitle2' sx={{ fontSize: 14, mt: 1 }}>Rs.{element.videoChatFee} Fee</Typography>
+            </Grid>
+            <Grid display={'flex'} alignItems={'flex-end'}>
+              <Button onClick={() => handleBook(element)} variant='contained' color='primary' sx={{ ml: 5, mb: 3 }}>BOOK NOW</Button>
+            </Grid>
+          </Box><Divider sx={{ ml: 10, width: '90%' }} /></>
+        ))}
 
-        </Grid>
-        <Grid display={'flex'} justifyContent={'center'} my={2} position={'sticky'}> <Stack spacing={2}>
-          <Pagination
-            variant="outlined"
-            size='large'
-            count={Math.ceil(doctors.length / itemsPerPage)}
-            page={currentPage}
-            onChange={handlePageChange}
-            shape="rounded" />
-        </Stack>
-        </Grid>
- <Footer/>
+      </Grid>
+      <Grid display={'flex'} justifyContent={'center'} my={2} position={'sticky'}> <Stack spacing={2}>
+        <Pagination
+          variant="outlined"
+          size='large'
+          count={Math.ceil(doctors.length / itemsPerPage)}
+          page={currentPage}
+          onChange={handlePageChange}
+          shape="rounded" />
+      </Stack>
+      </Grid>
+      <Footer />
     </>
   )
 }
